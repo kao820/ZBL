@@ -3,7 +3,10 @@ from __future__ import annotations
 
 import json
 import re
+import shutil
+import subprocess
 import sys
+import tempfile
 import urllib.parse
 import urllib.request
 from datetime import datetime, timezone
@@ -19,20 +22,15 @@ def now_iso() -> str:
     return datetime.now(timezone.utc).isoformat()
 
 
-def payload(error=None):
-    return {"playlistUrl": PLAYLIST_URL, "updatedAt": now_iso(), "error": error, "videos": [], "chunks": []}
-
-
-def load_existing():
-    if not OUT_PATH.exists():
-        return None
-    try:
-        data = json.loads(OUT_PATH.read_text(encoding="utf-8"))
-        if isinstance(data, dict):
-            return data
-    except Exception:
-        return None
-    return None
+def base_payload() -> dict:
+    return {
+        "playlistUrl": PLAYLIST_URL,
+        "updatedAt": now_iso(),
+        "error": None,
+        "videos": [],
+        "chunks": [],
+        "stats": {"total": 0, "withCaptions": 0, "withoutCaptions": 0, "failed": 0},
+    }
 
 
 def fetch_text(url: str, timeout: int = 30) -> str:
@@ -41,12 +39,11 @@ def fetch_text(url: str, timeout: int = 30) -> str:
         return r.read().decode("utf-8", errors="ignore")
 
 
-def parse_video_ids_from_playlist(html: str) -> list[str]:
-    ids = sorted(set(re.findall(r'"videoId":"([A-Za-z0-9_-]{11})"', html)))
-    return ids
+def parse_playlist_video_ids(html: str) -> list[str]:
+    return sorted(set(re.findall(r'"videoId":"([A-Za-z0-9_-]{11})"', html)))
 
 
-def parse_title(html: str, video_id: str) -> str:
+def parse_title(html: str, vid: str) -> str:
     m = re.search(r'<meta\s+property="og:title"\s+content="([^"]+)"', html, flags=re.I)
     if m:
         return m.group(1).strip()
@@ -56,65 +53,35 @@ def parse_title(html: str, video_id: str) -> str:
         t = re.sub(r"\s*-\s*YouTube$", "", t).strip()
         if t and t != "- YouTube":
             return t
-    return video_id
+    return vid
 
 
-def extract_player_response_json(html: str) -> dict | None:
-    pats = [
-        r"ytInitialPlayerResponse\s*=\s*(\{.+?\})\s*;",
-        r"var\s+ytInitialPlayerResponse\s*=\s*(\{.+?\})\s*;",
-    ]
-    for pat in pats:
-        m = re.search(pat, html, flags=re.S)
-        if m:
-            try:
-                return json.loads(m.group(1))
-            except Exception:
-                continue
-    return None
+def chunk_rows(video: dict, rows: list[tuple[int | None, str]]) -> list[dict]:
+    chunks, buf, seen = [], [], set()
+    start, idx = None, 1
+
+    def flush():
+        nonlocal buf, start, idx
+        if not buf:
+            return
+        txt = re.sub(r"\s+", " ", " ".join(buf)).strip()
+        if txt and txt not in seen:
+            seen.add(txt)
+            chunks.append({"id": f"{video['videoId']}-chunk-{idx:03d}", "videoId": video["videoId"], "title": video["title"], "url": video["url"], "start": start, "text": txt})
+            idx += 1
+        buf, start = [], None
+
+    for s, line in rows:
+        if start is None:
+            start = s
+        buf.extend(line.split())
+        if len(buf) >= MAX_WORDS:
+            flush()
+    flush()
+    return chunks
 
 
-def extract_caption_tracks(player_response: dict) -> list[dict]:
-    return (
-        player_response.get("captions", {})
-        .get("playerCaptionsTracklistRenderer", {})
-        .get("captionTracks", [])
-    )
-
-
-def pick_track(tracks: list[dict]) -> dict | None:
-    if not tracks:
-        return None
-    pref = ["ru", "en"]
-
-    def rank(t: dict):
-        lang = (t.get("languageCode") or "").lower()
-        kind = t.get("kind", "")
-        if lang == "ru":
-            base = 0
-        elif lang == "en":
-            base = 1
-        elif lang.startswith("ru"):
-            base = 2
-        elif lang.startswith("en"):
-            base = 3
-        else:
-            base = 4
-        auto_penalty = 0 if kind == "asr" else 1
-        return (base, auto_penalty, lang)
-
-    return sorted(tracks, key=rank)[0]
-
-
-def transcript_rows_from_track(track: dict) -> tuple[str | None, list[tuple[int | None, str]]]:
-    base_url = track.get("baseUrl")
-    if not base_url:
-        return None, []
-    lang = track.get("languageCode")
-    sep = "&" if "?" in base_url else "?"
-    url = f"{base_url}{sep}fmt=srv3"
-    xml = fetch_text(url)
-
+def parse_srv_xml(xml: str) -> list[tuple[int | None, str]]:
     rows = []
     for start, text in re.findall(r'<text[^>]*start="([0-9.]+)"[^>]*>(.*?)</text>', xml, flags=re.S):
         clean = re.sub(r"<[^>]+>", "", text)
@@ -123,103 +90,120 @@ def transcript_rows_from_track(track: dict) -> tuple[str | None, list[tuple[int 
         clean = re.sub(r"\s+", " ", clean).strip()
         if clean:
             rows.append((int(float(start)), clean))
-    return lang, rows
+    return rows
 
 
-def chunk_rows(video: dict, rows: list[tuple[int | None, str]]) -> list[dict]:
-    out, bucket = [], []
-    start = None
-    idx = 1
-    seen = set()
-
-    def flush():
-        nonlocal bucket, start, idx
-        if not bucket:
-            return
-        txt = re.sub(r"\s+", " ", " ".join(bucket)).strip()
-        if txt and txt not in seen:
-            seen.add(txt)
-            out.append({
-                "id": f"{video['videoId']}-chunk-{idx:03d}",
-                "videoId": video["videoId"],
-                "title": video["title"],
-                "url": video["url"],
-                "start": start,
-                "text": txt,
-            })
-            idx += 1
-        bucket = []
-        start = None
-
-    for s, line in rows:
-        words = line.split()
-        if start is None:
-            start = s
-        bucket.extend(words)
-        if len(bucket) >= MAX_WORDS:
-            flush()
-    flush()
-    return out
+def tracks_from_player_html(html: str) -> list[dict]:
+    for pat in [r"ytInitialPlayerResponse\s*=\s*(\{.+?\})\s*;", r"var\s+ytInitialPlayerResponse\s*=\s*(\{.+?\})\s*;"]:
+        m = re.search(pat, html, flags=re.S)
+        if not m:
+            continue
+        try:
+            data = json.loads(m.group(1))
+            return data.get("captions", {}).get("playerCaptionsTracklistRenderer", {}).get("captionTracks", [])
+        except Exception:
+            continue
+    return []
 
 
-def fetch_video_bundle(video_id: str) -> tuple[dict, list[tuple[int | None, str]]]:
-    url = f"https://www.youtube.com/watch?v={video_id}"
-    html = fetch_text(url)
-    title = parse_title(html, video_id)
-    dur_match = re.search(r'"lengthSeconds":"(\d+)"', html)
-    duration = int(dur_match.group(1)) if dur_match else None
+def choose_track(tracks: list[dict]) -> dict | None:
+    if not tracks:
+        return None
+    def key(t: dict):
+        lang = (t.get("languageCode") or "").lower()
+        if lang == "ru": rank = 0
+        elif lang == "en": rank = 1
+        elif lang.startswith("ru"): rank = 2
+        elif lang.startswith("en"): rank = 3
+        else: rank = 4
+        return (rank, 0 if t.get("kind") == "asr" else 1)
+    return sorted(tracks, key=key)[0]
 
-    video = {"videoId": video_id, "title": title, "url": url, "duration": duration, "language": None}
-    player = extract_player_response_json(html)
-    if not player:
-        return video, []
 
-    tracks = extract_caption_tracks(player)
-    track = pick_track(tracks)
-    if not track:
-        return video, []
+def try_http_captions(video: dict) -> tuple[str | None, list[tuple[int | None, str]]]:
+    html = fetch_text(video["url"])
+    tracks = tracks_from_player_html(html)
+    track = choose_track(tracks)
+    if not track or not track.get("baseUrl"):
+        return None, []
+    base = track["baseUrl"]
+    sep = "&" if "?" in base else "?"
+    xml = fetch_text(f"{base}{sep}fmt=srv3")
+    return track.get("languageCode"), parse_srv_xml(xml)
 
-    lang, rows = transcript_rows_from_track(track)
-    video["language"] = lang
-    return video, rows
+
+def try_ytdlp_captions(vid: str, url: str) -> tuple[str | None, list[tuple[int | None, str]]]:
+    if not shutil.which("yt-dlp"):
+        return None, []
+    with tempfile.TemporaryDirectory() as td:
+        cmd = ["yt-dlp", "--skip-download", "--write-auto-subs", "--sub-langs", "ru,en,ru.*,en.*,.*", "--sub-format", "vtt", "-o", str(Path(td)/"%(id)s.%(ext)s"), url]
+        proc = subprocess.run(cmd, text=True, capture_output=True)
+        if proc.returncode != 0:
+            return None, []
+        files = sorted(Path(td).glob(f"{vid}*.vtt"))
+        if not files:
+            return None, []
+        sf = files[0]
+        lang = sf.suffixes[-2].lstrip('.') if len(sf.suffixes) >= 2 else None
+        txt = sf.read_text(encoding="utf-8", errors="ignore")
+        rows = []
+        cur = None
+        for line in txt.splitlines():
+            s = line.strip()
+            if "-->" in s:
+                m = re.search(r"(\d{2}):(\d{2}):(\d{2})", s)
+                cur = int(m.group(1))*3600+int(m.group(2))*60+int(m.group(3)) if m else None
+                continue
+            if not s or s == "WEBVTT" or s.startswith(("NOTE", "STYLE", "Kind:", "Language:")):
+                continue
+            clean = re.sub(r"<[^>]+>", "", s)
+            clean = re.sub(r"\s+", " ", clean).strip()
+            if clean:
+                rows.append((cur, clean))
+        return lang, rows
+
+
+def build() -> dict:
+    data = base_payload()
+    playlist_html = fetch_text(PLAYLIST_URL)
+    ids = parse_playlist_video_ids(playlist_html)
+    data["stats"]["total"] = len(ids)
+    for vid in ids:
+        url = f"https://www.youtube.com/watch?v={vid}"
+        try:
+            html = fetch_text(url)
+            video = {"videoId": vid, "title": parse_title(html, vid), "url": url, "duration": None, "language": None}
+            dm = re.search(r'"lengthSeconds":"(\d+)"', html)
+            if dm: video["duration"] = int(dm.group(1))
+
+            lang, rows = try_ytdlp_captions(vid, url)
+            if not rows:
+                lang, rows = try_http_captions(video)
+
+            video["language"] = lang
+            data["videos"].append(video)
+            if rows:
+                data["stats"]["withCaptions"] += 1
+                data["chunks"].extend(chunk_rows(video, rows))
+            else:
+                data["stats"]["withoutCaptions"] += 1
+        except Exception:
+            data["stats"]["failed"] += 1
+
+    if not data["chunks"]:
+        data["error"] = "index_unavailable"
+    return data
 
 
 def main() -> int:
-    data = payload()
     try:
-        playlist_html = fetch_text(PLAYLIST_URL)
-        video_ids = parse_video_ids_from_playlist(playlist_html)
-        if not video_ids:
-            data["error"] = "index_unavailable"
-            OUT_PATH.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
-            return 1
-
-        for vid in video_ids:
-            try:
-                video, rows = fetch_video_bundle(vid)
-                data["videos"].append(video)
-                if rows:
-                    data["chunks"].extend(chunk_rows(video, rows))
-            except Exception:
-                data["videos"].append({"videoId": vid, "title": vid, "url": f"https://www.youtube.com/watch?v={vid}", "duration": None, "language": None})
-
-        if not data["chunks"]:
-            existing = load_existing()
-            if existing and existing.get("chunks"):
-                existing["updatedAt"] = now_iso()
-                OUT_PATH.write_text(json.dumps(existing, ensure_ascii=False, indent=2), encoding="utf-8")
-                return 0
-            data["error"] = "index_unavailable"
-
-        OUT_PATH.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
+        result = build()
+        OUT_PATH.write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8")
         return 0
     except Exception:
-        existing = load_existing()
-        if existing and existing.get("chunks"):
-            existing["updatedAt"] = now_iso()
-            OUT_PATH.write_text(json.dumps(existing, ensure_ascii=False, indent=2), encoding="utf-8")
-            return 0
-        OUT_PATH.write_text(json.dumps(payload("index_unavailable"), ensure_ascii=False, indent=2), encoding="utf-8")
+        fail = base_payload()
+        fail["error"] = "index_unavailable"
+        OUT_PATH.write_text(json.dumps(fail, ensure_ascii=False, indent=2), encoding="utf-8")
         return 1
 
 
