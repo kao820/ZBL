@@ -1,36 +1,125 @@
 #!/usr/bin/env python3
+"""Build a static transcript index for playlist QA (GitHub Pages friendly)."""
+
+from __future__ import annotations
+
 import json
 import re
+import shutil
 import subprocess
+from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
+from typing import Iterable
 
 PLAYLIST_URL = "https://www.youtube.com/playlist?list=PLQ0wmPbdvhzJl6lFMAVzbneqAPtBvCrsg"
-OUT = Path("playlist-transcripts.json")
-TMP = Path(".tmp_subs")
+OUT_PATH = Path("playlist-transcripts.json")
+TMP_DIR = Path(".tmp_subs")
+LANG_PREF = ["ru", "en"]
+MAX_WORDS = 160
 
 
-def base_payload():
-    return {"playlistUrl": PLAYLIST_URL, "updatedAt": None, "error": None, "videos": [], "chunks": []}
+@dataclass
+class VideoMeta:
+    video_id: str
+    title: str
+    url: str
+    duration: int | None
+    language: str | None = None
 
 
-def run(cmd):
-    return subprocess.run(cmd, capture_output=True, text=True)
+def empty_payload(error: str | None = None) -> dict:
+    return {
+        "playlistUrl": PLAYLIST_URL,
+        "updatedAt": datetime.now(timezone.utc).isoformat(),
+        "error": error,
+        "videos": [],
+        "chunks": [],
+    }
 
 
-def clean_vtt(text):
-    lines, seen = [], set()
-    for raw in text.splitlines():
+def run(cmd: list[str]) -> subprocess.CompletedProcess[str]:
+    return subprocess.run(cmd, text=True, capture_output=True)
+
+
+def write_payload(payload: dict) -> None:
+    OUT_PATH.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
+
+
+def choose_sub_file(video_id: str, files: Iterable[Path]) -> Path | None:
+    files = list(files)
+    if not files:
+        return None
+
+    def rank(path: Path) -> tuple[int, str]:
+        suffixes = path.suffixes
+        lang = suffixes[-2].lstrip(".") if len(suffixes) >= 2 else "zz"
+        if lang == "ru":
+            return (0, lang)
+        if lang == "en":
+            return (1, lang)
+        if lang.startswith("ru"):
+            return (2, lang)
+        if lang.startswith("en"):
+            return (3, lang)
+        return (4, lang)
+
+    return sorted(files, key=rank)[0]
+
+
+def parse_lang_from_filename(path: Path) -> str | None:
+    # Example: AbCdEf.ru.vtt or AbCdEf.en-orig.vtt
+    suffixes = path.suffixes
+    if len(suffixes) < 2:
+        return None
+    return suffixes[-2].lstrip(".")
+
+
+def vtt_blocks(vtt_text: str) -> list[tuple[int | None, str]]:
+    blocks: list[tuple[int | None, str]] = []
+    cur_start: int | None = None
+    cur_lines: list[str] = []
+
+    for raw in vtt_text.splitlines():
         line = raw.strip()
-        if not line or line == "WEBVTT" or "-->" in line or line.startswith(("NOTE", "STYLE", "Kind:", "Language:")):
+        if not line:
+            if cur_lines:
+                blocks.append((cur_start, " ".join(cur_lines)))
+                cur_lines = []
             continue
-        line = re.sub(r"<[^>]+>", "", line)
-        line = re.sub(r"\s+", " ", line).strip()
-        if line and line not in seen:
-            seen.add(line)
-            lines.append(line)
-    return " ".join(lines).strip()
 
+        if "-->" in line:
+            if cur_lines:
+                blocks.append((cur_start, " ".join(cur_lines)))
+                cur_lines = []
+            cur_start = parse_start_seconds(line)
+            continue
+
+        if line == "WEBVTT" or line.startswith(("NOTE", "STYLE", "Kind:", "Language:")):
+            continue
+
+        clean = re.sub(r"<[^>]+>", "", line)
+        clean = re.sub(r"\s+", " ", clean).strip()
+        if clean:
+            cur_lines.append(clean)
+
+    if cur_lines:
+        blocks.append((cur_start, " ".join(cur_lines)))
+
+    return blocks
+
+
+def parse_start_seconds(time_range: str) -> int | None:
+    m = re.search(r"(\d{2}:\d{2}:\d{2}\.\d{3})", time_range)
+    if not m:
+        return None
+    h, mnt, sec = m.group(1).split(":")
+    return int(h) * 3600 + int(mnt) * 60 + int(float(sec))
+
+
+def normalize_text(text: str) -> str:
+    text = re.sub(r"\s+", " ", text).strip()
+    return text
 
 def parse_vtt_chunks(vtt_text, max_words=150):
     entries = []
@@ -51,83 +140,128 @@ def parse_vtt_chunks(vtt_text, max_words=150):
     if current_text:
         entries.append((current_start, " ".join(current_text)))
 
-    chunks, bucket, starts = [], [], []
-    idx = 1
-    for st, txt in entries:
-        words = txt.split()
-        if st is not None and not starts:
-            starts.append(st)
+def chunk_blocks(video: VideoMeta, blocks: list[tuple[int | None, str]]) -> list[dict]:
+    chunks: list[dict] = []
+    bucket: list[str] = []
+    start: int | None = None
+    chunk_idx = 1
+    seen = set()
+
+    def flush() -> None:
+        nonlocal bucket, start, chunk_idx
+        if not bucket:
+            return
+        text = normalize_text(" ".join(bucket))
+        if not text or text in seen:
+            bucket = []
+            start = None
+            return
+        seen.add(text)
+        chunks.append(
+            {
+                "id": f"{video.video_id}-chunk-{chunk_idx:03d}",
+                "videoId": video.video_id,
+                "title": video.title,
+                "url": video.url,
+                "start": start,
+                "text": text,
+            }
+        )
+        chunk_idx += 1
+        bucket = []
+        start = None
+
+    for block_start, block_text in blocks:
+        words = block_text.split()
+        if not words:
+            continue
+        if start is None:
+            start = block_start
         bucket.extend(words)
-        if len(bucket) >= max_words:
-            chunks.append((idx, starts[0] if starts else None, " ".join(bucket)))
-            idx += 1
-            bucket, starts = [], []
-    if bucket:
-        chunks.append((idx, starts[0] if starts else None, " ".join(bucket)))
+        if len(bucket) >= MAX_WORDS:
+            flush()
+
+    flush()
     return chunks
 
 
-def _start_seconds(timerange):
-    m = re.search(r"(\d{2}:\d{2}:\d{2}\.\d{3})", timerange)
-    if not m:
-        return None
-    h, mi, sec = m.group(1).split(":")
-    return int(h) * 3600 + int(mi) * 60 + int(float(sec))
-
-
-def main():
-    payload = base_payload()
-    TMP.mkdir(exist_ok=True)
-    test = run(["yt-dlp", "--version"])
-    if test.returncode != 0:
-        payload["error"] = "yt-dlp не установлен"
-        OUT.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
-        return
-
-    cmd = ["yt-dlp", "--flat-playlist", "--dump-json", PLAYLIST_URL]
-    proc = run(cmd)
+def collect_playlist_entries() -> tuple[list[VideoMeta], str | None]:
+    proc = run(["yt-dlp", "--flat-playlist", "--dump-json", PLAYLIST_URL])
     if proc.returncode != 0:
-        payload["error"] = proc.stderr.strip() or "Не удалось получить плейлист"
-        OUT.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
-        return
+        return [], proc.stderr.strip() or "Не удалось получить плейлист"
 
+    videos: list[VideoMeta] = []
     for line in proc.stdout.splitlines():
         if not line.strip():
             continue
         meta = json.loads(line)
         vid = meta.get("id")
-        title = meta.get("title") or vid
-        url = f"https://www.youtube.com/watch?v={vid}"
-        video = {"videoId": vid, "title": title, "url": url, "duration": meta.get("duration"), "language": None}
-        payload["videos"].append(video)
+        if not vid:
+            continue
+        videos.append(
+            VideoMeta(
+                video_id=vid,
+                title=meta.get("title") or vid,
+                url=f"https://www.youtube.com/watch?v={vid}",
+                duration=meta.get("duration"),
+            )
+        )
+    return videos, None
 
-        sproc = run(["yt-dlp", "--skip-download", "--write-auto-subs", "--sub-langs", "ru,en,ru.*,en.*,.*", "--sub-format", "vtt", "-o", str(TMP / "%(id)s.%(ext)s"), url])
-        if sproc.returncode != 0:
+
+def download_subs(video: VideoMeta) -> Path | None:
+    cmd = [
+        "yt-dlp",
+        "--skip-download",
+        "--write-auto-subs",
+        "--sub-langs",
+        "ru,en,ru.*,en.*,.*",
+        "--sub-format",
+        "vtt",
+        "-o",
+        str(TMP_DIR / "%(id)s.%(ext)s"),
+        video.url,
+    ]
+    _ = run(cmd)
+    return choose_sub_file(video.video_id, TMP_DIR.glob(f"{video.video_id}*.vtt"))
+
+
+def main() -> None:
+    if shutil.which("yt-dlp") is None:
+        write_payload(empty_payload("yt-dlp не найден в окружении"))
+        return
+
+    TMP_DIR.mkdir(parents=True, exist_ok=True)
+
+    payload = empty_payload(None)
+    videos, err = collect_playlist_entries()
+    if err:
+        payload["error"] = err
+        write_payload(payload)
+        return
+
+    all_chunks: list[dict] = []
+    for video in videos:
+        sub = download_subs(video)
+        if not sub:
+            payload["videos"].append(video.__dict__)
             continue
 
-        files = sorted(TMP.glob(f"{vid}*.vtt"))
-        if not files:
-            continue
-        subfile = files[0]
-        lang = subfile.stem.split(".")[-1] if "." in subfile.stem else "unknown"
-        video["language"] = lang
-        raw = subfile.read_text(encoding="utf-8", errors="ignore")
-        cleaned = clean_vtt(raw)
-        if not cleaned:
-            continue
-        for cidx, start, text in parse_vtt_chunks(raw):
-            payload["chunks"].append({"id": f"{vid}-chunk-{cidx:03d}", "videoId": vid, "title": title, "url": url, "start": start, "text": text})
+        video.language = parse_lang_from_filename(sub)
+        raw = sub.read_text(encoding="utf-8", errors="ignore")
+        blocks = vtt_blocks(raw)
+        chunks = chunk_blocks(video, blocks)
+        all_chunks.extend(chunks)
+        payload["videos"].append(video.__dict__)
 
-    payload["updatedAt"] = datetime.now(timezone.utc).isoformat()
-    if not payload["chunks"] and payload["error"] is None:
-        payload["error"] = "Не удалось получить субтитры: проверьте ограничения YouTube или языки субтитров"
-    OUT.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
+    payload["chunks"] = all_chunks
+    if not payload["chunks"]:
+        payload["error"] = "Субтитры не извлечены: проверьте доступ к YouTube/ограничения авто-субтитров"
+    write_payload(payload)
 
 
 if __name__ == "__main__":
     try:
         main()
-    except Exception as exc:
-        payload = base_payload()
-        payload["error"] = str(exc)
-        OUT.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
+    except Exception as exc:  # keep JSON valid in all cases
+        write_payload(empty_payload(f"Сбой сборки индекса: {exc}"))
