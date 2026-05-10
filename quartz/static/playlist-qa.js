@@ -18,6 +18,7 @@
   ]);
 
   let chunks = [];
+  let isIndexReady = false;
 
   function normalize(text) {
     return (text || "")
@@ -104,6 +105,11 @@
       return;
     }
 
+    if (!isIndexReady) {
+      answerEl.textContent = "Индекс ещё загружается. Попробуйте через пару секунд.";
+      return;
+    }
+
     if (!chunks.length) {
       answerEl.textContent = "Индекс пуст. Сначала сгенерируйте playlist-transcripts.json.";
       return;
@@ -125,7 +131,8 @@
 
   askBtn.addEventListener("click", answerQuestion);
   queryEl.addEventListener("keydown", (ev) => {
-    if ((ev.ctrlKey || ev.metaKey) && ev.key === "Enter") {
+    if (ev.key === "Enter" && !ev.shiftKey) {
+      ev.preventDefault();
       answerQuestion();
     }
   });
@@ -137,9 +144,14 @@
     })
     .then((payload) => {
       chunks = Array.isArray(payload?.chunks) ? payload.chunks : [];
+      isIndexReady = true;
+      askBtn.disabled = false;
       statusEl.textContent = `Индекс загружен: ${chunks.length} фрагментов.`;
     })
     .catch((err) => {
+      askBtn.disabled = true;
       statusEl.textContent = `Не удалось загрузить индекс: ${err.message}`;
     });
+
+  askBtn.disabled = true;
 })();
