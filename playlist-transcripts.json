@@ -1,13 +1,3287 @@
 {
   "playlistUrl": "https://www.youtube.com/playlist?list=PLQ0wmPbdvhzJl6lFMAVzbneqAPtBvCrsg",
-  "updatedAt": "2026-05-10T22:28:08.824062+00:00",
-  "error": "index_unavailable",
-  "videos": [],
-  "chunks": [],
+  "updatedAt": "2026-05-10T22:31:44.070890+00:00",
+  "error": null,
+  "videos": [
+    {
+      "videoId": "d8AU7gXUqcw",
+      "title": "S1E1 | СВАДЬБА УРОДА | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=d8AU7gXUqcw",
+      "duration": 11076,
+      "language": null
+    },
+    {
+      "videoId": "rsTRHsQkmts",
+      "title": "S1E2 | ХАОС В ЛАГЕРЕ КОНДАМНИТАЛЬ | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=rsTRHsQkmts",
+      "duration": 10298,
+      "language": null
+    },
+    {
+      "videoId": "bkUd4QvygmA",
+      "title": "S1E3 | НАКАНУНЕ СВАДЬБЫ УРОДА | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=bkUd4QvygmA",
+      "duration": 14041,
+      "language": null
+    },
+    {
+      "videoId": "25E6a5kDYDM",
+      "title": "S1E4 | СВАНДЭЙЛ. БЫЛАЯ МУДРОСТЬ | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=25E6a5kDYDM",
+      "duration": 14814,
+      "language": null
+    },
+    {
+      "videoId": "oaW7m-XAMB4",
+      "title": "S2E1 | ПО ЛЕЗВИЮ КИНЖАЛА | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=oaW7m-XAMB4",
+      "duration": 14328,
+      "language": null
+    },
+    {
+      "videoId": "OnvP3zpCcgg",
+      "title": "S2E2 | ИГРА ТЕНЕЙ | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=OnvP3zpCcgg",
+      "duration": 15633,
+      "language": null
+    },
+    {
+      "videoId": "AZ-NZIftZl4",
+      "title": "S2E3 | НАВСТРЕЧУ ДОЛИНЕ ЭЛЬТИРОУ | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=AZ-NZIftZl4",
+      "duration": 12039,
+      "language": null
+    },
+    {
+      "videoId": "p7XOX9_wF0U",
+      "title": "S2E4 | О ЧЕМ ПОЕТ ВЕТЕР | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=p7XOX9_wF0U",
+      "duration": 14097,
+      "language": null
+    },
+    {
+      "videoId": "d7xortVaSH4",
+      "title": "S2E5 | РАЗНЫЕ ЦВЕТА ОДИНАКОВЫХ ДНЕЙ | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=d7xortVaSH4",
+      "duration": 17914,
+      "language": null
+    },
+    {
+      "videoId": "06aEqk1dkSU",
+      "title": "S2E6 | КОГДА РЯДОМ ДРУГ | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=06aEqk1dkSU",
+      "duration": 15137,
+      "language": null
+    },
+    {
+      "videoId": "8TTD46lVld4",
+      "title": "S2E7 | ВО ИМЯ ЛЮБВИ! | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=8TTD46lVld4",
+      "duration": 16876,
+      "language": null
+    },
+    {
+      "videoId": "0dIA5LoFCxo",
+      "title": "S2E8 | СМУТА | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=0dIA5LoFCxo",
+      "duration": 16413,
+      "language": null
+    },
+    {
+      "videoId": "HEeZEQD7kAU",
+      "title": "S2E9 | ВСЁ В ПРОШЛОМ... | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=HEeZEQD7kAU",
+      "duration": 15965,
+      "language": null
+    },
+    {
+      "videoId": "NjgIm2VFsKE",
+      "title": "S3E1 | ТАЙНЫ ДОЛИНЫ | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=NjgIm2VFsKE",
+      "duration": 15223,
+      "language": null
+    },
+    {
+      "videoId": "BoE5dfH64J4",
+      "title": "S3E2 | БОГОМ ЗАБЫТОЕ МЕСТО | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=BoE5dfH64J4",
+      "duration": 17415,
+      "language": null
+    },
+    {
+      "videoId": "Ltt80qtl9eU",
+      "title": "S3E3 | СКВОЗЬ ХЛАД РАВНИН | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=Ltt80qtl9eU",
+      "duration": 17839,
+      "language": null
+    },
+    {
+      "videoId": "-8GrA3m2hug",
+      "title": "S3E4 | ЗИМНИЙ БАЛ | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=-8GrA3m2hug",
+      "duration": 18373,
+      "language": null
+    },
+    {
+      "videoId": "cscFIZcWebk",
+      "title": "S3E5 | ОБОРОТЕНЬ. НОВОГОДНИЙ ВЫПУСК| Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=cscFIZcWebk",
+      "duration": 17519,
+      "language": null
+    },
+    {
+      "videoId": "_HuxbtiK5gw",
+      "title": "S3E6 | ОБОРОТЕНЬ. РАЗВЯЗКА | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=_HuxbtiK5gw",
+      "duration": 16877,
+      "language": null
+    },
+    {
+      "videoId": "dbben8hWc1U",
+      "title": "S3E7 | СОВПАДЕНИЙ НЕ БЫВАЕТ | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=dbben8hWc1U",
+      "duration": 15459,
+      "language": null
+    },
+    {
+      "videoId": "py3cmkFvIn0",
+      "title": "S3E8 | НАСТУПЛЕНИЕ ТЕМНОТЫ | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=py3cmkFvIn0",
+      "duration": 14609,
+      "language": null
+    },
+    {
+      "videoId": "MLnFGpo0sMc",
+      "title": "S4E1 | БЕЗ ТЕНИ СОМНЕНИЙ | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=MLnFGpo0sMc",
+      "duration": 15674,
+      "language": null
+    },
+    {
+      "videoId": "LuaxWwXBnKI",
+      "title": "S4E2 Part 1 | ВЕТЕР ВСЁ ЗНАЕТ | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=LuaxWwXBnKI",
+      "duration": 4502,
+      "language": null
+    },
+    {
+      "videoId": "IHt-edKy9kA",
+      "title": "S4E2 Part 2 | ВЕТЕР ВСЁ ЗНАЕТ | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=IHt-edKy9kA",
+      "duration": 4974,
+      "language": null
+    },
+    {
+      "videoId": "U4-A5M9qfF8",
+      "title": "S4E2 Part3 | ВЕТЕР ВСЁ ЗНАЕТ | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=U4-A5M9qfF8",
+      "duration": 5414,
+      "language": null
+    },
+    {
+      "videoId": "nal3EgMS6sM",
+      "title": "S4E3 Part 1 | ПЕТЛЯ ЗАТЯГИВАЕТСЯ | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=nal3EgMS6sM",
+      "duration": 4421,
+      "language": null
+    },
+    {
+      "videoId": "P9WWaSpAZ2g",
+      "title": "S4E3 Part 2 | ПЕТЛЯ ЗАТЯГИВАЕТСЯ | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=P9WWaSpAZ2g",
+      "duration": 4998,
+      "language": null
+    },
+    {
+      "videoId": "69Innu1FaNs",
+      "title": "S4E3 Part 3 | ПЕТЛЯ ЗАТЯГИВАЕТСЯ | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=69Innu1FaNs",
+      "duration": 4496,
+      "language": null
+    },
+    {
+      "videoId": "M3MSb6Hbtfs",
+      "title": "S4E4 Part 1 | СКЕЛЕТЫ В ШКАФУ | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=M3MSb6Hbtfs",
+      "duration": 4241,
+      "language": null
+    },
+    {
+      "videoId": "F2_uasdgmxY",
+      "title": "S4E4 Part 2 | СКЕЛЕТЫ В ШКАФУ | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=F2_uasdgmxY",
+      "duration": 6251,
+      "language": null
+    },
+    {
+      "videoId": "rUhLzkJy2XU",
+      "title": "S4E4 Part 3 | СКЕЛЕТЫ В ШКАФУ | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=rUhLzkJy2XU",
+      "duration": 3924,
+      "language": null
+    },
+    {
+      "videoId": "25pAQYS7Cao",
+      "title": "S4E5 Part 1 | ОПАСНЫЕ СВЯЗИ | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=25pAQYS7Cao",
+      "duration": 3963,
+      "language": null
+    },
+    {
+      "videoId": "TpjhsbVPzJY",
+      "title": "S4E5 Part 2 | ОПАСНЫЕ СВЯЗИ | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=TpjhsbVPzJY",
+      "duration": 5025,
+      "language": null
+    },
+    {
+      "videoId": "u7b-SHLI7Ms",
+      "title": "S4E5 Part 3 | ОПАСНЫЕ СВЯЗИ | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=u7b-SHLI7Ms",
+      "duration": 7606,
+      "language": null
+    },
+    {
+      "videoId": "BsgsKu-0Qe4",
+      "title": "S4E6 Part 1 | ВРЕМЯ ВСПЯТЬ | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=BsgsKu-0Qe4",
+      "duration": 3915,
+      "language": null
+    },
+    {
+      "videoId": "MWboPBWLDc8",
+      "title": "S4E6 Part 2 | ВРЕМЯ ВСПЯТЬ | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=MWboPBWLDc8",
+      "duration": 5482,
+      "language": null
+    },
+    {
+      "videoId": "a3OOTs0fskc",
+      "title": "S4E6 Part 3 | ВРЕМЯ ВСПЯТЬ | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=a3OOTs0fskc",
+      "duration": 5245,
+      "language": null
+    },
+    {
+      "videoId": "kh50dVZzFbE",
+      "title": "S4E7 Part 1 | ЧЕРВИВОЕ ЯБЛОКО | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=kh50dVZzFbE",
+      "duration": 5340,
+      "language": null
+    },
+    {
+      "videoId": "YkxUENQko7E",
+      "title": "S4E7 Part 2 | ЧЕРВИВОЕ ЯБЛОКО | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=YkxUENQko7E",
+      "duration": 5144,
+      "language": null
+    },
+    {
+      "videoId": "turR4x1ohRs",
+      "title": "S4E7 Part 3 | ЧЕРВИВОЕ ЯБЛОКО | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=turR4x1ohRs",
+      "duration": 5227,
+      "language": null
+    },
+    {
+      "videoId": "dyMIWqT2wWk",
+      "title": "S4E8 Part 1 | СИНИЕ ЦВЕТЫ | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=dyMIWqT2wWk",
+      "duration": 3942,
+      "language": null
+    },
+    {
+      "videoId": "puS8WWXcOr4",
+      "title": "S4E8 Part 2 | СИНИЕ ЦВЕТЫ | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=puS8WWXcOr4",
+      "duration": 5789,
+      "language": null
+    },
+    {
+      "videoId": "9Z6JyAURXRE",
+      "title": "S4E8 Part3 | СИНИЕ ЦВЕТЫ | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=9Z6JyAURXRE",
+      "duration": 5961,
+      "language": null
+    },
+    {
+      "videoId": "wPbHK3wmIZs",
+      "title": "S5E1 Part 1 | СУБТЕРА | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=wPbHK3wmIZs",
+      "duration": 5623,
+      "language": null
+    },
+    {
+      "videoId": "1BWSFHtGSQE",
+      "title": "S5E1 Part 2 | СУБТЕРА | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=1BWSFHtGSQE",
+      "duration": 7358,
+      "language": null
+    },
+    {
+      "videoId": "0KBiWR1A7V0",
+      "title": "S5E2 Part 1 | АДСКИЙ ЗНОЙ | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=0KBiWR1A7V0",
+      "duration": 4447,
+      "language": null
+    },
+    {
+      "videoId": "ilBbRcWKQRM",
+      "title": "S5E2 Part 2 | АДСКИЙ ЗНОЙ | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=ilBbRcWKQRM",
+      "duration": 5895,
+      "language": null
+    },
+    {
+      "videoId": "DyrEBZwXxxA",
+      "title": "S5E2 Part 3 | АДСКИЙ ЗНОЙ | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=DyrEBZwXxxA",
+      "duration": 4805,
+      "language": null
+    },
+    {
+      "videoId": "mHPzV6WuES8",
+      "title": "S5E3 Part 1 | ЧТО СКРЫВАЮТ ПЕСКИ? | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=mHPzV6WuES8",
+      "duration": 3886,
+      "language": null
+    },
+    {
+      "videoId": "Lb6ytYqwYXE",
+      "title": "S5E3 Part 2 | ЧТО СКРЫВАЮТ ПЕСКИ? | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=Lb6ytYqwYXE",
+      "duration": 5807,
+      "language": null
+    },
+    {
+      "videoId": "7kNmvx07pFc",
+      "title": "S5E3 Part 3 | ЧТО СКРЫВАЮТ ПЕСКИ? | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=7kNmvx07pFc",
+      "duration": 6267,
+      "language": null
+    },
+    {
+      "videoId": "6AzYq8YYj4U",
+      "title": "S5E4 Part 1 | ЗАВОРАЖИВАЮЩИЙ СВЕНГАЛИ | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=6AzYq8YYj4U",
+      "duration": 4541,
+      "language": null
+    },
+    {
+      "videoId": "vtkNETpUui4",
+      "title": "S5E4 Part 2 | ЗАВОРАЖИВАЮЩИЙ СВЕНГАЛИ | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=vtkNETpUui4",
+      "duration": 4509,
+      "language": null
+    },
+    {
+      "videoId": "WGjmDk3mhCo",
+      "title": "S5E4 Part 3 | ЗАВОРАЖИВАЮЩИЙ СВЕНГАЛИ | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=WGjmDk3mhCo",
+      "duration": 5415,
+      "language": null
+    },
+    {
+      "videoId": "GKE4vXorvsY",
+      "title": "S5E5 Part 1 | ПРОЩАЙ, ФИНЛИ...  | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=GKE4vXorvsY",
+      "duration": 4251,
+      "language": null
+    },
+    {
+      "videoId": "35r_eUsH7oY",
+      "title": "S5E5 Part 2 | ПРОЩАЙ, ФИНЛИ...  | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=35r_eUsH7oY",
+      "duration": 5061,
+      "language": null
+    },
+    {
+      "videoId": "19NPvQ3JjqY",
+      "title": "S5E5 Part 3 | ПРОЩАЙ, ФИНЛИ...  | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=19NPvQ3JjqY",
+      "duration": 5130,
+      "language": null
+    },
+    {
+      "videoId": "CzKluMaW_uQ",
+      "title": "S5E6 Part 1 | КАРАВАН ДЖУНО | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=CzKluMaW_uQ",
+      "duration": 5160,
+      "language": null
+    },
+    {
+      "videoId": "8iLn-LNjhFY",
+      "title": "S05E06 Part 2 | КАРАВАН ДЖУНО | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=8iLn-LNjhFY",
+      "duration": 5707,
+      "language": null
+    },
+    {
+      "videoId": "7G12uSe_npI",
+      "title": "S5E6 Part 3 | КАРАВАН ДЖУНО | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=7G12uSe_npI",
+      "duration": 4183,
+      "language": null
+    },
+    {
+      "videoId": "dZt5vB_Kda0",
+      "title": "S5E7 Part 1 | ЧЁРНЫЕ КРЫЛЬЯ | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=dZt5vB_Kda0",
+      "duration": 3839,
+      "language": null
+    },
+    {
+      "videoId": "Pzi5-QZGkmM",
+      "title": "S5E7 Part 2 | ЧЁРНЫЕ КРЫЛЬЯ | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=Pzi5-QZGkmM",
+      "duration": 4505,
+      "language": null
+    },
+    {
+      "videoId": "mq24DE07lPU",
+      "title": "S5E7 Part3 | ЧЁРНЫЕ КРЫЛЬЯ | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=mq24DE07lPU",
+      "duration": 6847,
+      "language": null
+    },
+    {
+      "videoId": "2jeAnKsKOBI",
+      "title": "S5E8 Part 1 | ПРОБУЖДЕНИЕ | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=2jeAnKsKOBI",
+      "duration": 4385,
+      "language": null
+    },
+    {
+      "videoId": "m1bBY7ahCv8",
+      "title": "S5E8 Part 2 | ПРОБУЖДЕНИЕ | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=m1bBY7ahCv8",
+      "duration": 4855,
+      "language": null
+    },
+    {
+      "videoId": "FD66Np82pFw",
+      "title": "S5E8 Part 3 | ПРОБУЖДЕНИЕ | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=FD66Np82pFw",
+      "duration": 5556,
+      "language": null
+    },
+    {
+      "videoId": "bTnHlAQwck4",
+      "title": "S6E1 Part 1 | ЗВЕЗДОПАД | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=bTnHlAQwck4",
+      "duration": 4460,
+      "language": null
+    },
+    {
+      "videoId": "w9HzjUx23KI",
+      "title": "S6E1 Part 2 | STARFALL | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=w9HzjUx23KI",
+      "duration": 5467,
+      "language": null
+    },
+    {
+      "videoId": "kT-hG-Gcv50",
+      "title": "S6E1 Part 3 | ЗВЕЗДОПАД | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=kT-hG-Gcv50",
+      "duration": 5918,
+      "language": null
+    },
+    {
+      "videoId": "oYt5eUG9AiA",
+      "title": "S6E2 Part 1 | ПОСЛЕДНИЙ ИЗ РОДА | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=oYt5eUG9AiA",
+      "duration": 4537,
+      "language": null
+    },
+    {
+      "videoId": "9o3af5zJYo8",
+      "title": "S6E2 Part 2 | ПОСЛЕДНИЙ ИЗ РОДА | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=9o3af5zJYo8",
+      "duration": 5575,
+      "language": null
+    },
+    {
+      "videoId": "OBdOciifBgA",
+      "title": "S6E2 Part 3 | LAST OF THE KIND | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=OBdOciifBgA",
+      "duration": 4400,
+      "language": null
+    },
+    {
+      "videoId": "JuUA8MRAhtI",
+      "title": "S6E3 Part 1 | КРЕЦЕПТЕ ВАР | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=JuUA8MRAhtI",
+      "duration": 4865,
+      "language": null
+    },
+    {
+      "videoId": "dbRGQ0eZuAg",
+      "title": "S6E3 Part 2 | КРЕЦЕПТЕ ВАР | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=dbRGQ0eZuAg",
+      "duration": 4823,
+      "language": null
+    },
+    {
+      "videoId": "4wytS5zt0Es",
+      "title": "S6E3 Part3 | КРЕЦЕПТЕ ВАР | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=4wytS5zt0Es",
+      "duration": 4378,
+      "language": null
+    },
+    {
+      "videoId": "V2m8vFog_9Y",
+      "title": "S6E4 Part 1 | НИТИ ЖИЗНИ | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=V2m8vFog_9Y",
+      "duration": 4555,
+      "language": null
+    },
+    {
+      "videoId": "28cQ4KgTl1M",
+      "title": "S6E4 Part 2 | НИТИ ЖИЗНИ | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=28cQ4KgTl1M",
+      "duration": 5318,
+      "language": null
+    },
+    {
+      "videoId": "du5lrikW5Fs",
+      "title": "S6E4 Part 3 | НИТИ ЖИЗНИ | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=du5lrikW5Fs",
+      "duration": 5489,
+      "language": null
+    },
+    {
+      "videoId": "VIku39ACAcw",
+      "title": "S6E5 Part 1 | ЛЕДИ КХАМЕНА | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=VIku39ACAcw",
+      "duration": 4464,
+      "language": null
+    },
+    {
+      "videoId": "NcBAMReOKIs",
+      "title": "S6E5 Part 2 | ЛЕДИ КХАМЕНА | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=NcBAMReOKIs",
+      "duration": 5149,
+      "language": null
+    },
+    {
+      "videoId": "czQqcIPSFQ0",
+      "title": "S6E5 Part 3 | ЛЕДИ КХАМЕНА | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=czQqcIPSFQ0",
+      "duration": 5806,
+      "language": null
+    },
+    {
+      "videoId": "SRB4jWL7OvI",
+      "title": "S6E6 Part 1 | ЛЕДИ КХАМЕНА - 2 | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=SRB4jWL7OvI",
+      "duration": 4614,
+      "language": null
+    },
+    {
+      "videoId": "KW7FD09ZAG4",
+      "title": "S6E6 Part 2 | ЛЕДИ КХАМЕНА - 2 | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=KW7FD09ZAG4",
+      "duration": 5679,
+      "language": null
+    },
+    {
+      "videoId": "txzrSbSCDrM",
+      "title": "S6E6 Part 3 | LADY OF KHAMENA - 2 | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=txzrSbSCDrM",
+      "duration": 4675,
+      "language": null
+    },
+    {
+      "videoId": "tZPBdkIgUAc",
+      "title": "S6E7 Part 1 | ШЁПОТ | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=tZPBdkIgUAc",
+      "duration": 4067,
+      "language": null
+    },
+    {
+      "videoId": "dlTUM225D5Y",
+      "title": "S6E7 Part 2 | ШЁПОТ | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=dlTUM225D5Y",
+      "duration": 5831,
+      "language": null
+    },
+    {
+      "videoId": "1JGVnvOWIO8",
+      "title": "S6E7 Part 3 | ШЁПОТ | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=1JGVnvOWIO8",
+      "duration": 6352,
+      "language": null
+    },
+    {
+      "videoId": "WZ1xh8yCPJA",
+      "title": "S6E8 Part 1 | ЗАДЕРЖИ ДЫХАНИЕ | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=WZ1xh8yCPJA",
+      "duration": 4848,
+      "language": null
+    },
+    {
+      "videoId": "YNo8uPl1g_8",
+      "title": "S6E8 Part 2 | ЗАДЕРЖИ ДЫХАНИЕ | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=YNo8uPl1g_8",
+      "duration": 4514,
+      "language": null
+    },
+    {
+      "videoId": "Q-4OsyQ6UwM",
+      "title": "S6E8 Part 3 | ЗАДЕРЖИ ДЫХАНИЕ | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=Q-4OsyQ6UwM",
+      "duration": 5897,
+      "language": null
+    },
+    {
+      "videoId": "zEWUymEeQG4",
+      "title": "S06E09 Part 1 | УЛЫБКА УДАЧИ | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=zEWUymEeQG4",
+      "duration": 4808,
+      "language": null
+    },
+    {
+      "videoId": "2XqKX9kfPRc",
+      "title": "S6E9 Part 2 | УЛЫБКА УДАЧИ | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=2XqKX9kfPRc",
+      "duration": 4537,
+      "language": null
+    },
+    {
+      "videoId": "svaeYogRTJU",
+      "title": "S6E9 Part 3 | УЛЫБКА УДАЧИ | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=svaeYogRTJU",
+      "duration": 5251,
+      "language": null
+    },
+    {
+      "videoId": "E5stjSgouT8",
+      "title": "S7E1 Part 1 | НА КРАЮ СВЕТА | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=E5stjSgouT8",
+      "duration": 4229,
+      "language": null
+    },
+    {
+      "videoId": "HlccQFfOagY",
+      "title": "S7E1 Part 2 | НА КРАЮ СВЕТА | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=HlccQFfOagY",
+      "duration": 4912,
+      "language": null
+    },
+    {
+      "videoId": "cFAQqG3EwFw",
+      "title": "S7E1 Part 3 | НА КРАЮ СВЕТА | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=cFAQqG3EwFw",
+      "duration": 6673,
+      "language": null
+    },
+    {
+      "videoId": "hEGHd5xljV8",
+      "title": "S7E2 Part 1 | СТРАННАЯ ПРОСЬБА |  Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=hEGHd5xljV8",
+      "duration": 3848,
+      "language": null
+    },
+    {
+      "videoId": "ItMuxPf_rP4",
+      "title": "S7E2 Part 2 | СТРАННАЯ ПРОСЬБА | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=ItMuxPf_rP4",
+      "duration": 7778,
+      "language": null
+    },
+    {
+      "videoId": "A9E7t8oU0Bo",
+      "title": "S7E2 Part 3 | СТРАННАЯ ПРОСЬБА | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=A9E7t8oU0Bo",
+      "duration": 5699,
+      "language": null
+    },
+    {
+      "videoId": "-1EMzhxXjwk",
+      "title": "S7E3 Part 1 | СЕРДЦЕ ИЗ СТАЛИ | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=-1EMzhxXjwk",
+      "duration": 4066,
+      "language": null
+    },
+    {
+      "videoId": "KSB1hi-KqvE",
+      "title": "S7E3 Part 2 | СЕРДЦЕ ИЗ СТАЛИ |  Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=KSB1hi-KqvE",
+      "duration": 4546,
+      "language": null
+    },
+    {
+      "videoId": "Og5dHYxxrJ4",
+      "title": "S7E3 Part 3 | СЕРДЦЕ ИЗ СТАЛИ |  Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=Og5dHYxxrJ4",
+      "duration": 5525,
+      "language": null
+    },
+    {
+      "videoId": "Me35nqnwTqo",
+      "title": "S7E4 Part 1 | СМЕРТЬ ИМ К ЛИЦУ | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=Me35nqnwTqo",
+      "duration": 4464,
+      "language": null
+    },
+    {
+      "videoId": "tTroR8vCzpM",
+      "title": "S7E4 Part 2 | СМЕРТЬ ИМ К ЛИЦУ | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=tTroR8vCzpM",
+      "duration": 3846,
+      "language": null
+    },
+    {
+      "videoId": "8WhqEESB570",
+      "title": "S7E4 Part 3 | СМЕРТЬ ИМ К ЛИЦУ |  Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=8WhqEESB570",
+      "duration": 4488,
+      "language": null
+    },
+    {
+      "videoId": "D9hzc-7brMw",
+      "title": "S7E5 Part 1 | ДОМИНУС | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=D9hzc-7brMw",
+      "duration": 4237,
+      "language": "ru-orig"
+    },
+    {
+      "videoId": "OuFp6VLr9yM",
+      "title": "S7E5 Part 2 | ДОМИНУС | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=OuFp6VLr9yM",
+      "duration": 4715,
+      "language": null
+    },
+    {
+      "videoId": "2iDudMzjOHU",
+      "title": "S7E5 Part 3 | ДОМИНУС | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=2iDudMzjOHU",
+      "duration": 6600,
+      "language": null
+    },
+    {
+      "videoId": "sVWbwBfEROI",
+      "title": "S7E6 Part 1 | COLD CLUB | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=sVWbwBfEROI",
+      "duration": 3012,
+      "language": null
+    },
+    {
+      "videoId": "mNbIaPdiGjc",
+      "title": "S7E6 Part 2 | ХОЛОДНЫЕ ГЛЫБЫ | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=mNbIaPdiGjc",
+      "duration": 4383,
+      "language": null
+    },
+    {
+      "videoId": "kQOri9d4bgg",
+      "title": "S7E6 Part 3 | ХОЛОДНЫЕ ГЛЫБЫ | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=kQOri9d4bgg",
+      "duration": 7376,
+      "language": null
+    },
+    {
+      "videoId": "5E4CLu2LuP4",
+      "title": "S7E7 Part 1 | КЛЕЙМО | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=5E4CLu2LuP4",
+      "duration": 5405,
+      "language": null
+    },
+    {
+      "videoId": "BAlZ79c-HqY",
+      "title": "S7E7 Part 2 | КЛЕЙМО | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=BAlZ79c-HqY",
+      "duration": 5234,
+      "language": null
+    },
+    {
+      "videoId": "s1sLHkLFArs",
+      "title": "S7E7 Part 3 | КЛЕЙМО | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=s1sLHkLFArs",
+      "duration": 5370,
+      "language": null
+    },
+    {
+      "videoId": "32vjhDQniSc",
+      "title": "S8E1 Part 1 | ДЖЕМИНИ | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=32vjhDQniSc",
+      "duration": 3873,
+      "language": null
+    },
+    {
+      "videoId": "dWTnZ9f5B5o",
+      "title": "S8E1 Part 2 | ДЖЕМИНИ | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=dWTnZ9f5B5o",
+      "duration": 3826,
+      "language": null
+    },
+    {
+      "videoId": "T20XT1S2dws",
+      "title": "S8E1 Part 3 | ДЖЕМИНИ | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=T20XT1S2dws",
+      "duration": 5723,
+      "language": null
+    },
+    {
+      "videoId": "x0_kXu2ihFM",
+      "title": "S8E2 Part 1 | ПРОКЛЯТАЯ ДРУЖБА | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=x0_kXu2ihFM",
+      "duration": 4459,
+      "language": null
+    },
+    {
+      "videoId": "Ho6gIiawUnk",
+      "title": "S8E2 Part 2 | ПРОКЛЯТАЯ ДРУЖБА | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=Ho6gIiawUnk",
+      "duration": 5559,
+      "language": null
+    },
+    {
+      "videoId": "BpZ4LlUxO-Q",
+      "title": "S8E2 Part 3 | ПРОКЛЯТАЯ ДРУЖБА | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=BpZ4LlUxO-Q",
+      "duration": 6408,
+      "language": null
+    },
+    {
+      "videoId": "QphtxsyH9fc",
+      "title": "S8E3 Part 1 | КОРОЛЬ СМРАДА | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=QphtxsyH9fc",
+      "duration": 3557,
+      "language": null
+    },
+    {
+      "videoId": "Z9vfU7ppU0k",
+      "title": "S8E3 Part 2 | КОРОЛЬ СМРАДА | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=Z9vfU7ppU0k",
+      "duration": 4935,
+      "language": null
+    },
+    {
+      "videoId": "XeIKPphg45M",
+      "title": "S8E3 Part 3 | КОРОЛЬ СМРАДА | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=XeIKPphg45M",
+      "duration": 5943,
+      "language": null
+    },
+    {
+      "videoId": "8ZWvDI41Pck",
+      "title": "S8E4 Part 1 | КАДОР | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=8ZWvDI41Pck",
+      "duration": 4740,
+      "language": null
+    },
+    {
+      "videoId": "FzTC6P0PwNk",
+      "title": "S8E4 Part 2 | KADOR | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=FzTC6P0PwNk",
+      "duration": 4711,
+      "language": null
+    },
+    {
+      "videoId": "aca641EQbSk",
+      "title": "S8E4 Part 3 | КАДОР | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=aca641EQbSk",
+      "duration": 4855,
+      "language": null
+    },
+    {
+      "videoId": "GdqrVvh6kF0",
+      "title": "S8E5 Part 1 | В ПОИСКАХ ОТВЕТА | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=GdqrVvh6kF0",
+      "duration": 3352,
+      "language": null
+    },
+    {
+      "videoId": "oiOESInHejo",
+      "title": "S8E5 Part 2 | В ПОИСКАХ ОТВЕТА | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=oiOESInHejo",
+      "duration": 3526,
+      "language": null
+    },
+    {
+      "videoId": "jAOARyosPFY",
+      "title": "S8E5 Part 3 | В ПОИСКАХ ОТВЕТА | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=jAOARyosPFY",
+      "duration": 3339,
+      "language": null
+    },
+    {
+      "videoId": "YIdWyvc5RVo",
+      "title": "DожDались. Миндальное печенье. Часть 1 | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=YIdWyvc5RVo",
+      "duration": 4746,
+      "language": null
+    },
+    {
+      "videoId": "ityG5SBcDSo",
+      "title": "The Wait Is Over. Almond Cookies. Part 2 | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=ityG5SBcDSo",
+      "duration": 4102,
+      "language": null
+    },
+    {
+      "videoId": "uWUnboMQIU4",
+      "title": "DожDались. Миндальное печенье. Часть 3 | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=uWUnboMQIU4",
+      "duration": 4609,
+      "language": null
+    },
+    {
+      "videoId": "NQ_y6J0ya5E",
+      "title": "DожDались. Пропажа мистера Фельфедора. Часть 1 | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=NQ_y6J0ya5E",
+      "duration": 4257,
+      "language": null
+    },
+    {
+      "videoId": "jZlbK0Se6Zs",
+      "title": "DожDались. Пропажа мистера Фельфедора. Часть 2 | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=jZlbK0Se6Zs",
+      "duration": 5720,
+      "language": null
+    },
+    {
+      "videoId": "7hidFIovy-g",
+      "title": "DожDались. Пропажа мистера Фельфедора. Часть 3 | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=7hidFIovy-g",
+      "duration": 5759,
+      "language": null
+    },
+    {
+      "videoId": "fo3y--hHV6Q",
+      "title": "DожDались. Небольшое недоразумение. Часть 1 | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=fo3y--hHV6Q",
+      "duration": 4257,
+      "language": null
+    },
+    {
+      "videoId": "OvtuN3Efr1M",
+      "title": "DожDались. Небольшое недоразумение. Часть 2 | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=OvtuN3Efr1M",
+      "duration": 4029,
+      "language": null
+    },
+    {
+      "videoId": "yNAQsWaq8zA",
+      "title": "DожDались. Небольшое недоразумение. Часть 3 | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=yNAQsWaq8zA",
+      "duration": 6712,
+      "language": null
+    },
+    {
+      "videoId": "cxS38X0OOD0",
+      "title": "DожDались. Сомнительный комплимент | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=cxS38X0OOD0",
+      "duration": 17168,
+      "language": null
+    },
+    {
+      "videoId": "_bjsPV2e9lk",
+      "title": "Возвращение Тенебрис. Дыхание | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=_bjsPV2e9lk",
+      "duration": 13632,
+      "language": null
+    },
+    {
+      "videoId": "WtTcASEggdI",
+      "title": "Возвращение Тенебрис. Срывая маски | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=WtTcASEggdI",
+      "duration": 14550,
+      "language": null
+    },
+    {
+      "videoId": "-lO6-EnOTcA",
+      "title": "Вика Картер | DожDались | ПАНОПТИКУМ | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=-lO6-EnOTcA",
+      "duration": 13389,
+      "language": null
+    },
+    {
+      "videoId": "LoE52gyfTx8",
+      "title": "По следам метаморфоз с Викой Картер | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=LoE52gyfTx8",
+      "duration": 11370,
+      "language": null
+    },
+    {
+      "videoId": "rVJwCaHIQW4",
+      "title": "Вика Картер играет в Dungeons and Dragons | Друзья Фердинанда Хартдегена",
+      "url": "https://www.youtube.com/watch?v=rVJwCaHIQW4",
+      "duration": 9488,
+      "language": null
+    },
+    {
+      "videoId": "JOgDCdFT2og",
+      "title": "Вика Картер играет в Dungeons and Dragons | КРУГОВЕРТЬ. Часть 1",
+      "url": "https://www.youtube.com/watch?v=JOgDCdFT2og",
+      "duration": 15518,
+      "language": null
+    },
+    {
+      "videoId": "PU1DwZ1Hba0",
+      "title": "Вика Картер играет в Dungeons and Dragons | КРУГОВЕРТЬ. Часть 2",
+      "url": "https://www.youtube.com/watch?v=PU1DwZ1Hba0",
+      "duration": 19538,
+      "language": null
+    },
+    {
+      "videoId": "N1lilLmR5p8",
+      "title": "Вика Картер играет в Dungeons and Dragons | Бродячий цирк Халэйло",
+      "url": "https://www.youtube.com/watch?v=N1lilLmR5p8",
+      "duration": 14677,
+      "language": null
+    },
+    {
+      "videoId": "SSC-0IBHf6w",
+      "title": "ПЛАЧУЩЕЕ ДИТЯ | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=SSC-0IBHf6w",
+      "duration": 9722,
+      "language": null
+    },
+    {
+      "videoId": "VVcnviI0me8",
+      "title": "Стас Давыдов и Вика Картер играют в Dungeons and Dragons | Эдвард и Зелёная лютня",
+      "url": "https://www.youtube.com/watch?v=VVcnviI0me8",
+      "duration": 14539,
+      "language": null
+    },
+    {
+      "videoId": "irle4ccSLPc",
+      "title": "ЖОЭНВЕЛЬСКАЯ ИНТЕРВЕНЦИЯ | Dungeons&Dragons",
+      "url": "https://www.youtube.com/watch?v=irle4ccSLPc",
+      "duration": 12503,
+      "language": null
+    },
+    {
+      "videoId": "isx9CK95MrQ",
+      "title": "Вика Картер играет в Dungeons and Dragons | Солёный вкус крови",
+      "url": "https://www.youtube.com/watch?v=isx9CK95MrQ",
+      "duration": 11649,
+      "language": null
+    },
+    {
+      "videoId": "g51sjHxx_VY",
+      "title": "Вика Картер играет в Dungeons and Dragons | Не теряй голову",
+      "url": "https://www.youtube.com/watch?v=g51sjHxx_VY",
+      "duration": 16435,
+      "language": null
+    },
+    {
+      "videoId": "voI7vKe3eAw",
+      "title": "Вика Картер играет в Dungeons and Dragons | Гостевой дом Брогга",
+      "url": "https://www.youtube.com/watch?v=voI7vKe3eAw",
+      "duration": 12000,
+      "language": null
+    },
+    {
+      "videoId": "Z0rvIUX5zhk",
+      "title": "Вика Картер играет в Dungeons and Dragons | Охота на вампира",
+      "url": "https://www.youtube.com/watch?v=Z0rvIUX5zhk",
+      "duration": 12148,
+      "language": null
+    },
+    {
+      "videoId": "ESAJ7SYgK_g",
+      "title": "Вика Картер играет в Dungeons and Dragons | Охота на вампира. Часть 2",
+      "url": "https://www.youtube.com/watch?v=ESAJ7SYgK_g",
+      "duration": 13867,
+      "language": null
+    },
+    {
+      "videoId": "wI_FpoTaKQA",
+      "title": "ФИНАЛ СЕЗОНА | Вика Картер играет в Dungeons and Dragons | Когда уляжется пепел",
+      "url": "https://www.youtube.com/watch?v=wI_FpoTaKQA",
+      "duration": 15131,
+      "language": null
+    },
+    {
+      "videoId": "QgLsBaP6rls",
+      "title": "ДОБРО ПОЖАЛОВАТЬ НА СЕВЕРНЫЙ КОНТИНЕНТ | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=QgLsBaP6rls",
+      "duration": 153,
+      "language": null
+    },
+    {
+      "videoId": "5S4POGdoN8A",
+      "title": "Серия 1. Часть 1 | Экспедиция Хартдеген. Земли Былых Легенд | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=5S4POGdoN8A",
+      "duration": 4236,
+      "language": null
+    },
+    {
+      "videoId": "hqzLoiw5YEo",
+      "title": "Серия 1. Часть 2 | Экспедиция Хартдеген. Земли Былых Легенд | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=hqzLoiw5YEo",
+      "duration": 4286,
+      "language": null
+    },
+    {
+      "videoId": "L4YswvKDKHA",
+      "title": "Серия 1. Часть 3 | Экспедиция Хартдеген. Земли Былых Легенд | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=L4YswvKDKHA",
+      "duration": 6350,
+      "language": null
+    },
+    {
+      "videoId": "nf7E8bEQ5nI",
+      "title": "Серия 2. Часть 1 | Экспедиция Хартдеген. Земли Былых Легенд | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=nf7E8bEQ5nI",
+      "duration": 4195,
+      "language": null
+    },
+    {
+      "videoId": "2mj6zt08x9A",
+      "title": "Серия 2. Часть 2 | Экспедиция Хартдеген. Земли Былых Легенд | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=2mj6zt08x9A",
+      "duration": 4936,
+      "language": null
+    },
+    {
+      "videoId": "hYLluktgQM4",
+      "title": "Серия 2. Часть 3 | Экспедиция Хартдеген. Земли Былых Легенд | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=hYLluktgQM4",
+      "duration": 4767,
+      "language": null
+    },
+    {
+      "videoId": "J77SJVCpvXE",
+      "title": "Серия 3. Часть 1 | Экспедиция Хартдеген. Земли Былых Легенд | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=J77SJVCpvXE",
+      "duration": 4107,
+      "language": null
+    },
+    {
+      "videoId": "QYnIbjPLzp4",
+      "title": "Серия 3. Часть 2 | Экспедиция Хартдеген. Земли Былых Легенд | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=QYnIbjPLzp4",
+      "duration": 4444,
+      "language": null
+    },
+    {
+      "videoId": "KsTZtiK1HhE",
+      "title": "Серия 3. Часть 3 | Экспедиция Хартдеген. Земли Былых Легенд | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=KsTZtiK1HhE",
+      "duration": 5290,
+      "language": null
+    },
+    {
+      "videoId": "IdZXE0QjvMI",
+      "title": "Серия 4. Часть 1 | История Конгливирти. Земли Былых Легенд | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=IdZXE0QjvMI",
+      "duration": 3898,
+      "language": null
+    },
+    {
+      "videoId": "ZBLLC1liC8k",
+      "title": "Серия 4. Часть 2 | История Конгливирти. Земли Былых Легенд | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=ZBLLC1liC8k",
+      "duration": 4217,
+      "language": null
+    },
+    {
+      "videoId": "9GS_mn62PQo",
+      "title": "Episode 4. Part 3 | History of Konglivirti: Lands of Past Legends | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=9GS_mn62PQo",
+      "duration": 3686,
+      "language": null
+    },
+    {
+      "videoId": "PQTU8cj3330",
+      "title": "Серия 5. Часть 1 | История Конгливирти. Земли Былых Легенд | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=PQTU8cj3330",
+      "duration": 4064,
+      "language": null
+    },
+    {
+      "videoId": "oatTyPSD3zE",
+      "title": "Серия 5. Часть 2 | История Конгливирти. Земли Былых Легенд | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=oatTyPSD3zE",
+      "duration": 4348,
+      "language": null
+    },
+    {
+      "videoId": "fZhmZY8hWJ0",
+      "title": "Серия 5. Часть 3 | История Конгливирти. Земли Былых Легенд | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=fZhmZY8hWJ0",
+      "duration": 6511,
+      "language": null
+    },
+    {
+      "videoId": "3_yzbQWR5L8",
+      "title": "Серия 6. Часть 1 | История Конгливирти. Земли Былых Легенд | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=3_yzbQWR5L8",
+      "duration": 3223,
+      "language": null
+    },
+    {
+      "videoId": "XNurZROuvEY",
+      "title": "Серия 6. Часть 2 | История Конгливирти. Земли Былых Легенд | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=XNurZROuvEY",
+      "duration": 4289,
+      "language": null
+    },
+    {
+      "videoId": "nVZFIS4kD7U",
+      "title": "Серия 6. Часть 3 | История Конгливирти. Земли Былых Легенд | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=nVZFIS4kD7U",
+      "duration": 4652,
+      "language": null
+    },
+    {
+      "videoId": "jCNA7zowtto",
+      "title": "Серия 7. Часть 1 | Чудовища. Земли Былых Легенд | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=jCNA7zowtto",
+      "duration": 3588,
+      "language": null
+    },
+    {
+      "videoId": "HhvEV7bJxJU",
+      "title": "Серия 7. Часть 2 | Чудовища. Земли Былых Легенд | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=HhvEV7bJxJU",
+      "duration": 4809,
+      "language": null
+    },
+    {
+      "videoId": "u1W5OL47_S4",
+      "title": "Серия 7. Часть 3 | Чудовища. Земли Былых Легенд | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=u1W5OL47_S4",
+      "duration": 3257,
+      "language": null
+    },
+    {
+      "videoId": "4c0LGY4_HaY",
+      "title": "Серия 8. Часть 1 | Чудовища. Земли Былых Легенд | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=4c0LGY4_HaY",
+      "duration": 3631,
+      "language": null
+    },
+    {
+      "videoId": "8Q5emTAFbZs",
+      "title": "Серия 8. Часть 2 | Чудовища. Земли Былых Легенд | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=8Q5emTAFbZs",
+      "duration": 4329,
+      "language": null
+    },
+    {
+      "videoId": "5mJ6sSLk7mk",
+      "title": "Серия 8. Часть 3 | Чудовища. Земли Былых Легенд | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=5mJ6sSLk7mk",
+      "duration": 6264,
+      "language": null
+    },
+    {
+      "videoId": "LXRflP_x--E",
+      "title": "Серия 9. Часть 1 | Чудовища. Земли Былых Легенд | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=LXRflP_x--E",
+      "duration": 3217,
+      "language": null
+    },
+    {
+      "videoId": "2h7-XqYdyCI",
+      "title": "Серия 9. Часть 2 | Чудовища. Земли Былых Легенд | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=2h7-XqYdyCI",
+      "duration": 5028,
+      "language": null
+    },
+    {
+      "videoId": "HK-MXMynrQg",
+      "title": "Серия 9. Часть 3 | Чудовища. Земли Былых Легенд | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=HK-MXMynrQg",
+      "duration": 6461,
+      "language": null
+    },
+    {
+      "videoId": "ApBCw15VgBA",
+      "title": "Episode 10. Part 1 | Drawings on My Body. Lands of Past Legends | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=ApBCw15VgBA",
+      "duration": 4150,
+      "language": null
+    },
+    {
+      "videoId": "ssuSkXj-8CI",
+      "title": "Серия 10. Часть 2 | Рисунки на моём теле. Земли Былых Легенд | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=ssuSkXj-8CI",
+      "duration": 4177,
+      "language": null
+    },
+    {
+      "videoId": "-d3HeGCshXM",
+      "title": "Серия 10. Часть 3 | Рисунки на моём теле. Земли Былых Легенд | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=-d3HeGCshXM",
+      "duration": 6373,
+      "language": null
+    },
+    {
+      "videoId": "O7OfUg216H8",
+      "title": "Серия 11. Часть 1 | Рисунки на моём теле. Земли Былых Легенд | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=O7OfUg216H8",
+      "duration": 3291,
+      "language": null
+    },
+    {
+      "videoId": "Or71xOkhBu0",
+      "title": "Серия 11. Часть 2 | Рисунки на моём теле. Земли Былых Легенд | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=Or71xOkhBu0",
+      "duration": 4459,
+      "language": null
+    },
+    {
+      "videoId": "xJ1BzkVQupA",
+      "title": "Серия 11. Часть 3 | Рисунки на моём теле. Земли Былых Легенд | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=xJ1BzkVQupA",
+      "duration": 6739,
+      "language": null
+    },
+    {
+      "videoId": "q6-IuwmRh18",
+      "title": "Серия 12. Часть 1 | Дыхание большого города. Земли Былых Легенд | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=q6-IuwmRh18",
+      "duration": 3488,
+      "language": null
+    },
+    {
+      "videoId": "GC916mw4eJ8",
+      "title": "Серия 12. Часть 2 | Дыхание большого города. Земли Былых Легенд | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=GC916mw4eJ8",
+      "duration": 4858,
+      "language": null
+    },
+    {
+      "videoId": "I_JkHF6W3ks",
+      "title": "Серия 12. Часть 3 | Дыхание большого города. Земли Былых Легенд | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=I_JkHF6W3ks",
+      "duration": 5644,
+      "language": null
+    },
+    {
+      "videoId": "8kQp-HDZu_o",
+      "title": "Серия 13. Часть 1 | Дыхание большого города. Земли Былых Легенд | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=8kQp-HDZu_o",
+      "duration": 3487,
+      "language": null
+    },
+    {
+      "videoId": "6k21weEVwN4",
+      "title": "Серия 13. Часть 2 | Дыхание большого города. Земли Былых Легенд | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=6k21weEVwN4",
+      "duration": 5698,
+      "language": null
+    },
+    {
+      "videoId": "zXM_tubgDus",
+      "title": "Серия 13. Часть 3 | Дыхание большого города. Земли Былых Легенд | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=zXM_tubgDus",
+      "duration": 5126,
+      "language": null
+    },
+    {
+      "videoId": "4mJFgJkmBHo",
+      "title": "Серия 14. Часть 1 | Смейся и танцуй. Земли Былых Легенд | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=4mJFgJkmBHo",
+      "duration": 3409,
+      "language": null
+    },
+    {
+      "videoId": "wKGWyHiXNAU",
+      "title": "Серия 14. Часть 2 | Смейся и танцуй. Земли Былых Легенд | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=wKGWyHiXNAU",
+      "duration": 3162,
+      "language": null
+    },
+    {
+      "videoId": "eROv8SBIHIM",
+      "title": "Серия 14. Часть 3 | Смейся и танцуй. Земли Былых Легенд | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=eROv8SBIHIM",
+      "duration": 7147,
+      "language": null
+    },
+    {
+      "videoId": "1BEZ6KiQKR0",
+      "title": "Episode 15. Part 1 | Laugh and Dance. Lands of Past Legends | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=1BEZ6KiQKR0",
+      "duration": 3660,
+      "language": null
+    },
+    {
+      "videoId": "6aKOgzLeMOU",
+      "title": "Серия 15. Часть 2 | Смейся и танцуй. Земли Былых Легенд | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=6aKOgzLeMOU",
+      "duration": 4977,
+      "language": null
+    },
+    {
+      "videoId": "TBDLuHTXb2M",
+      "title": "Серия 15. Часть 3 | Смейся и танцуй. Земли Былых Легенд | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=TBDLuHTXb2M",
+      "duration": 7803,
+      "language": null
+    },
+    {
+      "videoId": "9WZYqbxfGPY",
+      "title": "Серия 16. Часть 1 | Океан душ. Земли Былых Легенд | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=9WZYqbxfGPY",
+      "duration": 2854,
+      "language": null
+    },
+    {
+      "videoId": "1D4p-HqR89U",
+      "title": "Серия 16. Часть 2 | Океан душ. Земли Былых Легенд | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=1D4p-HqR89U",
+      "duration": 4337,
+      "language": null
+    },
+    {
+      "videoId": "FtArNwQXt20",
+      "title": "Серия 16. Часть 3 | Океан душ. Земли Былых Легенд | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=FtArNwQXt20",
+      "duration": 4258,
+      "language": null
+    },
+    {
+      "videoId": "KsPYZOzhalE",
+      "title": "Серия 17. Часть 1 | Океан душ. Земли Былых Легенд | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=KsPYZOzhalE",
+      "duration": 3737,
+      "language": null
+    },
+    {
+      "videoId": "6k0EYU3_G9c",
+      "title": "Серия 17. Часть 2 | Океан душ. Земли Былых Легенд | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=6k0EYU3_G9c",
+      "duration": 4537,
+      "language": null
+    },
+    {
+      "videoId": "aFpmwkRHYZU",
+      "title": "Серия 17. Часть 3 | Океан душ. Земли Былых Легенд | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=aFpmwkRHYZU",
+      "duration": 2810,
+      "language": null
+    },
+    {
+      "videoId": "H1Vaoddbm-w",
+      "title": "Серия 18. Часть 1 | ДРОЖЬ ЗЕМЛИ. Земли Былых Легенд | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=H1Vaoddbm-w",
+      "duration": 4591,
+      "language": null
+    },
+    {
+      "videoId": "RGme-gDHZk0",
+      "title": "Серия 18. Часть 2 | ДРОЖЬ ЗЕМЛИ. Земли Былых Легенд | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=RGme-gDHZk0",
+      "duration": 3727,
+      "language": null
+    },
+    {
+      "videoId": "u-6_6Lc34IQ",
+      "title": "Серия 18. Часть 3 | ДРОЖЬ ЗЕМЛИ. Земли Былых Легенд | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=u-6_6Lc34IQ",
+      "duration": 4798,
+      "language": null
+    },
+    {
+      "videoId": "La8fKpibIXc",
+      "title": "Серия 19. Часть 1 | ДРОЖЬ ЗЕМЛИ. Земли Былых Легенд | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=La8fKpibIXc",
+      "duration": 4137,
+      "language": null
+    },
+    {
+      "videoId": "b_3bbsur1Kg",
+      "title": "Серия 19. Часть 2 | ДРОЖЬ ЗЕМЛИ. Земли Былых Легенд | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=b_3bbsur1Kg",
+      "duration": 5686,
+      "language": null
+    },
+    {
+      "videoId": "Pfr_dJgiZsE",
+      "title": "Серия 19. Часть 3 | ДРОЖЬ ЗЕМЛИ. Земли Былых Легенд | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=Pfr_dJgiZsE",
+      "duration": 3882,
+      "language": null
+    },
+    {
+      "videoId": "7gQjHH8b5is",
+      "title": "Серия 20. Часть 1 | ПОИГРАЙ СО МНОЙ. Земли Былых Легенд | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=7gQjHH8b5is",
+      "duration": 4689,
+      "language": null
+    },
+    {
+      "videoId": "yZTZ5lP-wck",
+      "title": "Серия 20. Часть 2 | ПОИГРАЙ СО МНОЙ. Земли Былых Легенд | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=yZTZ5lP-wck",
+      "duration": 4954,
+      "language": null
+    },
+    {
+      "videoId": "9-rCUuI6hhw",
+      "title": "Серия 20. Часть 3 | ПОИГРАЙ СО МНОЙ. Земли Былых Легенд | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=9-rCUuI6hhw",
+      "duration": 4161,
+      "language": null
+    },
+    {
+      "videoId": "zhHeuvd6blU",
+      "title": "ФИНАЛ СЕЗОНА | Серия 21. Часть 1 | ПОИГРАЙ СО МНОЙ. Земли Былых Легенд | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=zhHeuvd6blU",
+      "duration": 3792,
+      "language": null
+    },
+    {
+      "videoId": "Rix5UhlQePc",
+      "title": "ФИНАЛ СЕЗОНА | Серия 21. Часть 2 | ПОИГРАЙ СО МНОЙ. Земли Былых Легенд | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=Rix5UhlQePc",
+      "duration": 4129,
+      "language": null
+    },
+    {
+      "videoId": "2yzBJk5M3wY",
+      "title": "ФИНАЛ СЕЗОНА | Серия 21. Часть 3 | ПОИГРАЙ СО МНОЙ. Земли Былых Легенд | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=2yzBJk5M3wY",
+      "duration": 4447,
+      "language": null
+    },
+    {
+      "videoId": "UUT4ZQeOxmk",
+      "title": "Страсти Севера | Интро | 2 сезон",
+      "url": "https://www.youtube.com/watch?v=UUT4ZQeOxmk",
+      "duration": 153,
+      "language": null
+    },
+    {
+      "videoId": "u3FDcDYtKoU",
+      "title": "Серия 22 | 45 ЛУН СПУСТЯ. Земли Былых Легенд | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=u3FDcDYtKoU",
+      "duration": 17396,
+      "language": null
+    },
+    {
+      "videoId": "fhbh8oBSZMo",
+      "title": "Серия 23. Кто есть кто? Земли Былых Легенд | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=fhbh8oBSZMo",
+      "duration": 13909,
+      "language": null
+    },
+    {
+      "videoId": "6WFHdlbNL8w",
+      "title": "Серия 24 | Повелитель страха. Земли Былых Легенд | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=6WFHdlbNL8w",
+      "duration": 12449,
+      "language": null
+    },
+    {
+      "videoId": "2Bed6O5mJwk",
+      "title": "Серия 25 | СРЕДИ ЧЁРНЫХ ДЕРЕВЬЕВ. Земли Былых Легенд | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=2Bed6O5mJwk",
+      "duration": 15044,
+      "language": null
+    },
+    {
+      "videoId": "QLrCCd7qF4g",
+      "title": "Серия 26 | КЛЮЧ ОТ КЛЕТКИ. Земли Былых Легенд | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=QLrCCd7qF4g",
+      "duration": 15163,
+      "language": null
+    },
+    {
+      "videoId": "EbaEnw3EiJo",
+      "title": "Серия 27 | РАСПАХНИ ОБЪЯТИЯ. Земли Былых Легенд | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=EbaEnw3EiJo",
+      "duration": 14861,
+      "language": null
+    },
+    {
+      "videoId": "LLX9rD1f72M",
+      "title": "Серия 28. ВРЕМЯ ДЕЙСТВОВАТЬ | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=LLX9rD1f72M",
+      "duration": 14615,
+      "language": null
+    },
+    {
+      "videoId": "gXmjAYCNzbY",
+      "title": "Серия 29. ПОДНИМАЯ ТЯЖЁЛЫЕ ВЕКИ | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=gXmjAYCNzbY",
+      "duration": 13155,
+      "language": null
+    },
+    {
+      "videoId": "tngqpxUjtIk",
+      "title": "Серия 30. СЭЛЬ И ДЕВЯТЬ ОГНЕЙ | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=tngqpxUjtIk",
+      "duration": 15344,
+      "language": null
+    },
+    {
+      "videoId": "XxOEnm2RC80",
+      "title": "Серия 31. ДА БЛАГОСЛОВИТ НАС КРЕУС! | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=XxOEnm2RC80",
+      "duration": 17334,
+      "language": null
+    },
+    {
+      "videoId": "igdJc_aD0Ok",
+      "title": "Серия 32. ДОЖДЬ СТЕНОЙ | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=igdJc_aD0Ok",
+      "duration": 13644,
+      "language": null
+    },
+    {
+      "videoId": "7Ps2050Eh4Q",
+      "title": "Серия 33. Чужая вода - твоя беда | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=7Ps2050Eh4Q",
+      "duration": 15914,
+      "language": null
+    },
+    {
+      "videoId": "KTNiq3-NSII",
+      "title": "Серия 34. Красный песок | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=KTNiq3-NSII",
+      "duration": 13708,
+      "language": null
+    },
+    {
+      "videoId": "FY3hrWFkI28",
+      "title": "Серия 35. Цепляясь за неизвестность | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=FY3hrWFkI28",
+      "duration": 12955,
+      "language": null
+    },
+    {
+      "videoId": "aLKZEbAtDPY",
+      "title": "Серия 36. После дождя | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=aLKZEbAtDPY",
+      "duration": 13279,
+      "language": null
+    },
+    {
+      "videoId": "VLyrpKhWXlE",
+      "title": "Серия 37. Неудачный эксперимент | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=VLyrpKhWXlE",
+      "duration": 14525,
+      "language": null
+    },
+    {
+      "videoId": "AgbnUBgYssA",
+      "title": "Серия 38. Кошки-мышки | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=AgbnUBgYssA",
+      "duration": 12211,
+      "language": null
+    },
+    {
+      "videoId": "xZCLTL39yOw",
+      "title": "Серия 39. Хруст костей | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=xZCLTL39yOw",
+      "duration": 13327,
+      "language": null
+    },
+    {
+      "videoId": "J25DW8DEPoY",
+      "title": "Серия 40. Крупицы знаний | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=J25DW8DEPoY",
+      "duration": 14845,
+      "language": null
+    },
+    {
+      "videoId": "9nMpSd6Mo7c",
+      "title": "Серия 41. Нечто больше, чем цель | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=9nMpSd6Mo7c",
+      "duration": 16072,
+      "language": null
+    },
+    {
+      "videoId": "Ur2lXNr2CRU",
+      "title": "Серия 42. Путь назад | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=Ur2lXNr2CRU",
+      "duration": 14853,
+      "language": null
+    },
+    {
+      "videoId": "cPMB7Rz7lbs",
+      "title": "Серия 43. Крысиные бега | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=cPMB7Rz7lbs",
+      "duration": 13099,
+      "language": null
+    },
+    {
+      "videoId": "PLzhxygDIZE",
+      "title": "Серия 44.Раскрытые секреты | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=PLzhxygDIZE",
+      "duration": 11403,
+      "language": null
+    },
+    {
+      "videoId": "tKGiylcQZPM",
+      "title": "Episode 44: Secrets Revealed (Continued) | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=tKGiylcQZPM",
+      "duration": 3144,
+      "language": null
+    },
+    {
+      "videoId": "ogv1yt8D5UY",
+      "title": "Серия 45. Альтер Эго | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=ogv1yt8D5UY",
+      "duration": 14416,
+      "language": null
+    },
+    {
+      "videoId": "elpy6bZJJ7E",
+      "title": "Серия 46. Безумный вальс | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=elpy6bZJJ7E",
+      "duration": 13301,
+      "language": null
+    },
+    {
+      "videoId": "CnIYJQlW_XM",
+      "title": "ФИНАЛ СЕЗОНА! Запредельные ставки | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=CnIYJQlW_XM",
+      "duration": 20118,
+      "language": null
+    },
+    {
+      "videoId": "s80-2TOQt9c",
+      "title": "Заставка 3-го сезона. Земли Былых Легенд",
+      "url": "https://www.youtube.com/watch?v=s80-2TOQt9c",
+      "duration": 126,
+      "language": null
+    },
+    {
+      "videoId": "n8FS7OYhTEw",
+      "title": "Начало 3-го сезона. Страсти Севера | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=n8FS7OYhTEw",
+      "duration": 11689,
+      "language": null
+    },
+    {
+      "videoId": "sCkbYs6OcoI",
+      "title": "Струны твоей души | Сезон 3 Серия 2 | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=sCkbYs6OcoI",
+      "duration": 11436,
+      "language": null
+    },
+    {
+      "videoId": "MEb29d4Z7wQ",
+      "title": "Реприза | Сезон 3 Серия 3 | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=MEb29d4Z7wQ",
+      "duration": 13269,
+      "language": null
+    },
+    {
+      "videoId": "AlhTpcEWZ4A",
+      "title": "Кошачий этюд | Сезон 3 Серия 4 | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=AlhTpcEWZ4A",
+      "duration": 12251,
+      "language": null
+    },
+    {
+      "videoId": "4osxl2Oiabs",
+      "title": "Первая скрипка | Сезон 3 Серия 5 | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=4osxl2Oiabs",
+      "duration": 12355,
+      "language": null
+    },
+    {
+      "videoId": "uVpy-_YKs9Y",
+      "title": "Чарующий вальс | Сезон 3 Серия 6 | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=uVpy-_YKs9Y",
+      "duration": 10822,
+      "language": null
+    },
+    {
+      "videoId": "LzCUytU1wGY",
+      "title": "Детская симфония | Сезон 3 Серия 7 | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=LzCUytU1wGY",
+      "duration": 11994,
+      "language": null
+    },
+    {
+      "videoId": "qSXvmL34fQs",
+      "title": "3 такта в темпе адажио. Такт 1 | Страсти Севера | Сезон 3 Серия 8 | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=qSXvmL34fQs",
+      "duration": 11428,
+      "language": null
+    },
+    {
+      "videoId": "VJZLknK6Pi0",
+      "title": "3 такта в темпе адажио. Такт 2 | Страсти Севера | Сезон 3 Серия 8 | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=VJZLknK6Pi0",
+      "duration": 9523,
+      "language": null
+    },
+    {
+      "videoId": "p1Jww2BgwC0",
+      "title": "3 такта в темпе адажио. Такт 3 | Страсти Севера | Сезон 3 Серия 8 | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=p1Jww2BgwC0",
+      "duration": 9687,
+      "language": null
+    },
+    {
+      "videoId": "zDT9krThYFQ",
+      "title": "Глиссандо на нервах | Страсти Севера | Сезон 3 Серия 9 | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=zDT9krThYFQ",
+      "duration": 14121,
+      "language": null
+    },
+    {
+      "videoId": "RnlePmPItv4",
+      "title": "Нисходящее арпеджио | Страсти Севера | Сезон 3 Серия 10 | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=RnlePmPItv4",
+      "duration": 13220,
+      "language": null
+    },
+    {
+      "videoId": "Y0x1Bjm3zyw",
+      "title": "Жоэнвельские аккорды | Страсти Севера | Сезон 3 Серия 11 | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=Y0x1Bjm3zyw",
+      "duration": 13463,
+      "language": null
+    },
+    {
+      "videoId": "u54wP855aLQ",
+      "title": "Траурный марш | Страсти Севера | Сезон 3 Серия 12 | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=u54wP855aLQ",
+      "duration": 13160,
+      "language": null
+    },
+    {
+      "videoId": "mnhCunw1WGE",
+      "title": "Завораживающий диссонанс | Страсти Севера | Сезон 3 Серия 13 |  Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=mnhCunw1WGE",
+      "duration": 13832,
+      "language": null
+    },
+    {
+      "videoId": "CvsKLKJztRo",
+      "title": "Аккомпанемент ужаса | Страсти Севера | Сезон 3 Серия 14 | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=CvsKLKJztRo",
+      "duration": 15151,
+      "language": null
+    },
+    {
+      "videoId": "CuUciixwtNo",
+      "title": "Нотная вязь | Страсти Севера | Сезон 3 Серия 15 | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=CuUciixwtNo",
+      "duration": 13296,
+      "language": null
+    },
+    {
+      "videoId": "vGrOFEpcCp4",
+      "title": "Горные мелизмы | Страсти Севера | Сезон 3 Серия 16 | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=vGrOFEpcCp4",
+      "duration": 12741,
+      "language": null
+    },
+    {
+      "videoId": "LFz9B63v4JY",
+      "title": "Богемная рапсодия | Страсти Севера | Сезон 3 Серия 17 | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=LFz9B63v4JY",
+      "duration": 10781,
+      "language": null
+    },
+    {
+      "videoId": "CL8jdFaTJTs",
+      "title": "Финал 3-го сезона | Страсти Севера | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=CL8jdFaTJTs",
+      "duration": 13139,
+      "language": null
+    },
+    {
+      "videoId": "RIBYRDBlvNo",
+      "title": "Вопросы по миру. Итоги. Планы | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=RIBYRDBlvNo",
+      "duration": 10735,
+      "language": null
+    },
+    {
+      "videoId": "g8DKhNVelYQ",
+      "title": "Саэхель | Земли Былых Легенд | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=g8DKhNVelYQ",
+      "duration": 13755,
+      "language": null
+    },
+    {
+      "videoId": "LStc5cGgBw4",
+      "title": "Новая жизнь | Земли Былых Легенд | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=LStc5cGgBw4",
+      "duration": 12996,
+      "language": null
+    },
+    {
+      "videoId": "kYPGx8sBN1Q",
+      "title": "Тирай | Земли Былых Легенд | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=kYPGx8sBN1Q",
+      "duration": 12314,
+      "language": null
+    },
+    {
+      "videoId": "jfcD_gIASaw",
+      "title": "Посредники | Земли Былых Легенд | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=jfcD_gIASaw",
+      "duration": 13673,
+      "language": null
+    },
+    {
+      "videoId": "HBoSqT017n4",
+      "title": "Везунчик | Земли Былых Легенд | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=HBoSqT017n4",
+      "duration": 9771,
+      "language": null
+    },
+    {
+      "videoId": "TDUkQLPt4Yk",
+      "title": "Предтечи. Марафон | Часть первая | Dungeons&Dragons",
+      "url": "https://www.youtube.com/watch?v=TDUkQLPt4Yk",
+      "duration": 14615,
+      "language": null
+    },
+    {
+      "videoId": "sech7MX_eNk",
+      "title": "Предтечи. Марафон | Часть вторая | Dungeons&Dragons",
+      "url": "https://www.youtube.com/watch?v=sech7MX_eNk",
+      "duration": 9104,
+      "language": null
+    },
+    {
+      "videoId": "eJRL5ZnoqQo",
+      "title": "\"Сопряжение\" - Тизер",
+      "url": "https://www.youtube.com/watch?v=eJRL5ZnoqQo",
+      "duration": 20,
+      "language": null
+    },
+    {
+      "videoId": "3nBRL1HSeIE",
+      "title": "Сопряжение - Земли Былых Легенд",
+      "url": "https://www.youtube.com/watch?v=3nBRL1HSeIE",
+      "duration": 45,
+      "language": null
+    },
+    {
+      "videoId": "K-TqQi92lJQ",
+      "title": "Зов. Первая серия | Сопряжение | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=K-TqQi92lJQ",
+      "duration": 12094,
+      "language": null
+    },
+    {
+      "videoId": "sBMxxXGcwWA",
+      "title": "Видения. Вторая серия | Сопряжение | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=sBMxxXGcwWA",
+      "duration": 12120,
+      "language": null
+    },
+    {
+      "videoId": "GAzwkd2AfCk",
+      "title": "Выбранные Хаосом. Третья серия | Сопряжение | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=GAzwkd2AfCk",
+      "duration": 13853,
+      "language": null
+    },
+    {
+      "videoId": "cL-UTiGg0k0",
+      "title": "Добро пожаловать. Четвёртая серия | Сопряжение | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=cL-UTiGg0k0",
+      "duration": 11514,
+      "language": null
+    },
+    {
+      "videoId": "UbG6HkqIyCU",
+      "title": "Пока все дома. Пятая серия | Сопряжение | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=UbG6HkqIyCU",
+      "duration": 11847,
+      "language": null
+    },
+    {
+      "videoId": "EiZqSIeLrtQ",
+      "title": "Скитание. Шестая серия | Сопряжение | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=EiZqSIeLrtQ",
+      "duration": 11183,
+      "language": null
+    },
+    {
+      "videoId": "Ne2HG0lHVKc",
+      "title": "Как твоё имя? Седьмая серия | Сопряжение | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=Ne2HG0lHVKc",
+      "duration": 12348,
+      "language": null
+    },
+    {
+      "videoId": "adzAO4Pmb6M",
+      "title": "Я жду тебя. Восьмая серия | Сопряжение | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=adzAO4Pmb6M",
+      "duration": 12566,
+      "language": null
+    },
+    {
+      "videoId": "dgGnzCbPjUM",
+      "title": "Усадьба путника. Девятая серия | Сопряжение | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=dgGnzCbPjUM",
+      "duration": 12137,
+      "language": null
+    },
+    {
+      "videoId": "eKZ6dF77_PM",
+      "title": "Беги за куницей. Первая часть. Десятая серия | Сопряжение | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=eKZ6dF77_PM",
+      "duration": 11098,
+      "language": null
+    },
+    {
+      "videoId": "hvcJyTtZNoU",
+      "title": "Беги за куницей. Вторая часть. Десятая серия | Сопряжение | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=hvcJyTtZNoU",
+      "duration": 12580,
+      "language": null
+    },
+    {
+      "videoId": "DKO5tOPIQWg",
+      "title": "Улыбка Хаоса. Первая часть. Одиннадцатая серия | Сопряжение | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=DKO5tOPIQWg",
+      "duration": 11580,
+      "language": null
+    },
+    {
+      "videoId": "6a7vq1l2hos",
+      "title": "Улыбка Хаоса. Вторая часть. Одиннадцатая серия | Сопряжение | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=6a7vq1l2hos",
+      "duration": 9926,
+      "language": null
+    },
+    {
+      "videoId": "wakIl8MXKDo",
+      "title": "Ничего общего. Первая часть. Двенадцатая серия | Сопряжение | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=wakIl8MXKDo",
+      "duration": 11952,
+      "language": null
+    },
+    {
+      "videoId": "kG2_TE6q5Ig",
+      "title": "Ничего общего. Вторая часть. Двенадцатая серия | Сопряжение | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=kG2_TE6q5Ig",
+      "duration": 11526,
+      "language": null
+    },
+    {
+      "videoId": "FVR1vjmYn1Y",
+      "title": "Под красным парусом. Тринадцатая серия | Сопряжение | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=FVR1vjmYn1Y",
+      "duration": 15959,
+      "language": null
+    },
+    {
+      "videoId": "2C42i6ioppo",
+      "title": "Вместе. Четырнадцатая серия | Сопряжение | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=2C42i6ioppo",
+      "duration": 14407,
+      "language": null
+    },
+    {
+      "videoId": "M1p_A0645O4",
+      "title": "Останется только пепел. Пятнадцатая серия | Сопряжение | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=M1p_A0645O4",
+      "duration": 16376,
+      "language": null
+    },
+    {
+      "videoId": "6qnkFP1plBs",
+      "title": "Истинное лицо | ФИНАЛ | Сопряжение | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=6qnkFP1plBs",
+      "duration": 20779,
+      "language": null
+    },
+    {
+      "videoId": "hvA9J6YCotM",
+      "title": "Эпилог | ФИНАЛ | Сопряжение | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=hvA9J6YCotM",
+      "duration": 16109,
+      "language": null
+    },
+    {
+      "videoId": "XzMQ-nTqpSk",
+      "title": "Ответы на вопросы | Сопряжение | Итог сезона",
+      "url": "https://www.youtube.com/watch?v=XzMQ-nTqpSk",
+      "duration": 16550,
+      "language": null
+    },
+    {
+      "videoId": "j2Gdqgqfe7A",
+      "title": "\"Песнь заблудшего” | Земли Былых Легенд",
+      "url": "https://www.youtube.com/watch?v=j2Gdqgqfe7A",
+      "duration": 236,
+      "language": null
+    },
+    {
+      "videoId": "nt4AmcfxNRg",
+      "title": "ТРЕЙЛЕР | Земли Былых Легенд: Тка-Ях | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=nt4AmcfxNRg",
+      "duration": 67,
+      "language": null
+    },
+    {
+      "videoId": "kQCOVM0iQOM",
+      "title": "Земли Былых Легенд: Тка-Ях | Эпизод 1: Погорельцы | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=kQCOVM0iQOM",
+      "duration": 13327,
+      "language": null
+    },
+    {
+      "videoId": "LOMf-tSQbDQ",
+      "title": "Земли Былых Легенд: Тка-Ях | Эпизод 2: Побег | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=LOMf-tSQbDQ",
+      "duration": 11958,
+      "language": null
+    },
+    {
+      "videoId": "RzCqYe5zJXY",
+      "title": "Земли Былых Легенд: Тка-Ях | Эпизод 3: Погибшее племя | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=RzCqYe5zJXY",
+      "duration": 13521,
+      "language": null
+    },
+    {
+      "videoId": "RqoliqX-QIw",
+      "title": "Земли Былых Легенд: Тка-Ях | Эпизод 4: Воцарение | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=RqoliqX-QIw",
+      "duration": 11624,
+      "language": null
+    },
+    {
+      "videoId": "IOY3nUbU20Q",
+      "title": "Земли Былых Легенд: Тка-Ях | Эпизод 5: Великий уравнитель| Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=IOY3nUbU20Q",
+      "duration": 12074,
+      "language": null
+    },
+    {
+      "videoId": "T_kNb36ce2I",
+      "title": "Земли Былых Легенд: Тка-Ях | Эпизод 6: Закон | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=T_kNb36ce2I",
+      "duration": 13429,
+      "language": null
+    },
+    {
+      "videoId": "TwBL4UXzXNw",
+      "title": "Земли Былых Легенд: Тка-Ях | Эпизод 7: Родные тропы | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=TwBL4UXzXNw",
+      "duration": 10843,
+      "language": null
+    },
+    {
+      "videoId": "yldATA4FYUo",
+      "title": "Земли Былых Легенд: Тка-Ях | Эпизод 8: Закат | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=yldATA4FYUo",
+      "duration": 11174,
+      "language": null
+    },
+    {
+      "videoId": "1bsLy392KGE",
+      "title": "Земли Былых Легенд: Тка-Ях | Эпизод 9: Земля безбожников| Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=1bsLy392KGE",
+      "duration": 11262,
+      "language": null
+    },
+    {
+      "videoId": "XLiz6ruu6V0",
+      "title": "Земли Былых Легенд: Тка-Ях | Эпизод 10: По воле пепла | ФИНАЛ | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=XLiz6ruu6V0",
+      "duration": 11299,
+      "language": null
+    },
+    {
+      "videoId": "uPh9zD_vkcI",
+      "title": "Земли Былых Легенд: Собиратель душ | Эпизод 1: Детство",
+      "url": "https://www.youtube.com/watch?v=uPh9zD_vkcI",
+      "duration": 17704,
+      "language": null
+    },
+    {
+      "videoId": "pAQm19UqHiE",
+      "title": "Земли Былых Легенд: Семейные ценности | Марафон в поддержку Крауда | История Габриэля и Деметры Грэй",
+      "url": "https://www.youtube.com/watch?v=pAQm19UqHiE",
+      "duration": 25991,
+      "language": null
+    },
+    {
+      "videoId": "1xNovwnGYbo",
+      "title": "Земли Былых Легенд: Семейные ценности (Часть 2) | История Габриэля и Деметры Грэй",
+      "url": "https://www.youtube.com/watch?v=1xNovwnGYbo",
+      "duration": 17954,
+      "language": null
+    },
+    {
+      "videoId": "MEFpx7LcSts",
+      "title": "Земли Былых Легенд: Семейные ценности (Часть 3) | История Габриэля и Деметры Грэй",
+      "url": "https://www.youtube.com/watch?v=MEFpx7LcSts",
+      "duration": 24396,
+      "language": null
+    },
+    {
+      "videoId": "GcX4PBizHTI",
+      "title": "Земли Былых Легенд | Скитания Рокка | ДнД | Настольная ролевая игра",
+      "url": "https://www.youtube.com/watch?v=GcX4PBizHTI",
+      "duration": 16329,
+      "language": null
+    },
+    {
+      "videoId": "zeLnLCcLY3k",
+      "title": "Земли Былых Легенд: Огонь и надежда | История Деметры | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=zeLnLCcLY3k",
+      "duration": 19720,
+      "language": null
+    },
+    {
+      "videoId": "4QAWQvZOMng",
+      "title": "Земли Былых Легенд: Огонь и надежда ЧАСТЬ 2 | История Деметры | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=4QAWQvZOMng",
+      "duration": 15730,
+      "language": null
+    },
+    {
+      "videoId": "nQmH5N91uP8",
+      "title": "Земли Былых Легенд: Огонь и надежда ЧАСТЬ 3 | История Деметры | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=nQmH5N91uP8",
+      "duration": 17392,
+      "language": null
+    },
+    {
+      "videoId": "i049ZKEwzTo",
+      "title": "Земли Былых Легенд: Огонь и надежда ЧАСТЬ 4 | История Деметры | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=i049ZKEwzTo",
+      "duration": 17971,
+      "language": null
+    },
+    {
+      "videoId": "kNx0G7wrau4",
+      "title": "Земли Былых Легенд: Огонь и надежда ЧАСТЬ 5 | История Деметры | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=kNx0G7wrau4",
+      "duration": 18483,
+      "language": null
+    },
+    {
+      "videoId": "dCIHCG-UxB0",
+      "title": "Земли Былых Легенд: Огонь и надежда ЧАСТЬ 6 | История Деметры | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=dCIHCG-UxB0",
+      "duration": 16762,
+      "language": null
+    },
+    {
+      "videoId": "SDg2K5iZ5VA",
+      "title": "Земли Былых Легенд: Огонь и надежда ФИНАЛ - ЧАСТЬ 7 | История Деметры | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=SDg2K5iZ5VA",
+      "duration": 15943,
+      "language": null
+    },
+    {
+      "videoId": "J5xpp2kchK0",
+      "title": "История Хондо - \"Трудно быть Богом\" | Земли Былых Легенд | Ваншот в рамках марафона (день 2)",
+      "url": "https://www.youtube.com/watch?v=J5xpp2kchK0",
+      "duration": 14282,
+      "language": null
+    },
+    {
+      "videoId": "M2uHDiA0DpI",
+      "title": "История Хондо - \"Трудно быть Богом\" | Часть 2 | Земли Былых Легенд",
+      "url": "https://www.youtube.com/watch?v=M2uHDiA0DpI",
+      "duration": 13611,
+      "language": null
+    },
+    {
+      "videoId": "TUNqV4AquT0",
+      "title": "История Хондо - \"Трудно быть Богом\" | Часть 3 | Земли Былых Легенд",
+      "url": "https://www.youtube.com/watch?v=TUNqV4AquT0",
+      "duration": 12688,
+      "language": null
+    },
+    {
+      "videoId": "bmKvSwpg9nI",
+      "title": "История Хондо - \"Трудно быть Богом\" | Часть 4 | Земли Былых Легенд",
+      "url": "https://www.youtube.com/watch?v=bmKvSwpg9nI",
+      "duration": 16950,
+      "language": null
+    },
+    {
+      "videoId": "lFmkg040qCE",
+      "title": "Небеса нас не слышат | Глава 1: Вера | Земли Былых Легенд",
+      "url": "https://www.youtube.com/watch?v=lFmkg040qCE",
+      "duration": 15704,
+      "language": null
+    },
+    {
+      "videoId": "uXCHxnoL9ns",
+      "title": "Небеса нас не слышат | Глава 2: Надежда | Земли Былых Легенд",
+      "url": "https://www.youtube.com/watch?v=uXCHxnoL9ns",
+      "duration": 16856,
+      "language": null
+    },
+    {
+      "videoId": "w1k__UCX5q4",
+      "title": "Небеса нас не слышат | Глава 3: С молитвой на устах | Земли Былых Легенд",
+      "url": "https://www.youtube.com/watch?v=w1k__UCX5q4",
+      "duration": 15647,
+      "language": null
+    },
+    {
+      "videoId": "MzGYFYuGJio",
+      "title": "Небеса нас не слышат | Глава 4: Скелеты в шкафу| Земли Былых Легенд",
+      "url": "https://www.youtube.com/watch?v=MzGYFYuGJio",
+      "duration": 16804,
+      "language": null
+    },
+    {
+      "videoId": "thxhgJR42bY",
+      "title": "Небеса нас не слышат | Глава 5: Быть вместе или порознь | Земли Былых Легенд",
+      "url": "https://www.youtube.com/watch?v=thxhgJR42bY",
+      "duration": 16674,
+      "language": null
+    },
+    {
+      "videoId": "ltjOv6h2GIY",
+      "title": "Небеса нас не слышат | Глава 6: Паломничество | ФИНАЛ | Земли Былых Легенд",
+      "url": "https://www.youtube.com/watch?v=ltjOv6h2GIY",
+      "duration": 16034,
+      "language": null
+    },
+    {
+      "videoId": "i87JGZlESKU",
+      "title": "Земли Былых Легенд: Молчание богов | Заккирийские мерзавцы | ДнД | Настольная ролевая игра",
+      "url": "https://www.youtube.com/watch?v=i87JGZlESKU",
+      "duration": 24680,
+      "language": null
+    },
+    {
+      "videoId": "AX7j4iEPky0",
+      "title": "Земли Былых Легенд: Молчание богов | Заккира: Прихвостни | Часть 1",
+      "url": "https://www.youtube.com/watch?v=AX7j4iEPky0",
+      "duration": 18139,
+      "language": null
+    },
+    {
+      "videoId": "xGbiMoDD_lc",
+      "title": "Земли Былых Легенд: Молчание богов | Заккира: Прихвостни | Часть 2",
+      "url": "https://www.youtube.com/watch?v=xGbiMoDD_lc",
+      "duration": 12516,
+      "language": null
+    },
+    {
+      "videoId": "EqEIpvaHfH0",
+      "title": "Земли Былых Легенд: Молчание богов. Презентация | Dungeons&Dragons",
+      "url": "https://www.youtube.com/watch?v=EqEIpvaHfH0",
+      "duration": 2963,
+      "language": null
+    },
+    {
+      "videoId": "vBPvNg0BW_M",
+      "title": "Земли Былых Легенд: Молчание богов | LORE | Часть 1 | Мироздание",
+      "url": "https://www.youtube.com/watch?v=vBPvNg0BW_M",
+      "duration": 6326,
+      "language": null
+    },
+    {
+      "videoId": "G9vse_aM4H0",
+      "title": "Земли Былых Легенд: Молчание богов | LORE | Часть 2 | Общины и расы",
+      "url": "https://www.youtube.com/watch?v=G9vse_aM4H0",
+      "duration": 5691,
+      "language": null
+    },
+    {
+      "videoId": "8HBkPQPo3ew",
+      "title": "Земли Былых Легенд: Молчание богов | LORE | Часть 3 | Особенности быта и уклада",
+      "url": "https://www.youtube.com/watch?v=8HBkPQPo3ew",
+      "duration": 5876,
+      "language": null
+    },
+    {
+      "videoId": "7FumZjt5CmM",
+      "title": "Земли Былых Легенд: Молчание богов | LORE | Часть 4 | Духи. Подробный разбор",
+      "url": "https://www.youtube.com/watch?v=7FumZjt5CmM",
+      "duration": 5241,
+      "language": null
+    },
+    {
+      "videoId": "MOyZXPXe1JE",
+      "title": "Земли Былых Легенд: Молчание богов | LORE | Часть 5 | История мира",
+      "url": "https://www.youtube.com/watch?v=MOyZXPXe1JE",
+      "duration": 7752,
+      "language": null
+    },
+    {
+      "videoId": "Rudm-6z9Clo",
+      "title": "Земли Былых Легенд: Молчание богов | LORE | Часть 6 | Вайрах",
+      "url": "https://www.youtube.com/watch?v=Rudm-6z9Clo",
+      "duration": 5795,
+      "language": null
+    },
+    {
+      "videoId": "1CgX7HtwkyY",
+      "title": "Земли Былых Легенд: Молчание богов | LORE | Часть 7 | Космология",
+      "url": "https://www.youtube.com/watch?v=1CgX7HtwkyY",
+      "duration": 7256,
+      "language": null
+    },
+    {
+      "videoId": "Xb-3G-n-ujY",
+      "title": "История мира ЗБЛ: Молчание богов | LORE | Часть 8 | География и легенды",
+      "url": "https://www.youtube.com/watch?v=Xb-3G-n-ujY",
+      "duration": 3091,
+      "language": null
+    },
+    {
+      "videoId": "_SZmg6ehjqQ",
+      "title": "Молчание Богов. Земли Былых Легенд. Анонс",
+      "url": "https://www.youtube.com/watch?v=_SZmg6ehjqQ",
+      "duration": 31,
+      "language": null
+    },
+    {
+      "videoId": "d80aNJXddz8",
+      "title": "Земли Былых Легенд: Молчание Богов. Вопросы и ответы",
+      "url": "https://www.youtube.com/watch?v=d80aNJXddz8",
+      "duration": 11479,
+      "language": null
+    },
+    {
+      "videoId": "CI_b_-DL3iQ",
+      "title": "Земли былых легенд: Молчание богов | НУЛЕВАЯ СЕССИЯ",
+      "url": "https://www.youtube.com/watch?v=CI_b_-DL3iQ",
+      "duration": 10341,
+      "language": null
+    },
+    {
+      "videoId": "tH9_IOv9TiU",
+      "title": "Молчание Богов. Земли Былых Легенд. Тизер",
+      "url": "https://www.youtube.com/watch?v=tH9_IOv9TiU",
+      "duration": 22,
+      "language": null
+    },
+    {
+      "videoId": "PxZxPu1rRYA",
+      "title": "Земли Былых Легенд: Молчание Богов. Интро",
+      "url": "https://www.youtube.com/watch?v=PxZxPu1rRYA",
+      "duration": 105,
+      "language": null
+    },
+    {
+      "videoId": "zsY3HX7jFC0",
+      "title": "Земли Былых Легенд: Молчание богов | Эпизод 1: Кости | Настольная ролевая игра",
+      "url": "https://www.youtube.com/watch?v=zsY3HX7jFC0",
+      "duration": 17970,
+      "language": null
+    },
+    {
+      "videoId": "_v1ZLp0pVzM",
+      "title": "Земли Былых Легенд: Молчание богов | Эпизод 2: Предки | Настольная ролевая игра",
+      "url": "https://www.youtube.com/watch?v=_v1ZLp0pVzM",
+      "duration": 14817,
+      "language": null
+    },
+    {
+      "videoId": "dDA-paT2iE4",
+      "title": "Земли Былых Легенд: Молчание богов | Эпизод 3: Традиции | Настольная ролевая игра",
+      "url": "https://www.youtube.com/watch?v=dDA-paT2iE4",
+      "duration": 18285,
+      "language": null
+    },
+    {
+      "videoId": "06N89N2UH1Q",
+      "title": "Земли Былых Легенд: Молчание богов | Эпизод 4: Пророчество ч.1 | Настольная ролевая игра",
+      "url": "https://www.youtube.com/watch?v=06N89N2UH1Q",
+      "duration": 16297,
+      "language": null
+    },
+    {
+      "videoId": "YS9B_FfO75c",
+      "title": "Земли Былых Легенд: Молчание богов | Эпизод 5: Пророчество ч.2 | Настольная ролевая игра",
+      "url": "https://www.youtube.com/watch?v=YS9B_FfO75c",
+      "duration": 19464,
+      "language": null
+    },
+    {
+      "videoId": "JX4WJFohvKs",
+      "title": "Земли Былых Легенд: Молчание богов | Эпизод 6: Вина и прощение | Настольная ролевая игра",
+      "url": "https://www.youtube.com/watch?v=JX4WJFohvKs",
+      "duration": 16680,
+      "language": null
+    },
+    {
+      "videoId": "qp-7vRpuIwc",
+      "title": "Земли Былых Легенд: Молчание богов | Эпизод 7: Раскаяние | Настольная ролевая игра",
+      "url": "https://www.youtube.com/watch?v=qp-7vRpuIwc",
+      "duration": 19086,
+      "language": null
+    },
+    {
+      "videoId": "v5vfQnrysyM",
+      "title": "Земли Былых Легенд: Молчание богов | Эпизод 8: Инстинкт | Настольная ролевая игра",
+      "url": "https://www.youtube.com/watch?v=v5vfQnrysyM",
+      "duration": 17090,
+      "language": null
+    },
+    {
+      "videoId": "6LYh8klP_FM",
+      "title": "Земли Былых Легенд: Молчание богов | Эпизод 9: Время хищника | Настольная ролевая игра",
+      "url": "https://www.youtube.com/watch?v=6LYh8klP_FM",
+      "duration": 17519,
+      "language": null
+    },
+    {
+      "videoId": "meDr6rw34oU",
+      "title": "Земли Былых Легенд: Молчание богов | Эпизод 10: Капкан | Настольная ролевая игра",
+      "url": "https://www.youtube.com/watch?v=meDr6rw34oU",
+      "duration": 17645,
+      "language": null
+    },
+    {
+      "videoId": "SE8JCx-Zvvg",
+      "title": "Земли Былых Легенд: Молчание богов | Эпизод 11: Обет молчания | Настольная ролевая игра",
+      "url": "https://www.youtube.com/watch?v=SE8JCx-Zvvg",
+      "duration": 18884,
+      "language": null
+    },
+    {
+      "videoId": "igVsdXdMRr0",
+      "title": "Земли Былых Легенд: Молчание богов | Эпизод 12: Долг | Настольная ролевая игра",
+      "url": "https://www.youtube.com/watch?v=igVsdXdMRr0",
+      "duration": 24186,
+      "language": null
+    },
+    {
+      "videoId": "gHADJj1k6lk",
+      "title": "Вопросы и ответы | Земли Былых Легенд: Молчание богов | Диалоги с ДМ'ом",
+      "url": "https://www.youtube.com/watch?v=gHADJj1k6lk",
+      "duration": 11142,
+      "language": null
+    },
+    {
+      "videoId": "rfbsPnnu1j0",
+      "title": "Земли Былых Легенд: Молчание богов. Нулевая сессия второго сезона",
+      "url": "https://www.youtube.com/watch?v=rfbsPnnu1j0",
+      "duration": 8562,
+      "language": null
+    },
+    {
+      "videoId": "BkI5tIaof58",
+      "title": "Земли Былых Легенд: Молчание богов | 2 сезон | ЗАСТАВКА",
+      "url": "https://www.youtube.com/watch?v=BkI5tIaof58",
+      "duration": 111,
+      "language": null
+    },
+    {
+      "videoId": "lANkdohfdKo",
+      "title": "Земли Былых Легенд: Молчание богов | 2 сезон | Эпизод 13: Голова",
+      "url": "https://www.youtube.com/watch?v=lANkdohfdKo",
+      "duration": 18984,
+      "language": null
+    },
+    {
+      "videoId": "c8Ev67tcfzM",
+      "title": "Земли Былых Легенд: Молчание богов | 2 сезон | Эпизод 14: Нюх",
+      "url": "https://www.youtube.com/watch?v=c8Ev67tcfzM",
+      "duration": 19516,
+      "language": null
+    },
+    {
+      "videoId": "SAk0sLzGESE",
+      "title": "Земли Былых Легенд: Молчание богов | 2 сезон | Эпизод 15: Чутье",
+      "url": "https://www.youtube.com/watch?v=SAk0sLzGESE",
+      "duration": 18311,
+      "language": null
+    },
+    {
+      "videoId": "oYoE9U1l_wQ",
+      "title": "Земли Былых Легенд: Молчание богов | 2 сезон | Эпизод 16: Отрава",
+      "url": "https://www.youtube.com/watch?v=oYoE9U1l_wQ",
+      "duration": 18234,
+      "language": null
+    },
+    {
+      "videoId": "hQUvzLaYuPA",
+      "title": "Земли Былых Легенд: Молчание богов | 2 сезон | Эпизод 17: Ответ",
+      "url": "https://www.youtube.com/watch?v=hQUvzLaYuPA",
+      "duration": 18147,
+      "language": null
+    },
+    {
+      "videoId": "4wSBIWVzPzc",
+      "title": "Земли Былых Легенд: Молчание богов | 2 сезон | Эпизод 18: Жилы",
+      "url": "https://www.youtube.com/watch?v=4wSBIWVzPzc",
+      "duration": 17577,
+      "language": null
+    },
+    {
+      "videoId": "1FH5SbPwxAY",
+      "title": "Земли Былых Легенд: Молчание богов | 2 сезон | Эпизод 19: Чучуны",
+      "url": "https://www.youtube.com/watch?v=1FH5SbPwxAY",
+      "duration": 17692,
+      "language": null
+    },
+    {
+      "videoId": "HfgIaPBZBHs",
+      "title": "Земли Былых Легенд: Молчание богов | 2 сезон | Эпизод 20: Туслахи",
+      "url": "https://www.youtube.com/watch?v=HfgIaPBZBHs",
+      "duration": 17185,
+      "language": null
+    },
+    {
+      "videoId": "kxQP4KgSCAU",
+      "title": "Земли Былых Легенд: Молчание богов | 2 сезон | Эпизод 21: Скиталец",
+      "url": "https://www.youtube.com/watch?v=kxQP4KgSCAU",
+      "duration": 19727,
+      "language": null
+    },
+    {
+      "videoId": "NlOjnyQMKIM",
+      "title": "Земли Былых Легенд: Молчание богов | 2 сезон | Эпизод 22: Она",
+      "url": "https://www.youtube.com/watch?v=NlOjnyQMKIM",
+      "duration": 17246,
+      "language": null
+    },
+    {
+      "videoId": "4sNPeD2WYYk",
+      "title": "Земли Былых Легенд: Молчание богов | 2 сезон | Эпизод 23: Костры",
+      "url": "https://www.youtube.com/watch?v=4sNPeD2WYYk",
+      "duration": 18820,
+      "language": null
+    },
+    {
+      "videoId": "mzG7ahuAKjU",
+      "title": "Земли Былых Легенд: Молчание богов | 2 сезон | Эпизод 24: Заккира",
+      "url": "https://www.youtube.com/watch?v=mzG7ahuAKjU",
+      "duration": 20330,
+      "language": null
+    },
+    {
+      "videoId": "flBuF4sQdg8",
+      "title": "Земли Былых Легенд: Молчание богов | 2 сезон | Эпизод 25: Заккира (часть 2)",
+      "url": "https://www.youtube.com/watch?v=flBuF4sQdg8",
+      "duration": 20543,
+      "language": null
+    },
+    {
+      "videoId": "beesLVlmAnc",
+      "title": "Земли Былых Легенд: Молчание богов | 2 сезон | Эпизод 26: Гнев",
+      "url": "https://www.youtube.com/watch?v=beesLVlmAnc",
+      "duration": 24212,
+      "language": null
+    },
+    {
+      "videoId": "-BunhW2vZZ0",
+      "title": "ТИЗЕР НОВОГО СЕЗОНА | Земли Былых Легенд: Молчание богов",
+      "url": "https://www.youtube.com/watch?v=-BunhW2vZZ0",
+      "duration": 19,
+      "language": null
+    },
+    {
+      "videoId": "ZAbmVifsDbQ",
+      "title": "ВСЕ СЕЗОНЫ \"Молчания богов\" ЗА 9 МИНУТ",
+      "url": "https://www.youtube.com/watch?v=ZAbmVifsDbQ",
+      "duration": 598,
+      "language": null
+    },
+    {
+      "videoId": "qkOHbNtFYT8",
+      "title": "Земли Былых Легенд: Молчание богов | Вайрах | ТРЕЙЛЕР",
+      "url": "https://www.youtube.com/watch?v=qkOHbNtFYT8",
+      "duration": 129,
+      "language": null
+    },
+    {
+      "videoId": "Hy_nhFzTQdo",
+      "title": "Земли былых легенд: Молчание богов | Эпизод 1: Искусство войны | Вайрах",
+      "url": "https://www.youtube.com/watch?v=Hy_nhFzTQdo",
+      "duration": 17404,
+      "language": null
+    },
+    {
+      "videoId": "jl8cc2gaVd8",
+      "title": "Земли былых легенд: Молчание богов | Эпизод 2: Идти по течению | Вайрах",
+      "url": "https://www.youtube.com/watch?v=jl8cc2gaVd8",
+      "duration": 15999,
+      "language": null
+    },
+    {
+      "videoId": "2BiBbCmbgnw",
+      "title": "Земли былых легенд: Молчание богов | Эпизод 3: Секреты мертвецов | Вайрах",
+      "url": "https://www.youtube.com/watch?v=2BiBbCmbgnw",
+      "duration": 17761,
+      "language": null
+    },
+    {
+      "videoId": "qUsDtmefT30",
+      "title": "Земли былых легенд: Молчание богов | Эпизод 4: Встречай, Арзагар! | Вайрах",
+      "url": "https://www.youtube.com/watch?v=qUsDtmefT30",
+      "duration": 17242,
+      "language": null
+    },
+    {
+      "videoId": "r7CifFg4Em8",
+      "title": "Земли былых легенд: Молчание богов | Эпизод 5: Перемены | Вайрах",
+      "url": "https://www.youtube.com/watch?v=r7CifFg4Em8",
+      "duration": 16675,
+      "language": null
+    },
+    {
+      "videoId": "jcXswWH8Gf8",
+      "title": "Земли былых легенд: Молчание богов | Эпизод 6: Плеть | Вайрах",
+      "url": "https://www.youtube.com/watch?v=jcXswWH8Gf8",
+      "duration": 15738,
+      "language": null
+    },
+    {
+      "videoId": "vZG76SXijGQ",
+      "title": "Земли былых легенд: Молчание богов | Эпизод 7: Распутье | Вайрах",
+      "url": "https://www.youtube.com/watch?v=vZG76SXijGQ",
+      "duration": 16948,
+      "language": null
+    },
+    {
+      "videoId": "30ShEtQLAqY",
+      "title": "Земли былых легенд: Молчание богов | Эпизод 8: Праздник жизни | Вайрах",
+      "url": "https://www.youtube.com/watch?v=30ShEtQLAqY",
+      "duration": 16568,
+      "language": null
+    },
+    {
+      "videoId": "tXnjGUJpKgQ",
+      "title": "Земли былых легенд: Молчание богов | Эпизод 9: Легенды при свете костров | Вайрах",
+      "url": "https://www.youtube.com/watch?v=tXnjGUJpKgQ",
+      "duration": 17119,
+      "language": null
+    },
+    {
+      "videoId": "C-eHCw9Qm_Y",
+      "title": "Земли былых легенд: Молчание богов | Эпизод 10: Авторитет | Вайрах",
+      "url": "https://www.youtube.com/watch?v=C-eHCw9Qm_Y",
+      "duration": 15970,
+      "language": null
+    },
+    {
+      "videoId": "2T2c_txJT-8",
+      "title": "Земли былых легенд: Молчание богов | ФИНАЛ | Эпизод 11: Нежданный гость | Вайрах",
+      "url": "https://www.youtube.com/watch?v=2T2c_txJT-8",
+      "duration": 14071,
+      "language": null
+    },
+    {
+      "videoId": "jeXPcABdz6U",
+      "title": "TEASER | Lands of Lost Legends: Silence of the Gods | Season 4",
+      "url": "https://www.youtube.com/watch?v=jeXPcABdz6U",
+      "duration": 25,
+      "language": null
+    },
+    {
+      "videoId": "K7N2rqNwiWQ",
+      "title": "Trailer for the new season of \"Lands of Past Legends: Silence of the Gods\"",
+      "url": "https://www.youtube.com/watch?v=K7N2rqNwiWQ",
+      "duration": 99,
+      "language": null
+    },
+    {
+      "videoId": "3vh7l5bx18A",
+      "title": "Земли Былых Легенд: Молчание богов | Эпизод 1: По тонкому льду | 4 сезон",
+      "url": "https://www.youtube.com/watch?v=3vh7l5bx18A",
+      "duration": 14555,
+      "language": null
+    },
+    {
+      "videoId": "yU1_r6jd9FA",
+      "title": "Земли Былых Легенд: Молчание богов | Эпизод 2: Право сильного | 4 сезон",
+      "url": "https://www.youtube.com/watch?v=yU1_r6jd9FA",
+      "duration": 17285,
+      "language": null
+    },
+    {
+      "videoId": "PDDLo4IISmc",
+      "title": "Земли Былых Легенд: Молчание богов | Эпизод 3: Между молотом и наковальней | 4 сезон",
+      "url": "https://www.youtube.com/watch?v=PDDLo4IISmc",
+      "duration": 15454,
+      "language": null
+    },
+    {
+      "videoId": "IwnwGcK0SjI",
+      "title": "Земли Былых Легенд: Молчание богов | Эпизод 4: Отблеск Байны | 4 сезон",
+      "url": "https://www.youtube.com/watch?v=IwnwGcK0SjI",
+      "duration": 15054,
+      "language": null
+    },
+    {
+      "videoId": "V1MU3Tqdj_k",
+      "title": "Земли Былых Легенд: Молчание богов | Эпизод 5: Корни | 4 сезон",
+      "url": "https://www.youtube.com/watch?v=V1MU3Tqdj_k",
+      "duration": 16808,
+      "language": null
+    },
+    {
+      "videoId": "HFuaApw4JMc",
+      "title": "Земли Былых Легенд: Молчание богов | Эпизод 6: Гора Амга | 4 сезон",
+      "url": "https://www.youtube.com/watch?v=HFuaApw4JMc",
+      "duration": 16138,
+      "language": null
+    },
+    {
+      "videoId": "CEqM9-THWoU",
+      "title": "Земли Былых Легенд: Молчание богов | Эпизод 7: Паутина | 4 сезон",
+      "url": "https://www.youtube.com/watch?v=CEqM9-THWoU",
+      "duration": 15238,
+      "language": null
+    },
+    {
+      "videoId": "933LHWQPp2w",
+      "title": "Земли Былых Легенд: Молчание богов | Эпизод 8: Яд и любовь | 4 сезон",
+      "url": "https://www.youtube.com/watch?v=933LHWQPp2w",
+      "duration": 15564,
+      "language": null
+    },
+    {
+      "videoId": "hP94zDTABmQ",
+      "title": "Земли Былых Легенд: Молчание богов | Эпизод 9: Тайна | 4 сезон",
+      "url": "https://www.youtube.com/watch?v=hP94zDTABmQ",
+      "duration": 18029,
+      "language": null
+    },
+    {
+      "videoId": "z2114iJ53Vs",
+      "title": "Земли Былых Легенд: Молчание богов | Эпизод 10: Спуск | 4 сезон",
+      "url": "https://www.youtube.com/watch?v=z2114iJ53Vs",
+      "duration": 15066,
+      "language": null
+    },
+    {
+      "videoId": "PLFoWli96tM",
+      "title": "Земли Былых Легенд: Молчание богов | Эпизод 11: Хаос | 4 сезон",
+      "url": "https://www.youtube.com/watch?v=PLFoWli96tM",
+      "duration": 16892,
+      "language": null
+    },
+    {
+      "videoId": "ivIgro-6rqY",
+      "title": "Земли Былых Легенд: Молчание богов | Эпизод 12: Маленькие проблемы | 4 сезон",
+      "url": "https://www.youtube.com/watch?v=ivIgro-6rqY",
+      "duration": 16802,
+      "language": null
+    },
+    {
+      "videoId": "bHTLmTh6lh4",
+      "title": "Земли Былых Легенд: Молчание Богов | Эпизод 13: Вёльвы | 4 сезон",
+      "url": "https://www.youtube.com/watch?v=bHTLmTh6lh4",
+      "duration": 17166,
+      "language": null
+    },
+    {
+      "videoId": "uwXQ4gGeVWY",
+      "title": "Земли Былых Легенд: Молчание Богов | Эпизод 14: Битва за Ватрант | 4 сезон",
+      "url": "https://www.youtube.com/watch?v=uwXQ4gGeVWY",
+      "duration": 17559,
+      "language": null
+    },
+    {
+      "videoId": "nmdTunPWwes",
+      "title": "Земли Былых Легенд: Молчание Богов | Эпизод 15: Битва за Ватрант, Часть 2 | 4 сезон",
+      "url": "https://www.youtube.com/watch?v=nmdTunPWwes",
+      "duration": 17839,
+      "language": null
+    },
+    {
+      "videoId": "Dz_pbqZr8Jw",
+      "title": "Земли Былых Легенд: Молчание Богов | Эпизод 16: Принятие | 4 сезон",
+      "url": "https://www.youtube.com/watch?v=Dz_pbqZr8Jw",
+      "duration": 16086,
+      "language": null
+    },
+    {
+      "videoId": "CqHQjYI08gY",
+      "title": "Земли Былых Легенд: Молчание Богов | Эпизод 17: Жертва | 4 сезон",
+      "url": "https://www.youtube.com/watch?v=CqHQjYI08gY",
+      "duration": 15616,
+      "language": null
+    },
+    {
+      "videoId": "2rNDBCrK3v8",
+      "title": "Земли Былых Легенд: Молчание Богов | Эпизод 18: Дорога жадности | 4 сезон",
+      "url": "https://www.youtube.com/watch?v=2rNDBCrK3v8",
+      "duration": 14580,
+      "language": null
+    },
+    {
+      "videoId": "oGVl2zLnmRY",
+      "title": "Земли Былых Легенд: Молчание Богов | Эпизод 19: Нуул - Часть 1 | 4 сезон",
+      "url": "https://www.youtube.com/watch?v=oGVl2zLnmRY",
+      "duration": 13004,
+      "language": null
+    },
+    {
+      "videoId": "ZBGHxgWFWgM",
+      "title": "Земли Былых Легенд: Молчание Богов | Эпизод 19: Нуул - Часть 2 | 4 сезон",
+      "url": "https://www.youtube.com/watch?v=ZBGHxgWFWgM",
+      "duration": 21161,
+      "language": null
+    }
+  ],
+  "chunks": [
+    {
+      "id": "D9hzc-7brMw-chunk-001",
+      "videoId": "D9hzc-7brMw",
+      "title": "S7E5 Part 1 | ДОМИНУС | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=D9hzc-7brMw",
+      "start": 1,
+      "text": "[музыка] здравствуйте дорогие друзья в эфире канал левином studio и сегодня как и каждое воскресенье мы играем dane jones and dragon 5 редакция играем а по авторскому миру земли был их легенд делаем это очень тщательно качественно и продуманно никаких умру лак замечено не было даже он содрогаться это настольная ролевая игра разговорного жанра мы продолжаем нашу историю caddy caddy бой непонятное происходит но боже мой господи это просто невозможность такой обстановке работать поэтому мы начнём игру заново газов заливала уровня первого уровня небольшой штраф нашим игрокам и так пожалуйста откройте игроков наших славных героев которые отправятся сегодня продолжать борьбу с демоном тираны пожалуйста добрый всем привет удивить надо как в этот человек сидит вроде на месте там еще бы вообще просто просто какие-то чудеса портировался как вы уже заметили кристины и с нами нету мы очень надеемся устранить этот досадный внедрить сухую не палка да да да техническая неполадка вскоре вскоре надеемся что а кристина к нам присоединится чуть-чуть"
+    },
+    {
+      "id": "D9hzc-7brMw-chunk-002",
+      "videoId": "D9hzc-7brMw",
+      "title": "S7E5 Part 1 | ДОМИНУС | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=D9hzc-7brMw",
+      "start": 92,
+      "text": "попозже к сожалению придется до понаблюдать за сугубо мужским коллективом [смех] да просто мне все же он дал просто это мой старый лист который бывший которой нет вагинит кадр здесь которые на месте просто ему не всегда удобно ходить о спасибо спасибо сразу же спасибо сразу же удар просто которого дядюшки которую не всегда удобно ходить и в теплом в теплом плаще поэтому иногда он одевает легко футболочка как раз of grass кроссовки reebok из паспортами и утренняя пробежка с легкими жертвоприношениями всего немножечко бодрит нельзя да а давайте наверное представимся расскажем немножечко про наших персонажей это наши игроки у них есть персонажи они за не будут отыгрывать и творить все героический штуки конечно развивать кресты до творить разврат да отлично первая статья есть григорий пожалуйста да уже сказал предыдущий оратор меня зовут григорий я отыгрываю персонажа человека которому еще нет и тридцати но уже есть 25 это рамбла кашель их размер жилец богини тимур и который верит в удачу храбрый и считает что наша"
+    },
+    {
+      "id": "D9hzc-7brMw-chunk-003",
+      "videoId": "D9hzc-7brMw",
+      "title": "S7E5 Part 1 | ДОМИНУС | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=D9hzc-7brMw",
+      "start": 205,
+      "text": "судьба в наших руках продолжаем меня зовут евгения до игрового персонажа по имени фильмы ты на волшебник маленький агрессивный клан кака на самом деле добрый просто считаю все кто нет она точно это точно продолжаем добрый меня зовут владимир я его зовут оскар ули герб он воин words in star super он очень стар что там он просто superstar отлично следующим меня зовут видите я играю за персонажа и его зовут url и он верит что отличие от работы владимира соловьева и также эти 2 во всем виноваты кремлю боты начнем пошел за pokemon итак дорогие друзья наши герои сейчас находятся на континенте брюс где происходит собственно событие нашего приключения нашу героя пытается противостоять ужасному демону terranica пересказывать конечно же все предыдущие части я не буду но упомяну лишь а потом упомяну лишь о том что закончилось наше приключение на следующих событий фоки с рамблом решили провести и спасательную операцию спасательную операцию вселенной потому что ей очень угрожала в общем не сам"
+    },
+    {
+      "id": "D9hzc-7brMw-chunk-004",
+      "videoId": "D9hzc-7brMw",
+      "title": "S7E5 Part 1 | ДОМИНУС | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=D9hzc-7brMw",
+      "start": 330,
+      "text": "поручил но сказал косвенно намекнул сказал то что селена является неким ключом который поможет героем пройти в некое место где кроется слабое место terranica флаги и rumble сразу же рванули в город потому что остальные члены отряда были уже такие достаточно уставшие за ними побежал в попыхах world чтобы попытаться хоть как-то проконтролировать своих друзей но увы они были настолько стремительность что сразу же ворвавшись просто буквально ворвавшийся в 1 г д д д д и сорвав фольгу они сразу же они сразу же прибегли к очень активным действиям и решили забрать селену силой потому что селена скажем начала лепетать про то что она никуда не пойдёт про то что она влюбилась замечательного человека которого она встретила буквально на днях буквально вчера вечером и просто без ума от этого прекрасного чувства решил отправиться с ним дальше но наши герои решили то что зачем ему судьба ей не до то что ее судьба день и принадлежит она принадлежит рамблу и фуги очень недолго думая решила"
+    },
+    {
+      "id": "D9hzc-7brMw-chunk-005",
+      "videoId": "D9hzc-7brMw",
+      "title": "S7E5 Part 1 | ДОМИНУС | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=D9hzc-7brMw",
+      "start": 405,
+      "text": "опробовать порошок который приготовил недавно финли черную падчерицу и собственно вселенная погрузилась в сон возможно вечный сон и наши герои вот так бывает иногда этот сертификат последствия вражды школу даже помру черных падчерица не подчиняется никаким официальным правилам наши герои поспешно волоча на себе девушку начали выбегать из этой странной деревне холодный который такое ощущение что каждый человек просто живёт в каком-то своем мире и все только сидят и молятся на вот эту бездну и купаются так сказать в разговорах с ней своим побегом герои создали не шуточный ажиотаж в деревне урал все время оглядываясь назад увидел то что старейшина вне себя вообще от того что происходит двинулся вслед нашему игрока и уже выбегает черту города наши герои увидели страну молодого человека которого они не видели ранее который стоял чего-то ожидал немного странно немного странно все это было они продолжили свое бегства из этой деревни обернувшийся url увидел то что человека больше нету на своем месте но зато он увидел село старейшего которая бежит"
+    },
+    {
+      "id": "D9hzc-7brMw-chunk-006",
+      "videoId": "D9hzc-7brMw",
+      "title": "S7E5 Part 1 | ДОМИНУС | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=D9hzc-7brMw",
+      "start": 487,
+      "text": "быстрее наверное сообщить какие-то прекрасные новости нашему отряду наш отряд настигнув сердце сердце дом наш отряд настигнув сердце вырывается просто внутрь срывает ольгу и заканчивается все на какие слова что-то сделать виды да напомню вам то что оскар у нас дремлет но конечно же от этого шума он так встрепенулся фотки с рамблом чувствует резкий прилив усталости потому что действие этих ягод которые они съели она начинает потихоньку подходить концу фоки сразу же садится в кресло и тут же засыпает точно-точно они садятся и рядышком и сразу же засыпает вы находитесь в сердце ну что уважаемые графе я желаю вам сегодня ролик advantage удачи вам в этой нелегкой схватку на конечно не поможет удача вам не принадлежит пожалуйста фены фены ты видишь я не успела мойки селе загустеть как они притащили схватили ее оселков кинули в ней порошок которые ты сотворил ее при начале сюда за нами идет страшно частью деревне зале среди какой-то непонятный страны тип который стоял на входе в деревню мы взяли"
+    },
+    {
+      "id": "D9hzc-7brMw-chunk-007",
+      "videoId": "D9hzc-7brMw",
+      "title": "S7E5 Part 1 | ДОМИНУС | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=D9hzc-7brMw",
+      "start": 577,
+      "text": "острых просыпать мою оскар не расти моя борода в нахрена суде ту бабу притащили сумма шли посходили все ты-то куда смотреть и ладно долбать они они как как это быстро были вообще не понимаем что кто-нибудь из доме но в доме сейчас стоит только тереза под который был здесь он куда-то ушёл стоит тереза на почувствовать свое мохнатое лицо быстро зла из-за зависла она быстро критические меры очень быстро сейчас попробую нет это не должно быть пока она она стучит в пол своей клюкой словили слова что мы можем поделать как вот делал там дом спрятаться примерно хотя бы никуда не передвигаясь без слои все равно этому любишь наш клан автор жизни то пойдем к навигатору сходим где он путей пойти поговорить ты подвергаешь как ну и ты видишь то что водолей убежит задыхаясь сегура фигура собственно облаченная в такую легкую рясу как и всех здесь я в облегченной такую одежду серого цвета но в принципе очевидно то что это старейший он один он"
+    },
+    {
+      "id": "D9hzc-7brMw-chunk-008",
+      "videoId": "D9hzc-7brMw",
+      "title": "S7E5 Part 1 | ДОМИНУС | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=D9hzc-7brMw",
+      "start": 657,
+      "text": "один там старейшина горизонте уже в окне маячит в друзья если ему знать никаких единственным правильным решением будет наверное чуть ли не отдать ему притащили сюда это хороший вопрос кстати ответить что у него они отличные да я отвечу на него если что-то может быть мы попробуем кроме как ухо играл невест где я позвала она стучит по полу и тоже так я достаю свисток начинаешь этим столь крика словно из слон слон и свистка я просыпаюсь немного открываю один глаз и смотря на все происходящее да ты просыпаешься ты чувствуешь такую истому по своего по всему своему телу будто бы только что мы себе просто в лоб телегу полную золотом ты чувствуешь такую слабость каждом своем члене я наслаждаюсь ничего не происходит но не появляется словом еще людей нибудь выводится из тишь нет ничего не происходит перед теми за куда он делся я пойду посмотрю удара ли она спуска же зашуршал что может этот дом под землю брать только слон только словно кто еще"
+    },
+    {
+      "id": "D9hzc-7brMw-chunk-009",
+      "videoId": "D9hzc-7brMw",
+      "title": "S7E5 Part 1 | ДОМИНУС | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=D9hzc-7brMw",
+      "start": 751,
+      "text": "это кто-то за команда хочет найти более что значит под землю по нам нужно у тебя сюда срочно очень срочно там еще не может никуда везти его что спрятаться значит нужно идти более с ней он не спрячется я подхожу к окошку где с ней кто это такая что значит с нами внутренними спрячется почему то что вас раздаю логично я подхожу к окошку и заглядывая за навела на жарко вещами шаркающей походкой она направляется туда в сторону шкафа открывает его и успешно исчезает ним ты подвергаешь как ну и смотришь на него то что происходит там немного непонятно но тем не менее она происходит ты видишь как стремительно приближается старейшина отвечать того момента когда смотрел ворову он уже становится несколько ближе и ты видишь то что вот эти вот деревья которые вы вместе с финлей сажали видишь то что они они вот таким вот карта балетом в четвером они начинают продвигаться к дороге туда лишь нет ни на встрече так сказать преграждая"
+    },
+    {
+      "id": "D9hzc-7brMw-chunk-010",
+      "videoId": "D9hzc-7brMw",
+      "title": "S7E5 Part 1 | ДОМИНУС | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=D9hzc-7brMw",
+      "start": 827,
+      "text": "ему путь они машут своими веточками на которых там болтаются буквально пару листиков на них смотрят и просто стоят между собой смотрит обожаю там землю только один старик вообще отварить отдаваясь не повлияет выхожу безумно но сейчас сейчас подожди не заглаживаем вы видите то что оскар уже с милыми шагаем открывает дверь и выходит господи на заводе он обладал очень многие тоже иду за ним как бы периодически поливают был только воду и умываюсь россию лицо мокрое то срывался ты же понимаешь что я не знаю что говорить я тоже иду за ними но я знаю что делать сейчас хорошо вы выходите на улицу встречает опять это легкая прохлада и видите то что перед вами на дороге выступившие выстроившись стоит четыре дерева и их но не такого небольшого размера но тем не менее их стволы они так раз раздуваются раздваиваются под конец и образует ну подобие ног и вы видите то что их маленькие такие корешки они шевелятся на самом конце и такие"
+    },
+    {
+      "id": "D9hzc-7brMw-chunk-011",
+      "videoId": "D9hzc-7brMw",
+      "title": "S7E5 Part 1 | ДОМИНУС | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=D9hzc-7brMw",
+      "start": 902,
+      "text": "будто бы взялись за землю вся 4 штуки сколько этот забор 50 представлять е4 они вот сколько высоту в ширину а образовывают заслонку какого формата но получается что это они заняли 4 клетки то есть они всю дорогу не две клетки еще вне дороги высоту высоту они чуть выше рамбла и они стоят они пребывают в каком-то таком достаточно веселом настроении вы видите цветами они они что они закрывают путь встречи не может и оградит нас хотите ли ты видишь то что она бежит и у1 lowed он протирает глаза и смотрит вперед не верят что движемся я смотрю его взгляд он ходит как будто сквозь меня там ну сквозь деревья он видит вообще нет к вам тебя ну да да да скорее всего его взгляд обращен на деревья которые стоят там и это его немножко удивляет наверное шутишь я даю тебя благословление скрытности и сейчас с преимуществом совершая скрытность они раз помехой это очень разумно ты виделся было 2012"
+    },
+    {
+      "id": "D9hzc-7brMw-chunk-012",
+      "videoId": "D9hzc-7brMw",
+      "title": "S7E5 Part 1 | ДОМИНУС | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=D9hzc-7brMw",
+      "start": 989,
+      "text": "преимуществом двадцать двадцать или двадцать чтобы я скрылся скрылись за деревьями чтобы у нас тоже пытаюсь может лишних вопросов до 12 бонусная единицами 13 очков skills вы видите то что старейшины решительный шаг он становится меня решительным он подходит к ним ну где-то на расстоянии 30 футов и смотрит на все это вот эти деревья не так весело пошатывать вы прямо вот туда вот к ним да ты чувствуешь то что вот эти вот ветки они вот так они тебя убивают от 10 и будто бы при прижимает к стволу редкое листва указке в битве я скорее всего вы как как будто бы не лезь со старым другом старейшина стоит нечисть то за черт побери он замечает меня но пока он смотрит на дерево хорошо или и периодически посмотреть на избушку когда обрати нас внимание я буду я тоже мне заготовлено действие просто если я не привлекают мы не привлекаем внимание значит я хочу сделать perfomax хочу прям так и да я пытаюсь повторить звуки"
+    },
+    {
+      "id": "D9hzc-7brMw-chunk-013",
+      "videoId": "D9hzc-7brMw",
+      "title": "S7E5 Part 1 | ДОМИНУС | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=D9hzc-7brMw",
+      "start": 1099,
+      "text": "бездны photoshop от бездны который я слышал и изредка вставляя какие-то слова которые ты вставляешь владыки когда но домой gif она нужна ну и пытаюсь короче по замутить отнесешь танец чистая за деревом тоже у так нужно что-нибудь и устраиваем оставлять удаление я вас точно не больше поступления 17 плюс 8 2020 хорош а она он смотрит и он как раз заменится не замечается и себя тот машет головой своей смотрит в сторону бизнес со стороны бездны нету ничего в принципе тумана нет больше что делать селена и тут я короче пусть сделать подарок мудрости просто просто окучиваем дитятко очарования личности сложности пятнадцать это он прошел ох как не сделаю то я говорю может стать его приобрести дружище нужно довериться без оставить его кости ему дальше но мне кости начнет я лягу костьми удач но тем интересное что что здесь плеть чехол с бездной у нее предназначением . ты беги я подыграю я боюсь его власть этим моментом спасайся это то что тебя"
+    },
+    {
+      "id": "D9hzc-7brMw-chunk-014",
+      "videoId": "D9hzc-7brMw",
+      "title": "S7E5 Part 1 | ДОМИНУС | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=D9hzc-7brMw",
+      "start": 1242,
+      "text": "начинаю этот перекручивать все вот эти вот ветки и ты понимаешь что потом больше нету земли тебе вот так вот поднимаю с таким хрустом рамбла понимаю и ты вечно что-то лад то что вот эти вот ветки они одевают тебя и крепко крепко сжались и тут я реально короче накладываю кричим беги спасай себя потому что становится страшно сам не самому я уже может я не контролирую ситуацию и вы видите как он был весело летит сторону в сторону до бездны но его подхватывают одна из вот этих вот ветвей просто за ногу тебя перехватывает дыхание вы видите то что рама вот так вот начинает размахивать просто рамбова во все стороны вторично он далеко шучу конечно не до чего он там же стоит в тридцати футах от короче в этот момент я выскакиваю и кричу собственно я кричу это энтом но я стараюсь воздействовать на старейшину запугать его запугивая не знаю что я выскакиваю с молотом и начинаю качать в сторону вот"
+    },
+    {
+      "id": "D9hzc-7brMw-chunk-015",
+      "videoId": "D9hzc-7brMw",
+      "title": "S7E5 Part 1 | ДОМИНУС | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=D9hzc-7brMw",
+      "start": 1335,
+      "text": "где то время было туда-сюда ах вы [&nbsp;__&nbsp;] деревья я вас сейчас всех блэк рыбочистки покручу [аплодисменты] это 21 ну запугивание если вы видите то что он просто разворачивается и дают дёру его старости покинул его адель и энергии юности овладела им и вы видите то что быстрыми шагами он чешет просто противоположном направлении от валяние залог а это пока меня как какой альваро деревьев спустить его обратно вы видите то что нам был летит и снова к противоположному дерево его ловят его одно из деревьев хватает когда подхватывает деревья дерево я подхожу и прикладываю ладонью к дереву ну-ка пусти его будет что деревьев я ещё не рассказывал про 1921 ты в этот звук отпусти его шляпы случае с в мире и только сейчас вглядываясь туда в кору ты различаешь то что там действительно есть такие глаза они такая моргают видишь такой род он бью достаточно плохо раз он различием в этой карена гримасе такое включу и вы видите то что"
+    },
+    {
+      "id": "D9hzc-7brMw-chunk-016",
+      "videoId": "D9hzc-7brMw",
+      "title": "S7E5 Part 1 | ДОМИНУС | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=D9hzc-7brMw",
+      "start": 1449,
+      "text": "тот дерево которое уже готовилась еще один разок и швырнуть краба она его опускают своими ветвями и ставить перед тобой так я короче сбегались я достаю сейчас видел дарья дерево напугал до москвы я видел это так вы выиграли того времени вы видите то что они периодически подталкивая друг друга своими ветвями и стволами направляется туда же на то же место где они и стояли и снова так их корни глубоко-глубоко выйти расщелины и цепляются и всей они замирают времени у нас совсем нет на если эти ягоды куда-нибудь перемолоть в дом можно зарядиться еще не не очень-то камня там осталось сверлит я я пытаюсь высмотреть этого засранца которое открывался ящики не покидает меня мысль то что алгоритм правы о 16 ты смотришь вокруг в принципе здесь вообще но те сложно представить где можно скрыться никого секреты что-то сама за вой я все это время том чего ты волен делать первую очередь обращают на него это она это ключ посмотри"
+    },
+    {
+      "id": "D9hzc-7brMw-chunk-017",
+      "videoId": "D9hzc-7brMw",
+      "title": "S7E5 Part 1 | ДОМИНУС | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=D9hzc-7brMw",
+      "start": 1545,
+      "text": "внимательно низшему нужно посмотреть он устает он подходит к ней наклонять ты видишь то что он достаточно грубо кладет ей стальную свою варежку на лоб аккуратно ни в коем случае не делай больно него даже больно я захожу в дом из не может коченеть боль да да в ней то что нужно мне что в ней ключ смысле что этом внутреннюю или что что кришна это на дождь и рода там внутри она пропустит на она может находиться там и переживай ты не про которых случаем смысле что внутри что у нас пропустит вот там вот внутри нее есть вообще это нужно чуть-чуть мы придем туда на место так и все того что она с нами будет достаточно чтобы пройти в точку а куда мы пройдем что это за место я не знаю у меня в голове есть только направление чуть-чуть вы делает умеешь я за микро покажу вам куда идти отлично я не знаю ты можешь там полем кони стоят на улице нашим утра да"
+    },
+    {
+      "id": "D9hzc-7brMw-chunk-018",
+      "videoId": "D9hzc-7brMw",
+      "title": "S7E5 Part 1 | ДОМИНУС | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=D9hzc-7brMw",
+      "start": 1648,
+      "text": "конечно есть like any ты можешь там не знаю перемещаться быстро брат сможешь финли я не могу причинять боль живом существе не достигается мир месяц это механизм имеющий сердце и мечтающая мире ясно лично я могу сопереживать твоему горю и труда в кучу новое ранее была по heavy duty юмор за штуку нет времени бери всех там кто есть в доме по лошадям и полетели отсюда сейчас я чувствую придет повтор смысле бери чёрча сделают а я забегаю в дом беру в одну руку селену вторую фоне и к лошадям и они хорошо я помогаю седлать лошадей и делает овощами да ты абсолютно чуть что то что помогали стать здесь играть сумки полоски такие полоски сумки рюкзаки которые остались доме я себе сажаю флаги рамблу в селе ну да сколько вас лошадей к осталось четверо ну как кобыла но я надеюсь что я надеюсь четверо это было роковую залезаю в седло и это потом торможу и откуда двигатель собственно тереза"
+    },
+    {
+      "id": "D9hzc-7brMw-chunk-019",
+      "videoId": "D9hzc-7brMw",
+      "title": "S7E5 Part 1 | ДОМИНУС | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=D9hzc-7brMw",
+      "start": 1759,
+      "text": "открывается шкаф битве что слон сейчас позову подожди паять значит в первую очередь мы сейчас отсюда уходим вам нужно спрятаться как можно скорее а потом тут же найди слона и скажи что вам нужно убираться из этого места куда если он будет знать где я то вот поближе ко мне куда здесь недалеко есть какой-то ущелье я не знаю где конкретно куда то на нем и направление же говорим что это ближе к джормагом они тают на северном ни сколько-нибудь и вашему этому с ним все давай искать доме нет все адреса что на кухне что-то заглядываю на кухне ты заглядываешь на кухне и ты видишь то что там нож тесто будто кот против я здесь не смотрю да привет пока что не прошел что здесь идея существовало намного лучше действительно а почему там тереза блин полностью пит вечно ты можешь предупредить что вам нужно спрятаться это странам угрожает опасность а если все ты ты видишь что нужно падает на землю и и мою чашу календаре я"
+    },
+    {
+      "id": "D9hzc-7brMw-chunk-020",
+      "videoId": "D9hzc-7brMw",
+      "title": "S7E5 Part 1 | ДОМИНУС | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=D9hzc-7brMw",
+      "start": 1861,
+      "text": "покажу быстро кладку нас на стол еду к нему говорю все все нам нужно уходить ему выходим механизм может уходить отлично при на лошади ездить умеешь хотя а вон сколько весит я буду идти ногами не так нельзя урологи что так уж слишком медленно пением лишь и боишься что хотя мы выходим из дома вы не выходит вы видите то что маленький гном тащат за собой вот этот огромное металлическое существо небеса прогибаясь обновление за мной як стой-стой-стой нам нужно обойти мимо города да конечно нам нам северный нам северней да конечно а это 2 деревни до слушай 2 как со зрением отлично . успеешь за лошадью чего я конечно у стоите ли вы за мной подожди если будешь видеть кого-то впереди или кто-то будет следить за нами сразу предупреждаем этом сообщить а кто-нибудь есть ясно приглядываюсь по странам помоги мне заявлены поскакал я помогаю я тоже 7 9 полагаю забираться работу и селение наложить 16 хорошо ты что сколько 16 шт"
+    },
+    {
+      "id": "D9hzc-7brMw-chunk-021",
+      "videoId": "D9hzc-7brMw",
+      "title": "S7E5 Part 1 | ДОМИНУС | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=D9hzc-7brMw",
+      "start": 1957,
+      "text": "на ты смотришь вокруг нету никого места тоже оглядывает он крутит дома нет никого нет куча таким хрустом будто бы у него там что-то ломается в этот момент нет никого нет отлично может я конечно лиза витражи для того чтобы я залез затащили selena селена и сможешь удержать тем лучше я поеду вселенной тогда ты такой маленький откуда в тесто сильный давайте давайте я поведу сам был я вижу ясные справлюсь я с романса русь особо путешествие по мне катя нова есть так что мои сети отваги кто ты мужская листопада и снова сколько вышли четыре отличаются раз два три у вас в принципе хватает положите не то с ним потому что получается я привязываю узлы и свободные лошади которые осталось к своей лошади лошадей марафон залезаю кладу силе давал перед собой сама сажу и и и игр скорее вывели вы видите то что месяц или нас огромная жила она погибает немного вот так вот колени становясь минске видите то что у него"
+    },
+    {
+      "id": "D9hzc-7brMw-chunk-022",
+      "videoId": "D9hzc-7brMw",
+      "title": "S7E5 Part 1 | ДОМИНУС | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=D9hzc-7brMw",
+      "start": 2051,
+      "text": "колено начинает раскручиваться и оттуда из колена вываливать колесико небольшое из каждого колена вы видите то что из его носки они тоже выпрямляются и вот с места лодыжки она тоже костюм вываливаются тоже колесам и он начинает ехать ты уже тупишь там вовсю но ты видишь то что месяцами едет с тобой вот так вот а вот только вперед как и как народа коми я откажусь или вы видите то что мы топим до устраивая достаточно большое облако пыли он топит вперед значит держим такой темп сколько часа 2 лошади продержится без отдыха галопом час конечно ну че сок прямо такого вот усиленного как-то и погнал то вот сейчас мы так придерживаемся и потом избавляем ход время утра если мне память не изменяет абсолютли ну и собственно скачем не переговариваясь несмотря только жуков пожара иногда они тебе молодого и разряда вы едете и месим действительно был прав за ним достаточно сложно угнаться потому что только этому будет здоров периодически что ты копаешь станция была"
+    },
+    {
+      "id": "D9hzc-7brMw-chunk-023",
+      "videoId": "D9hzc-7brMw",
+      "title": "S7E5 Part 1 | ДОМИНУС | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=D9hzc-7brMw",
+      "start": 2138,
+      "text": "вещи то там вот давайте еще не загонишь в этом и минус живых существ проходит примерно час вашей езды в таком интенсивном темпе и что лошади ваши начинают уже начнет задыхаться да и оставляют я могу лишь море дорогу старайся не выпрыгнуть из села прижимаем себе розовое тельце тоже не выводится она не попадает просто разбавлять отеля и я возможном темпе до девушек для привала да плевал а кто знает сколько действует хреновину к края фольги ей настоящий чего даже не та черная женщина плачет можно болеть работает очень точное и делал безусловно можно предположить анализ анализ но на неплохо ты уже происходили на 16 возможно побочный эффект да да да возможно побочный эффект всю эту нет муравьи вообще если так как бы немножечко флешбэк то побочные про побочные эффекты говорилось еще тогда давным давно когда в первый раз и его не знаю в принципе вы нашли в игре ну давай так стать узнала да в принципе где-то часов через десять-двенадцать вероятно"
+    },
+    {
+      "id": "D9hzc-7brMw-chunk-024",
+      "videoId": "D9hzc-7brMw",
+      "title": "S7E5 Part 1 | ДОМИНУС | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=D9hzc-7brMw",
+      "start": 2237,
+      "text": "ее тело будет живым если будет новости сейчас она выглядит как будто между человек поблизости ну чисто физиологически она жива правильно понимаете люди в том то и дело что у нас полно побочный виктора про 10 человек может не проснуться и остаться 10 она жива очень вроде как потом она должна очнуться может не очнется декхи что если обвели дочку которых то мы и получим доступ да мы с ним скажите когда мы остановимся я устал часов через восемь может быть я порошка только ехать падчерицы dito2 но с вашими темпами я чувствую дня 4 видят то есть таким вот темпом четыре дня я думаю что да pure purple нам надо остановить тогда сейчас уже поедем еще пуще мне со старшим дискомфорта дискомфорта как пассажиров ягоды придет сейчас давай давай привяжем его он три лошади который мы все привяжу руками-ногами так и пусть едет с ним все кто у вас и да и что тут нужно вселенной что то сделать чтобы она баба нормально"
+    },
+    {
+      "id": "D9hzc-7brMw-chunk-025",
+      "videoId": "D9hzc-7brMw",
+      "title": "S7E5 Part 1 | ДОМИНУС | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=D9hzc-7brMw",
+      "start": 2348,
+      "text": "моя сестра жди на и те хорошо когда начнется чтобы сделать хочет повторно и так четыре дня ее держать варианты а если вы копыта птиц в которую смешно как у меня все достало это господи хочу домой давайте вы произносите услуг стоит аж до что вы продолжайте путь сколько я доплела до этого до вечера нет часов 5-6 максимум потому что во первых лошади откинуться то есть часов через пять-шесть это будет ну день еще надо гарри там четыре прекрасно нету а что ты через пять часов и что изменится нужно что праву помог ей там точно вспомни про эту вот твою вот порошочек который сидел дома побочные действия точно надо что то делать чтобы человек жил или как вообще как это работает друзья камбал повелел вы видите вон те же порядке нормально нормально он новый формат побочные действия возможно но все-таки это достаточно сильный порошок который вообще понабилось погружает весь организм такой может выдержать никак но в принципе девка молодая"
+    },
+    {
+      "id": "D9hzc-7brMw-chunk-026",
+      "videoId": "D9hzc-7brMw",
+      "title": "S7E5 Part 1 | ДОМИНУС | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=D9hzc-7brMw",
+      "start": 2428,
+      "text": "но должна выдержать друзьям буду начальник девка девка а у нас в компании потеряем по дороге есть есть у меня болело лицо вмещаете меня все залей у него финли поможет ему папа может лечебная мазь я все времени помогает внутреннего только понюхав лечебную мазь хорошо которая помогает vasko.ru что это за массе ну во-первых первую очередь это конечно же стройбат больше протирает ну ладно ну что до вечера тона держим путь ramal карты короче и брови чтобы ваши видения заказать становится можно следить и я не правильно понимаю что вот сейчас в обычном темпе лошади смогут спокойно до привала дайте я вечер 78 могут конечно не отдохнувших это да да просто сейчас час в усиленном темпе они хреначим причем если возможно это понимаю что местность каменистая то есть но нет никаких там а врагов ещё кого-то гавно напрямую мы по ним мы хреначим напрямую или мы по дороге едем по той дороге прийти к бездорожью прекрасно тогда ничего весьма достаточно"
+    },
+    {
+      "id": "D9hzc-7brMw-chunk-027",
+      "videoId": "D9hzc-7brMw",
+      "title": "S7E5 Part 1 | ДОМИНУС | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=D9hzc-7brMw",
+      "start": 2517,
+      "text": "хорошо справляется в принципе с местностью объезжает we have камушки а вы едете копыта лошадей стучат о каменистую поверхность рен был окончательно достал тебя найти я постоянно те ну и короче понимаю что могут быть другие некоторое время скрип моих зубов начинает заглушать что копыт и аромат и не мечтала о семья очень держу чтобы не пропустить себе горло finger ешьте говорю залей моего средства сразу снят может ягод есть также не можете вернуться и либо тормозить или вы ускоряете ребята но не 2 вы держите путь местность вообще вот если бы вы оказались там просто так вот одни но все это корову потому что местность вообще ни за что не за что было зацепиться периодически какие-то кустики такие скудные торчат но ничего вокруг нет из-за сдержанного кустик да да да да да я поехал будто бы очутились мигать анри только в котором нету песка и не так жарко но в ричард целом вокруг вообще эти техники последует сканируют территорию на наличие следящих за нами я"
+    },
+    {
+      "id": "D9hzc-7brMw-chunk-028",
+      "videoId": "D9hzc-7brMw",
+      "title": "S7E5 Part 1 | ДОМИНУС | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=D9hzc-7brMw",
+      "start": 2604,
+      "text": "тоже с одеяло до сих пор по у меня в этом парне да вы можете кинуть проверка это как вот допустим мы вот все эти 8:09 едем и это как один бросок здесь 12 взяла 18 бросков на каждые 7 минут легко это внимательность был на конные прогулки это 10 я не представляю как ехать таком состоянии которому вы вдвоем это просто ребята три фильма ну пожалуйста пожалеете человечество человечество должно страдать будет если я еще посижу этом хотя бы полчаса а таких 10 20 профи громко смеялся меня в ушах был спасен от смеха как обычно вы оглядываетесь вокруг нету ничего ничего того что могло бы собственно у вас вызывать подозрений rumble то и с каждым часом езды понимаешь что становится действительно все хуже и хуже ты просто уже такой хотя там где-то вот эта маленькая душонка оно бьется где-то внутри вот этого куска мяса которая когда-то была тебе родным но ты не чувствуешь ни рук ни ног постоянному тип это 90 процентов"
+    },
+    {
+      "id": "D9hzc-7brMw-chunk-029",
+      "videoId": "D9hzc-7brMw",
+      "title": "S7E5 Part 1 | ДОМИНУС | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=D9hzc-7brMw",
+      "start": 2685,
+      "text": "этого эффекта это эффектов от ягод место требуется если понимаешь слишком сильные ловите прибегаю к средствам которые я просто примерную его к себе но там сзади веревка ты гораздо лучше было бы натравим ты привязываешь него и собственно вы вместе до становится полегче потому что он перестал быть выход хотя в седле нас маленький умный наступает потихонечку начинает уже вечереть но вы видите то что уже день перевалил за свой самый заполнен и уже приближается вечер вы держите путь лошади уже так перри перебирают вяло копытами мисс вообще-то он топится топят ниже revol revol он разворачивается и чё я еще какой-нибудь местечка подходящие любое реально все ровная поверхность куда хочет власти листов нет как я как я и говорил то что есть расщелины такие неглубокие будто бы вот это вот земля это какая-то очень плотная такая глина и потрескавшаяся вот этот каменистая почва вместе с глиной ну тогда вот вся вот так вот освещению короче как морщинами ну тогда какое-нибудь место находим и этот"
+    },
+    {
+      "id": "D9hzc-7brMw-chunk-030",
+      "videoId": "D9hzc-7brMw",
+      "title": "S7E5 Part 1 | ДОМИНУС | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=D9hzc-7brMw",
+      "start": 2779,
+      "text": "лошадей пусть и тут ест траву на острова завтра увидимся развожу костер ночно ночи холодные ночи в развожу костер и собственно сижу один воском костер не очень хорошие имена можно завести затененных я думал про эту но мы же не хотим держать ее в пленник после того как мы доехали и даю ему упасть я прослежу на лошади дают пока он не упадет с нее 10 висишь маленький шанс чтобы удержаться и готовится бровь пожалуйста плохо знаю что 2 конек единиц строителей вы видите что rumble как держался в такой позе так и ты просто летишь целую вечность а я лечу очень долго ты шлепаешь ся на землю друзья сделано подождите пока подожди секунду я боюсь что я не знаю как поступить внутри звенящим он обнимает землю целует и я короче я хочу беру его за шкирку не может я помогаю тащу короче относительно костра вытаскивали спальный мешок растила его и туда его заворачиваю короче как shaver а не 100 просто должны"
+    },
+    {
+      "id": "D9hzc-7brMw-chunk-031",
+      "videoId": "D9hzc-7brMw",
+      "title": "S7E5 Part 1 | ДОМИНУС | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=D9hzc-7brMw",
+      "start": 2889,
+      "text": "быть тут же пытаются сопротивляться сама испании до чуть более бережно потому что хотя бы спала на лошадь а вот вселенной просто если он очнется она с кляпом во рту и связано и не будет ли это являться тревожным атака начнется за мечтой здесь может быть у себя ярл url сможет убедить я рада я вообще на самом деле есть мне иди интересны не надо интересных пожалуйста последний день закончилось тем находится блин них не понятно где скрыли степных хорошие реально хороший геем так вот сирену тую есть все хорошо но именно это идеи плохая то потому господи плохая и все не надо 30 дней вот может быть я попытаюсь загримироваться под того паренька в которого она могла влюбиться от какого но мы видели по дороге вдруг это не может быть него наверняка сможет узнать может лучше стать тем пареньком . нормально ну я не знаю нет надо попробовать убедить я думаю плохая идея вязать areas кроме между делом разводит костёр вскоре"
+    },
+    {
+      "id": "D9hzc-7brMw-chunk-032",
+      "videoId": "D9hzc-7brMw",
+      "title": "S7E5 Part 1 | ДОМИНУС | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=D9hzc-7brMw",
+      "start": 2973,
+      "text": "становится несколько теплее ты заворачиваешься в этот мешок вообще то что он не шевелится и больно периодически бьешься коленями и локтями об этом твердую каменистую спа-зона куда его врач вы видите раму до поздна diag о ней чтобы сделать нужный момент что нас может установить что меня как бы напрягает это то что может появиться рыжебородый кусок говна связывать давайте положим ее спать и будем следить этих попаданий проснулся на проект статья состоянии попытаюсь и все объяснить в принципе достаточно логичное то что mapper вот как ты ли говорил херли что а может и правду сказать сказал можете ли не всю про рассказать про то что эта страна довольно что она влюбилась так быстро и рассказать при бронировании возможно даже показать на каком-то примере если rumble вас приемные профессор подумал дай я его момент в том что сказать что тот кого она влюбилась это убийца который хотел убить артура или показать иран должен может попробовать ! можно в принципе дать чуть даже чуть"
+    },
+    {
+      "id": "D9hzc-7brMw-chunk-033",
+      "videoId": "D9hzc-7brMw",
+      "title": "S7E5 Part 1 | ДОМИНУС | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=D9hzc-7brMw",
+      "start": 3053,
+      "text": "больше информации сказать про то что этот помощник старейшины тоже было не могу бить так в принципе можно объяснить наше странное поведение потому что она была получиться люд на я считаю что это будет размер несколько единственное что она все еще помнит ну что там области из нас я не уверен кто конечно что мы хотим убить ется мы опустим этот момент мы попытаемся убедитесь в том что мы благожелательно и под явочная есть как я может быть хижину софтом друзьям безусловно создать давайте-ка я присяду а до скольки она внутри может даже 9 человек среднего роста конька [&nbsp;__&nbsp;] у коней знают 44 месяц силен на 10 4 коней да коней он даже дождей . а есть еще вроде бы есть чем у коней себе внизу не кони не конец а само собой небо ночью я беру шлем фоне снега т.д. вот это будет хорошим выходом ситуаций вы видите тут же температуру становится комфортнее я рисовать свой палец спальный мешок и по кому-то населена как"
+    },
+    {
+      "id": "D9hzc-7brMw-chunk-034",
+      "videoId": "D9hzc-7brMw",
+      "title": "S7E5 Part 1 | ДОМИНУС | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=D9hzc-7brMw",
+      "start": 3140,
+      "text": "она себя чувствует бледна как смерть а это прощупывается там пульс не это вообще ничего нет в трубку стукнули я могу понять вообще на желание или она реально нет все ты можешь понять авто ну ждем пока пройдет 12 часов пока многие проснется развеять как противоядие делается можно по поводу противоядие тебе ничего не известно это собственно пока ты готовил то тоже размышлял над этим но либо тебе нужно попробовать это проэкспериментировать но вот так навскидку тебе не пришло ни какая формула противоядие этого аналогов финли учесть время принимал и мне помочь или на запад уготована может оказать удаление или здесь гораздо более серьезных именем просто дело в том что этот порошок и все помните раз пользовался убить как бы все не так просто я помню все не так просто что ты можешь мне помочь чем чем я тут разобраться не могу хочу вот типа ничего у меня смуту в чем он странный что не так я без понятия сброшу и даже не подниму"
+    },
+    {
+      "id": "D9hzc-7brMw-chunk-035",
+      "videoId": "D9hzc-7brMw",
+      "title": "S7E5 Part 1 | ДОМИНУС | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=D9hzc-7brMw",
+      "start": 3209,
+      "text": "я поставлю и оставляю тут смотри какие-то руны что не значит я знаю что они значит они просто нарисованы написано я покажу как сложить умным видом короче я я пытаюсь понять ну вообще все узнать про этот предмет фанаты тоже да это же я делаю несколько кругов вокруг этого молота говорит мол я могу сказать однозначно только одно это молот я вижу ровно знакомая что на этих круши людей да да что там этот мол для того чтобы крушить людей как это так что-то навскидку что это можешь понять скидка ты можешь понять что как-то слишком он больно здорово сделано красиво для какого-то молота каких-то голиафов но это дворца я же работа лучше оружейники все дела то врач пока это все я не знаю проведи с ним побольше времени помаши я машу и провожу больше времени уделяешь побочек внимание что вы делаете так rumble speed ты что но я собственно создал филу это уже готовлюсь ко сну так я сижу возле силен и хочу достать"
+    },
+    {
+      "id": "D9hzc-7brMw-chunk-036",
+      "videoId": "D9hzc-7brMw",
+      "title": "S7E5 Part 1 | ДОМИНУС | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=D9hzc-7brMw",
+      "start": 3297,
+      "text": "давайте поучить надо будет доставать до друзьям да конечно отрубаешь разбудите меня как на той твоя очередь конечно я достаю съемки читает ты достаешь склянки ты вообще наверное буду начислять ты достаешь все вот это вот все бутылочки которые ты оттуда под на пир а ты хочу откупает новый т.к. все склянки склянки с жидкости бы учитывая это откуда мы и мы достали то как бы точно буду что в них прозрачный [&nbsp;__&nbsp;] склянки с глинки прозрачный этой скрывая стекло по-разному по-разному там где есть способы его добывать в принципе стекло ну нормально мы имеет место быть в таких местах где вода быть сложно соответственно но это как бы достаточно дорогостоящим видимым жить делает стекло котировки вот ты смотришь склянки в склянках ты видишь то что жидкости они все наполнены какими-то жидкостями и видишь то что там есть жидкость красного цвета и какой то еще там была я скажу краску разбились синий все они тоже было не сейчас я скажу в общем одно ты точно"
+    },
+    {
+      "id": "D9hzc-7brMw-chunk-037",
+      "videoId": "D9hzc-7brMw",
+      "title": "S7E5 Part 1 | ДОМИНУС | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=D9hzc-7brMw",
+      "start": 3400,
+      "text": "видишь то что некоторые склянки они наполнены прямо такое очень темно-красной жидкостью а некоторые склянки они наполнены немного жидкостью посветлее каждая из этих жидкости она будто бы газировок как лимана вот и ты так трясешься ты видишь то что сверху такая пенка вот собственно все остальное что-либо про глупо то есть но на них ничего не написано не подписано местные в маркировке тобой вас конечно нет то этот партикл у можно пробить к не понял я понял точно то было это была зеленая с пленкой там было склянка с двумя светлой красными жидкостями одна такая вот с темно-темно темную краску жидкость я открываю красный свет ты открываешь и и ты видишь то что эти пузырьки не так нет нет они никуда они пытаются выйти кинь пожалуйста анализ 12 ты не услышите склянки очень такое знакомое возможно это зелье лечение возможно также это может быть ты можешь попробовать чтобы узнать эффект отвозили я не буду будет само собой жаль пока не"
+    },
+    {
+      "id": "D9hzc-7brMw-chunk-038",
+      "videoId": "D9hzc-7brMw",
+      "title": "S7E5 Part 1 | ДОМИНУС | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=D9hzc-7brMw",
+      "start": 3493,
+      "text": "вы не до конца уверен темно-красную ты открываешь темно-красную ты видишь то что она ведет себя несколько агрессивнее она вообще такая достаточно густо ты нюхаешь ее и там такой тебе бросается в нос сладкий сладкий запах ты можешь попробовать конечно попытаться что-нибудь понять 18 18 как-то раз когда раз читаю книжки лохами ты узнаешь ингредиент одного растения лоб когда-то тебе рассказал про то что корень назван горном любви и вероятно это зелье это зелье любви которая способна ну немножечко изменить состояние существа и примерно ними да да потому может вас глаз . да а ты смотришь на ну да да я 8 часов гляделки это для этих хорошей новости 10 что-то вроде типа приворотного зелья любого телефона узнает ахирительной а новость да просто шикарная воска выпивать смысле видеть во вселенной все или в которой влюбленными которые ты интерес просто игроки сломали игра еще одну маленькую вселенную оно долгосрочно действует всегда понимаем а судя по его концентрации если периодически его подливать там в"
+    },
+    {
+      "id": "D9hzc-7brMw-chunk-039",
+      "videoId": "D9hzc-7brMw",
+      "title": "S7E5 Part 1 | ДОМИНУС | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=D9hzc-7brMw",
+      "start": 3619,
+      "text": "пищу может быть но она не развивается всем нет нет я говорю судя по его концентрации в принципе она может быть по жижи но у нескольких бы тоже но судя по этой концентрации достаточно маленькой дозы достаточно на то чтобы долго удержать налог для это полчаса день меняется да день этой бутылке хватит дня на три на четыре наверное чтобы это человек заливай она мертва и насрать пускаешь проснётся нормально все будет и лет не работает то хрен знает на котором согласись что если кто дал выпить то волкова 1 обычно обычно того кого 1 до нам наплевать любой кто здесь находится кроме 0 на фоне и почему-то я правда интересно да наплевать хотя бы отнес на фоне ну или поверни ее лицом к себе и лежит чуть и пока она проснется хрен его знает я не знаю чё то желто еще до что сказать не знаю а чё за хрень это скорее всего для лечения но это не до конца reverend"
+    },
+    {
+      "id": "D9hzc-7brMw-chunk-040",
+      "videoId": "D9hzc-7brMw",
+      "title": "S7E5 Part 1 | ДОМИНУС | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=D9hzc-7brMw",
+      "start": 3689,
+      "text": "может быть другой так что с этим поаккуратнее так только не пей и азартно видите у меня все и я даю его страну бутылку с винишком может просто винишко можете просто кидался винишком я попробую да нет это я может быть и четырем увижу я нормально реагирует только я дела маленькими . ты делаешь маленький глоточек и ты чувствуешь будто будет но внутри тебя как-то стало немножечко позже кровь стала бежать как будто бы бахнул стоп похоже на 4 шикарно собственно ты открываешь это конечно да да да и говорите исполнит твое желание ками ты открываешься и видишь такой зеленый дым его сразу же оттуда похож на меня большая у меня большой опыт в этих делах попробовал да скорее всего это я сложно определить по запаху какой но нужно провести эксперимент и он о тебе тебе вообще сложно то есть для тебя эта зеленая жидкость которая даже не вдохнуть потому что скорее всего ты обожжешься а там сквозь бороду ти5 фильтров ты"
+    },
+    {
+      "id": "D9hzc-7brMw-chunk-041",
+      "videoId": "D9hzc-7brMw",
+      "title": "S7E5 Part 1 | ДОМИНУС | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=D9hzc-7brMw",
+      "start": 3810,
+      "text": "можешь попробовать анализ а это преимущество 4 слушай это яд короче сложно понять чтобы чуть дальше пожитки кастами я ищу интересную и хрен узнает по направить но я думал что и местные грибники явно охраняет что-нибудь интересное а ты видишь то что он достает плачь , плачь перчатки и собственно сапоги и первое что тебе попадает внутрь так копаешься ты перчатки ты чувствуешь то что это волшебный все три из этих предметов это волшебный предмет ты понимаешь то что с плащом лучше бы провести немного времени чтобы понять вообще в чем его природа сущность ну либо используют там до своей колдун я использую заклинаний оценка а точнее момент как ритуал можно будет провести в этом случае 1 плащ на каких размеров каких размеров с полли таких размеров перчатки и что за ключ от чего конева и бронированные платные нет я до нее они тканевые они такого кожаные кожаные кожаные тоненькие перчатки так и достаточно просто сложная элегантное да да у нас в принципе есть бы ты был двое"
+    },
+    {
+      "id": "D9hzc-7brMw-chunk-042",
+      "videoId": "D9hzc-7brMw",
+      "title": "S7E5 Part 1 | ДОМИНУС | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=D9hzc-7brMw",
+      "start": 3910,
+      "text": "дворянином до того мог бы их тоже спокойно надевать а четыре назад из не парвизом я пытаюсь и они вообще в одной фразы они магический дела об этом здании но если мысли получается ты видишь с небольшим над с небольшим трудом но они все-таки вылезают на огромную конюшню оскар клешню омара вот и ты понимаешь что что на нем больше не дайте перчаток сейчас ними сделал просите сильно не хотел ни ты видишь то что на тебе перчатки ты понимаешь то их нет ты что сделал где перчатки вот они и а нет вот они где перчатки и тигры ты вот они в чем прикол я вижу что люди ада ты видишь то что они у тебя на руках не не понимаю что что твои пальцы как то это все я беру mode а вот тебе лишь мало то есть все ничего не происходит нет ничего к неправильному это чтобы стоит это ты чувствуешь что прилив ты чувствуешь то твои пальцы"
+    },
+    {
+      "id": "D9hzc-7brMw-chunk-043",
+      "videoId": "D9hzc-7brMw",
+      "title": "S7E5 Part 1 | ДОМИНУС | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=D9hzc-7brMw",
+      "start": 3994,
+      "text": "стали несколько ловчим в общем пока ты носишь эти перчатки ты получаешь бонус плюс 5 проверкам ловкости ловкость рук и проверкам ловкости совершенно для открывания замков я это понял на контакт да да прочитал где перк да он снимает и кладет они когда появляется мне кажется эта вещичка для фольги не для меня а я рассказываю что мне пришло в голову хорошо ты одеваешь ты видишь я раньше за это не сливай убираем рюкзак ладно можно поверить спа не хотел очень и мере а то вдруг они провожу ритуал почему именно так бы поступил настоящие 2 ты проводишь ритуал с плащом ты проводишь ритуал с плащом и мы как я уже говорил и понимаю что что это вещь магическая вещь достаточно необычная и ты понимаешь что что этот плащ дает дополнительную защиту носящему его а также он помогает преодолевать некие другие трудности которые могут возникнуть в жизнь соответственно ты получаешь бонус плюс один кадр тот кто носит и мир сайдинг"
+    },
+    {
+      "id": "D9hzc-7brMw-chunk-044",
+      "videoId": "D9hzc-7brMw",
+      "title": "S7E5 Part 1 | ДОМИНУС | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=D9hzc-7brMw",
+      "start": 4092,
+      "text": "спас броском пока ты носишь этот плащ spoken неплохо не смоги взрывают сам уничтожаешь а ты надеваешь эти сапоги и начинаешь ходить и ты понимаешь что что твоя скорость в них несколько больше чем обычно пока ты носишь эти сапоги твоя скорость ходьбы становится равный 30 футов если она была ниже и твоя скорость не при не уменьшается когда ты перегружен или носишь тяжелый доспех кроме того ты можешь совершить прыжке в 3 раза дальше чем обычно но ты все равно не можешь прыгнуть дальше чем осталось у вас перемещенным да да ну я потом снимаю и сказывают во всем разбираться резная всех идеальный способ изучать просто на себя все давай я , но rss дело конечно понятно лена и количество и я кидаю с по гамме и возвращаюсь к такому нормально ты это делаешь сапоги на эти планы если на так смотрю на всё это ты там это не забудь вылить когда надо будет я убираю все эти вещи обратно в рюкзак"
+    },
+    {
+      "id": "D9hzc-7brMw-chunk-045",
+      "videoId": "D9hzc-7brMw",
+      "title": "S7E5 Part 1 | ДОМИНУС | Dungeons and Dragons",
+      "url": "https://www.youtube.com/watch?v=D9hzc-7brMw",
+      "start": 4192,
+      "text": "как и собственно да я иду к селению сторожите до сторожите я здесь уже он одержим готовим бутылку ты что делаешь ты сидишь и прогулка больше опираться итак друзья мы вывернем с вами после небольшого перерыва протяженностью 15 минут сегодня как и каждое воскресенье мы играем дженсен dragon's 5 редакции играем по авторскому миру земли был их легенд и я надеюсь что поступили у нас ждет пополнение отлично отлично оставайтесь с нами спасибо что смотрите нас"
+    }
+  ],
   "stats": {
-    "total": 0,
-    "withCaptions": 0,
-    "withoutCaptions": 0,
+    "total": 416,
+    "withCaptions": 1,
+    "withoutCaptions": 415,
     "failed": 0
   }
 }
