@@ -42,24 +42,79 @@ def fetch_text(url: str, timeout: int = 30) -> str:
 
 
 def parse_video_ids_from_playlist(html: str) -> list[str]:
-    ids = set(re.findall(r'"videoId":"([A-Za-z0-9_-]{11})"', html))
-    return list(ids)
+    ids = sorted(set(re.findall(r'"videoId":"([A-Za-z0-9_-]{11})"', html)))
+    return ids
 
 
-def parse_title(html: str) -> str | None:
-    m = re.search(r"<title>(.*?)</title>", html, flags=re.I | re.S)
-    if not m:
+def parse_title(html: str, video_id: str) -> str:
+    m = re.search(r'<meta\s+property="og:title"\s+content="([^"]+)"', html, flags=re.I)
+    if m:
+        return m.group(1).strip()
+    m2 = re.search(r"<title>(.*?)</title>", html, flags=re.I | re.S)
+    if m2:
+        t = re.sub(r"\s+", " ", m2.group(1)).strip()
+        t = re.sub(r"\s*-\s*YouTube$", "", t).strip()
+        if t and t != "- YouTube":
+            return t
+    return video_id
+
+
+def extract_player_response_json(html: str) -> dict | None:
+    pats = [
+        r"ytInitialPlayerResponse\s*=\s*(\{.+?\})\s*;",
+        r"var\s+ytInitialPlayerResponse\s*=\s*(\{.+?\})\s*;",
+    ]
+    for pat in pats:
+        m = re.search(pat, html, flags=re.S)
+        if m:
+            try:
+                return json.loads(m.group(1))
+            except Exception:
+                continue
+    return None
+
+
+def extract_caption_tracks(player_response: dict) -> list[dict]:
+    return (
+        player_response.get("captions", {})
+        .get("playerCaptionsTracklistRenderer", {})
+        .get("captionTracks", [])
+    )
+
+
+def pick_track(tracks: list[dict]) -> dict | None:
+    if not tracks:
         return None
-    t = re.sub(r"\s+", " ", m.group(1)).strip()
-    return re.sub(r" - YouTube$", "", t)
+    pref = ["ru", "en"]
+
+    def rank(t: dict):
+        lang = (t.get("languageCode") or "").lower()
+        kind = t.get("kind", "")
+        if lang == "ru":
+            base = 0
+        elif lang == "en":
+            base = 1
+        elif lang.startswith("ru"):
+            base = 2
+        elif lang.startswith("en"):
+            base = 3
+        else:
+            base = 4
+        auto_penalty = 0 if kind == "asr" else 1
+        return (base, auto_penalty, lang)
+
+    return sorted(tracks, key=rank)[0]
 
 
-def transcript_api_url(video_id: str, lang: str) -> str:
-    qs = urllib.parse.urlencode({"lang": lang, "v": video_id, "fmt": "srv3"})
-    return f"https://www.youtube.com/api/timedtext?{qs}"
+def transcript_rows_from_track(track: dict) -> tuple[str | None, list[tuple[int | None, str]]]:
+    base_url = track.get("baseUrl")
+    if not base_url:
+        return None, []
+    lang = track.get("languageCode")
+    sep = "&" if "?" in base_url else "?"
+    url = f"{base_url}{sep}fmt=srv3"
+    xml = fetch_text(url)
 
-
-def parse_transcript_xml(xml: str) -> list[tuple[int | None, str]]:
     rows = []
     for start, text in re.findall(r'<text[^>]*start="([0-9.]+)"[^>]*>(.*?)</text>', xml, flags=re.S):
         clean = re.sub(r"<[^>]+>", "", text)
@@ -68,7 +123,7 @@ def parse_transcript_xml(xml: str) -> list[tuple[int | None, str]]:
         clean = re.sub(r"\s+", " ", clean).strip()
         if clean:
             rows.append((int(float(start)), clean))
-    return rows
+    return lang, rows
 
 
 def chunk_rows(video: dict, rows: list[tuple[int | None, str]]) -> list[dict]:
@@ -107,22 +162,26 @@ def chunk_rows(video: dict, rows: list[tuple[int | None, str]]) -> list[dict]:
     return out
 
 
-def fetch_video_meta(video_id: str) -> dict:
+def fetch_video_bundle(video_id: str) -> tuple[dict, list[tuple[int | None, str]]]:
     url = f"https://www.youtube.com/watch?v={video_id}"
     html = fetch_text(url)
-    title = parse_title(html) or video_id
+    title = parse_title(html, video_id)
     dur_match = re.search(r'"lengthSeconds":"(\d+)"', html)
     duration = int(dur_match.group(1)) if dur_match else None
-    return {"videoId": video_id, "title": title, "url": url, "duration": duration, "language": None}
 
+    video = {"videoId": video_id, "title": title, "url": url, "duration": duration, "language": None}
+    player = extract_player_response_json(html)
+    if not player:
+        return video, []
 
-def fetch_best_transcript(video_id: str) -> tuple[str | None, list[tuple[int | None, str]]]:
-    for lang in ["ru", "en"]:
-        xml = fetch_text(transcript_api_url(video_id, lang))
-        rows = parse_transcript_xml(xml)
-        if rows:
-            return lang, rows
-    return None, []
+    tracks = extract_caption_tracks(player)
+    track = pick_track(tracks)
+    if not track:
+        return video, []
+
+    lang, rows = transcript_rows_from_track(track)
+    video["language"] = lang
+    return video, rows
 
 
 def main() -> int:
@@ -131,20 +190,13 @@ def main() -> int:
         playlist_html = fetch_text(PLAYLIST_URL)
         video_ids = parse_video_ids_from_playlist(playlist_html)
         if not video_ids:
-            existing = load_existing()
-            if existing and existing.get("chunks"):
-                existing["updatedAt"] = now_iso()
-                OUT_PATH.write_text(json.dumps(existing, ensure_ascii=False, indent=2), encoding="utf-8")
-                return 0
             data["error"] = "index_unavailable"
             OUT_PATH.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
             return 1
 
         for vid in video_ids:
             try:
-                video = fetch_video_meta(vid)
-                lang, rows = fetch_best_transcript(vid)
-                video["language"] = lang
+                video, rows = fetch_video_bundle(vid)
                 data["videos"].append(video)
                 if rows:
                     data["chunks"].extend(chunk_rows(video, rows))
