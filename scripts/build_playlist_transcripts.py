@@ -242,7 +242,106 @@ def main() -> None:
     write_payload(payload)
 
 
-if __name__ == "__main__":
+def now_iso() -> str:
+    return datetime.now(timezone.utc).isoformat()
+
+
+def payload(error=None):
+    return {"playlistUrl": PLAYLIST_URL, "updatedAt": now_iso(), "error": error, "videos": [], "chunks": []}
+
+
+def fetch_text(url: str, timeout: int = 30) -> str:
+    req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+    with urllib.request.urlopen(req, timeout=timeout) as r:
+        return r.read().decode("utf-8", errors="ignore")
+
+
+def parse_video_ids_from_playlist(html: str) -> list[str]:
+    ids = set(re.findall(r'"videoId":"([A-Za-z0-9_-]{11})"', html))
+    return list(ids)
+
+
+def parse_title(html: str) -> str | None:
+    m = re.search(r"<title>(.*?)</title>", html, flags=re.I | re.S)
+    if not m:
+        return None
+    t = re.sub(r"\s+", " ", m.group(1)).strip()
+    return re.sub(r" - YouTube$", "", t)
+
+
+def transcript_api_url(video_id: str, lang: str) -> str:
+    qs = urllib.parse.urlencode({"lang": lang, "v": video_id, "fmt": "srv3"})
+    return f"https://www.youtube.com/api/timedtext?{qs}"
+
+
+def parse_transcript_xml(xml: str) -> list[tuple[int | None, str]]:
+    rows = []
+    for start, text in re.findall(r'<text[^>]*start="([0-9.]+)"[^>]*>(.*?)</text>', xml, flags=re.S):
+        clean = re.sub(r"<[^>]+>", "", text)
+        clean = clean.replace("&amp;", "&").replace("&quot;", '"').replace("&#39;", "'")
+        clean = clean.replace("&lt;", "<").replace("&gt;", ">")
+        clean = re.sub(r"\s+", " ", clean).strip()
+        if clean:
+            rows.append((int(float(start)), clean))
+    return rows
+
+
+def chunk_rows(video: dict, rows: list[tuple[int | None, str]]) -> list[dict]:
+    out, bucket = [], []
+    start = None
+    idx = 1
+    seen = set()
+
+    def flush():
+        nonlocal bucket, start, idx
+        if not bucket:
+            return
+        txt = re.sub(r"\s+", " ", " ".join(bucket)).strip()
+        if txt and txt not in seen:
+            seen.add(txt)
+            out.append({
+                "id": f"{video['videoId']}-chunk-{idx:03d}",
+                "videoId": video["videoId"],
+                "title": video["title"],
+                "url": video["url"],
+                "start": start,
+                "text": txt,
+            })
+            idx += 1
+        bucket = []
+        start = None
+
+    for s, line in rows:
+        words = line.split()
+        if start is None:
+            start = s
+        bucket.extend(words)
+        if len(bucket) >= MAX_WORDS:
+            flush()
+    flush()
+    return out
+
+
+def fetch_video_meta(video_id: str) -> dict:
+    url = f"https://www.youtube.com/watch?v={video_id}"
+    html = fetch_text(url)
+    title = parse_title(html) or video_id
+    dur_match = re.search(r'"lengthSeconds":"(\d+)"', html)
+    duration = int(dur_match.group(1)) if dur_match else None
+    return {"videoId": video_id, "title": title, "url": url, "duration": duration, "language": None}
+
+
+def fetch_best_transcript(video_id: str) -> tuple[str | None, list[tuple[int | None, str]]]:
+    for lang in ["ru", "en"]:
+        xml = fetch_text(transcript_api_url(video_id, lang))
+        rows = parse_transcript_xml(xml)
+        if rows:
+            return lang, rows
+    return None, []
+
+
+def main() -> int:
+    data = payload()
     try:
         main()
     except Exception as exc:  # keep JSON valid in all cases
