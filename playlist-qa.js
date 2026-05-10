@@ -60,7 +60,7 @@
   fetch('./playlist-transcripts.json').then((r) => { if (!r.ok) throw new Error(`HTTP ${r.status}`); return r.json(); }).then((payload) => {
     if (!payload || !Array.isArray(payload.videos) || !Array.isArray(payload.chunks)) throw new Error('Некорректная структура playlist-transcripts.json');
     idx = payload;
-    if (payload.error) setStatus('error', `Ошибка индекса: ${payload.error}`);
+    if (payload.error) setStatus('error', 'Индекс временно недоступен. Попробуйте позже.');
     else if (!payload.chunks.length) setStatus('empty', 'Индекс пуст: субтитры ещё не собраны или недоступны.');
     else setStatus('ok', `Индекс готов: видео ${payload.videos.length}, чанков ${payload.chunks.length}, обновлён ${payload.updatedAt ?? 'неизвестно'}.`);
     el.ask.disabled = false;
