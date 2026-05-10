@@ -1,7 +1,7 @@
 {
   "playlistUrl": "https://www.youtube.com/playlist?list=PLQ0wmPbdvhzJl6lFMAVzbneqAPtBvCrsg",
-  "updatedAt": "2026-05-10T21:09:07.514585+00:00",
-  "error": "yt-dlp не найден в окружении",
+  "updatedAt": "2026-05-10T21:20:00.558809+00:00",
+  "error": "Сбой сборки индекса: <urlopen error Tunnel connection failed: 403 Forbidden>",
   "videos": [],
   "chunks": []
 }
