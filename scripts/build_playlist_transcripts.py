@@ -121,6 +121,24 @@ def normalize_text(text: str) -> str:
     text = re.sub(r"\s+", " ", text).strip()
     return text
 
+def parse_vtt_chunks(vtt_text, max_words=150):
+    entries = []
+    current_start = None
+    current_text = []
+    for line in vtt_text.splitlines():
+        s = line.strip()
+        if "-->" in s:
+            if current_text:
+                entries.append((current_start, " ".join(current_text)))
+                current_text = []
+            current_start = _start_seconds(s)
+            continue
+        if s and s not in {"WEBVTT"} and not s.startswith(("NOTE", "STYLE", "Kind:", "Language:")):
+            clean = re.sub(r"<[^>]+>", "", s).strip()
+            if clean:
+                current_text.append(clean)
+    if current_text:
+        entries.append((current_start, " ".join(current_text)))
 
 def chunk_blocks(video: VideoMeta, blocks: list[tuple[int | None, str]]) -> list[dict]:
     chunks: list[dict] = []
