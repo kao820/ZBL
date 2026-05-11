@@ -7,6 +7,7 @@ import subprocess
 import sys
 import os
 import tempfile
+import time
 import urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
@@ -16,19 +17,27 @@ try:
 except Exception:
     YouTubeTranscriptApi = None
 
+try:
+    from openai import OpenAI
+except Exception:
+    OpenAI = None
+
 PLAYLIST_URL = "https://www.youtube.com/playlist?list=PLQ0wmPbdvhzJl6lFMAVzbneqAPtBvCrsg"
 OUT_PATH = Path("playlist-transcripts.json")
 MAX_WORDS = 120
 SCRIPT_REV = "2026-05-11-fix-nonlocal-v2"
 
+def now_iso() -> str:
+    return datetime.now(timezone.utc).isoformat()
 
 def now_iso() -> str:
     return datetime.now(timezone.utc).isoformat()
 
-
 def run(cmd: list[str]) -> subprocess.CompletedProcess[str]:
     return subprocess.run(cmd, text=True, capture_output=True)
 
+def run(cmd: list[str]) -> subprocess.CompletedProcess[str]:
+    return subprocess.run(cmd, text=True, capture_output=True)
 
 def ytdlp_base_args() -> list[str]:
     args = ["yt-dlp"]
@@ -37,6 +46,12 @@ def ytdlp_base_args() -> list[str]:
         args += ["--cookies", cookies_file]
     return args
 
+def ytdlp_base_args() -> list[str]:
+    args = ["yt-dlp"]
+    cookies_file = os.getenv("YTDLP_COOKIES_FILE", "").strip()
+    if cookies_file:
+        args += ["--cookies", cookies_file]
+    return args
 
 def load_existing() -> dict:
     if not OUT_PATH.exists():
@@ -55,6 +70,16 @@ def load_existing() -> dict:
         return data if isinstance(data, dict) else {}
     except Exception:
         return {}
+
+def load_existing() -> dict:
+    if not OUT_PATH.exists():
+        return {}
+    try:
+        data = json.loads(OUT_PATH.read_text(encoding="utf-8"))
+        return data if isinstance(data, dict) else {}
+    except Exception:
+        return {}
+
 
 def list_playlist_videos() -> list[dict]:
     p = run(ytdlp_base_args() + ["--flat-playlist", "--dump-single-json", PLAYLIST_URL])
@@ -225,6 +250,36 @@ def fallback_rows_from_yta(video: dict) -> tuple[str | None, list[tuple[int | No
     lang = transcript[0].get("language_code") if transcript else None
     return lang, rows
 
+
+
+def fallback_rows_from_openai(video: dict) -> tuple[str | None, list[tuple[int | None, str]]]:
+    if OpenAI is None or not os.getenv("OPENAI_API_KEY"):
+        return None, []
+    vid = video.get("videoId")
+    if not vid:
+        return None, []
+    with tempfile.TemporaryDirectory() as td:
+        audio = Path(td) / f"{vid}.m4a"
+        cmd = ytdlp_base_args() + ["-f", "bestaudio[ext=m4a]/bestaudio", "--no-playlist", "-o", str(audio), video["url"]]
+        p = run(cmd)
+        if p.returncode != 0 or not audio.exists():
+            return None, []
+        client = OpenAI()
+        with audio.open("rb") as fh:
+            tr = client.audio.transcriptions.create(model="gpt-4o-mini-transcribe", file=fh, response_format="verbose_json")
+        segs = getattr(tr, "segments", None) or []
+        rows = []
+        if segs:
+            for seg in segs:
+                txt = re.sub(r"\s+", " ", (seg.text or "").strip())
+                if txt:
+                    rows.append((int(seg.start or 0), txt))
+        else:
+            txt = re.sub(r"\s+", " ", (getattr(tr, "text", "") or "").strip())
+            if txt:
+                rows.append((0, txt))
+        return "auto-openai", rows
+
 def extract_video_chunks(video: dict) -> list[dict]:
     vid = video["videoId"]
     with tempfile.TemporaryDirectory() as td:
@@ -243,7 +298,12 @@ def extract_video_chunks(video: dict) -> list[dict]:
             ylang, yrows = fallback_rows_from_yta(video)
             if ylang:
                 video["language"] = ylang
-            return chunk_rows(video, yrows) if yrows else []
+            if yrows:
+                return chunk_rows(video, yrows)
+            olang, orows = fallback_rows_from_openai(video)
+            if olang:
+                video["language"] = olang
+            return chunk_rows(video, orows) if orows else []
         files = sorted(Path(td).glob(f"{vid}*.vtt"))
         if not files:
             lang, rows = fallback_rows_from_metadata(video)
@@ -254,7 +314,12 @@ def extract_video_chunks(video: dict) -> list[dict]:
             ylang, yrows = fallback_rows_from_yta(video)
             if ylang:
                 video["language"] = ylang
-            return chunk_rows(video, yrows) if yrows else []
+            if yrows:
+                return chunk_rows(video, yrows)
+            olang, orows = fallback_rows_from_openai(video)
+            if olang:
+                video["language"] = olang
+            return chunk_rows(video, orows) if orows else []
         chosen = files[0]
         if len(chosen.suffixes) >= 2:
             video["language"] = chosen.suffixes[-2].lstrip(".")
@@ -264,7 +329,12 @@ def extract_video_chunks(video: dict) -> list[dict]:
         ylang, yrows = fallback_rows_from_yta(video)
         if ylang:
             video["language"] = ylang
-        return chunk_rows(video, yrows) if yrows else []
+        if yrows:
+            return chunk_rows(video, yrows)
+        olang, orows = fallback_rows_from_openai(video)
+        if olang:
+            video["language"] = olang
+        return chunk_rows(video, orows) if orows else []
 
 
 
@@ -286,6 +356,16 @@ def dedupe_chunks(chunks: list[dict]) -> list[dict]:
     out.sort(key=lambda x: (x.get("videoId") or "", x.get("start") or 0, x.get("id") or ""))
     return out
 
+def extract_with_retries(video: dict, attempts: int = 3) -> list[dict]:
+    for i in range(attempts):
+        chunks = extract_video_chunks(video)
+        if chunks:
+            return chunks
+        if i < attempts - 1:
+            time.sleep(1 + i)
+    return []
+
+
 def build() -> dict:
     existing = load_existing()
     existing_chunks = existing.get("chunks") if isinstance(existing.get("chunks"), list) else []
@@ -297,6 +377,8 @@ def build() -> dict:
     chunks = []
     stats = {"total": len(videos), "withCaptions": 0, "withoutCaptions": 0, "failed": 0, "reused": 0, "downloaded": 0}
 
+    missing_videos = []
+
     for video in videos:
         vid = video["videoId"]
         reused = by_video.get(vid)
@@ -306,17 +388,22 @@ def build() -> dict:
             stats["reused"] += 1
             continue
         try:
-            new_chunks = extract_video_chunks(video)
+            new_chunks = extract_with_retries(video, attempts=3)
             if new_chunks:
                 chunks.extend(new_chunks)
                 stats["withCaptions"] += 1
                 stats["downloaded"] += 1
             else:
                 stats["withoutCaptions"] += 1
+                missing_videos.append(video["videoId"])
         except Exception:
             stats["failed"] += 1
+            missing_videos.append(video["videoId"])
 
     chunks = dedupe_chunks(chunks)
+    if not chunks and existing_chunks:
+        chunks = dedupe_chunks(existing_chunks)
+        stats["reused"] = max(stats.get("reused", 0), len({c.get("videoId") for c in chunks if c.get("videoId")}))
 
     return {
         "scriptRev": SCRIPT_REV,
@@ -326,6 +413,7 @@ def build() -> dict:
         "videos": videos,
         "chunks": chunks,
         "stats": stats,
+        "missingVideos": sorted(set(missing_videos)),
     }
 
 
@@ -335,6 +423,12 @@ def main() -> int:
         OUT_PATH.write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8")
         return 0
     except Exception:
+        existing = load_existing()
+        if isinstance(existing.get("chunks"), list) and existing.get("chunks"):
+            existing["updatedAt"] = now_iso()
+            existing["error"] = None
+            OUT_PATH.write_text(json.dumps(existing, ensure_ascii=False, indent=2), encoding="utf-8")
+            return 0
         OUT_PATH.write_text(json.dumps({"playlistUrl": PLAYLIST_URL, "updatedAt": now_iso(), "error": "index_unavailable", "videos": [], "chunks": [], "stats": {"total": 0, "withCaptions": 0, "withoutCaptions": 0, "failed": 0, "reused": 0, "downloaded": 0}}, ensure_ascii=False, indent=2), encoding="utf-8")
         return 1
 

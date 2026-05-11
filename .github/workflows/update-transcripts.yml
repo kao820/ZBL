@@ -16,7 +16,7 @@ jobs:
         with:
           python-version: '3.11'
       - name: Install yt-dlp
-        run: python -m pip install --upgrade pip yt-dlp youtube-transcript-api
+        run: python -m pip install --upgrade pip yt-dlp youtube-transcript-api openai
       - name: Debug revision
         run: |
           echo "GITHUB_SHA=$GITHUB_SHA"
