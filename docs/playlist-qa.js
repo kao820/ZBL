@@ -39,6 +39,7 @@
 
   function buildShortAnswer(results, qTokens) {
     if (!results.length) return 'По текущему индексу не найдено достаточно данных для ответа. Уточните вопрос.';
+<<<<<<< codex/check-repository-access-i175wd
     const askDuration = qTokens.some((t) => ['долго', 'сколько', 'время', 'минут', 'час'].includes(t));
     if (askDuration) {
       for (const r of results.slice(0, 5)) {
@@ -50,6 +51,15 @@
     const cleaned = best.replace(/\s+/g, ' ').trim();
     const sentence = cleaned.split(/[.!?]/)[0] || cleaned;
     return `Короткий ответ: ${sentence}.`;
+=======
+    const parts = [];
+    for (const r of results.slice(0, 5)) {
+      const sn = snippet(r.text, qTokens, 220);
+      if (sn) parts.push(sn);
+      if (parts.length >= 3) break;
+    }
+    return `По найденным фрагментам: ${parts.join(' ')}.`;
+>>>>>>> main
   }
 
   function renderResults(results, qTokens) {
