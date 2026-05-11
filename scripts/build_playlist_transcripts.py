@@ -168,6 +168,34 @@ def main() -> int:
         OUT_PATH.write_text(json.dumps({"playlistUrl": PLAYLIST_URL, "updatedAt": now_iso(), "error": "index_unavailable", "videos": [], "chunks": [], "stats": {"total": 0, "withCaptions": 0, "withoutCaptions": 0, "failed": 0, "reused": 0, "downloaded": 0}}, ensure_ascii=False, indent=2), encoding="utf-8")
         return 1
 
+def extract_video_chunks(video: dict) -> list[dict]:
+    vid = video["videoId"]
+    with tempfile.TemporaryDirectory() as td:
+        out_tpl = str(Path(td) / "%(id)s.%(ext)s")
+        cmd = [
+            "yt-dlp",
+            "--skip-download",
+            "--write-auto-subs",
+            "--write-subs",
+            "--sub-langs",
+            "ru,en,ru.*,en.*,.*",
+            "--sub-format",
+            "vtt",
+            "-o",
+            out_tpl,
+            video["url"],
+        ]
+        p = run(cmd)
+        if p.returncode != 0:
+            return []
+        files = sorted(Path(td).glob(f"{vid}*.vtt"))
+        if not files:
+            return []
+        chosen = files[0]
+        if len(chosen.suffixes) >= 2:
+            video["language"] = chosen.suffixes[-2].lstrip(".")
+        text = chosen.read_text(encoding="utf-8", errors="ignore")
+        return chunk_rows(video, parse_vtt_rows(text))
 
 if __name__ == "__main__":
     sys.exit(main())
