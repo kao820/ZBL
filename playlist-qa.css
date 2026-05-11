@@ -1,0 +1,9 @@
+body{margin:0;font-family:Arial,sans-serif;background:#f6f7fb;color:#1f2937}
+.app{max-width:900px;margin:2rem auto;padding:0 1rem}
+.card{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:1rem;margin:1rem 0}
+textarea{width:100%;min-height:100px;padding:.75rem;border-radius:8px;border:1px solid #cbd5e1;margin:.5rem 0 .75rem}
+button{background:#2563eb;color:#fff;border:none;border-radius:8px;padding:.65rem 1.2rem;font-weight:600;cursor:pointer}
+button:disabled{background:#94a3b8;cursor:not-allowed}
+#qa-answer,#qa-fragments{white-space:pre-wrap;line-height:1.5}
+.status-loading{border-left:5px solid #3b82f6}.status-empty{border-left:5px solid #f59e0b}.status-ok{border-left:5px solid #10b981}.status-error{border-left:5px solid #ef4444;background:#fef2f2}
+@media (max-width:640px){.app{margin:1rem auto}}
