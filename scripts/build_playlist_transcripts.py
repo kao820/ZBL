@@ -6,6 +6,7 @@ import re
 import subprocess
 import sys
 import tempfile
+import urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -98,6 +99,65 @@ def chunk_rows(video: dict, rows: list[tuple[int | None, str]]) -> list[dict]:
 
 
 
+
+
+def fetch_text(url: str) -> str:
+    req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+    with urllib.request.urlopen(req, timeout=30) as r:
+        return r.read().decode("utf-8", errors="ignore")
+
+
+def rows_from_json3(payload: str) -> list[tuple[int | None, str]]:
+    try:
+        data = json.loads(payload)
+    except Exception:
+        return []
+    rows = []
+    for e in data.get("events", []):
+        segs = e.get("segs") or []
+        text = "".join(seg.get("utf8", "") for seg in segs).strip()
+        if not text:
+            continue
+        start = int((e.get("tStartMs") or 0) / 1000)
+        clean = re.sub(r"\s+", " ", text).strip()
+        if clean:
+            rows.append((start, clean))
+    return rows
+
+
+def fallback_rows_from_metadata(video: dict) -> tuple[str | None, list[tuple[int | None, str]]]:
+    p = run(["yt-dlp", "-J", video["url"]])
+    if p.returncode != 0:
+        return None, []
+    try:
+        meta = json.loads(p.stdout)
+    except Exception:
+        return None, []
+    caps = meta.get("automatic_captions") or meta.get("subtitles") or {}
+    langs = ["ru", "en"] + sorted(caps.keys())
+    seen = set()
+    for lang in langs:
+        if lang in seen:
+            continue
+        seen.add(lang)
+        tracks = caps.get(lang) or []
+        for t in tracks:
+            u = t.get("url")
+            ext = (t.get("ext") or "").lower()
+            if not u:
+                continue
+            try:
+                body = fetch_text(u)
+            except Exception:
+                continue
+            if ext == "json3" or body.strip().startswith('{'):
+                rows = rows_from_json3(body)
+            else:
+                rows = parse_vtt_rows(body)
+            if rows:
+                return lang, rows
+    return None, []
+
 def extract_video_chunks(video: dict) -> list[dict]:
     vid = video["videoId"]
     with tempfile.TemporaryDirectory() as td:
@@ -108,10 +168,16 @@ def extract_video_chunks(video: dict) -> list[dict]:
         ]
         p = run(cmd)
         if p.returncode != 0:
-            return []
+            lang, rows = fallback_rows_from_metadata(video)
+            if lang:
+                video["language"] = lang
+            return chunk_rows(video, rows) if rows else []
         files = sorted(Path(td).glob(f"{vid}*.vtt"))
         if not files:
-            return []
+            lang, rows = fallback_rows_from_metadata(video)
+            if lang:
+                video["language"] = lang
+            return chunk_rows(video, rows) if rows else []
         chosen = files[0]
         if len(chosen.suffixes) >= 2:
             video["language"] = chosen.suffixes[-2].lstrip(".")
@@ -168,34 +234,6 @@ def main() -> int:
         OUT_PATH.write_text(json.dumps({"playlistUrl": PLAYLIST_URL, "updatedAt": now_iso(), "error": "index_unavailable", "videos": [], "chunks": [], "stats": {"total": 0, "withCaptions": 0, "withoutCaptions": 0, "failed": 0, "reused": 0, "downloaded": 0}}, ensure_ascii=False, indent=2), encoding="utf-8")
         return 1
 
-def extract_video_chunks(video: dict) -> list[dict]:
-    vid = video["videoId"]
-    with tempfile.TemporaryDirectory() as td:
-        out_tpl = str(Path(td) / "%(id)s.%(ext)s")
-        cmd = [
-            "yt-dlp",
-            "--skip-download",
-            "--write-auto-subs",
-            "--write-subs",
-            "--sub-langs",
-            "ru,en,ru.*,en.*,.*",
-            "--sub-format",
-            "vtt",
-            "-o",
-            out_tpl,
-            video["url"],
-        ]
-        p = run(cmd)
-        if p.returncode != 0:
-            return []
-        files = sorted(Path(td).glob(f"{vid}*.vtt"))
-        if not files:
-            return []
-        chosen = files[0]
-        if len(chosen.suffixes) >= 2:
-            video["language"] = chosen.suffixes[-2].lstrip(".")
-        text = chosen.read_text(encoding="utf-8", errors="ignore")
-        return chunk_rows(video, parse_vtt_rows(text))
 
 if __name__ == "__main__":
     sys.exit(main())
