@@ -14,16 +14,27 @@
   function scoreChunk(chunk, qTokens) {
     const txt = norm(chunk.text), title = norm(chunk.title);
     let score = 0;
-    let matched = 0;
     for (const t of qTokens) {
-      if (txt.includes(t)) { score += 2; matched += 1; }
-      if (title.includes(t)) score += 4;
+      if (txt.includes(t)) score += 2;
+      if (title.includes(t)) score += 3;
     }
-    if (qTokens.length) score += matched / qTokens.length;
     return score;
   }
 
-  function snippet(text, qTokens, maxLen = 320) {
+  function rerankDiverse(ranked) {
+    const out = [];
+    const perVideo = new Map();
+    for (const r of ranked) {
+      const n = perVideo.get(r.videoId) || 0;
+      if (n >= 2) continue;
+      perVideo.set(r.videoId, n + 1);
+      out.push(r);
+      if (out.length >= 12) break;
+    }
+    return out;
+  }
+
+  function snippet(text, qTokens, maxLen = 260) {
     if (!text) return '';
     const low = text.toLowerCase();
     let pos = -1;
@@ -32,54 +43,32 @@
       if (pos >= 0) break;
     }
     if (pos < 0) return text.slice(0, maxLen).trim();
-    const start = Math.max(0, pos - 120);
-    const end = Math.min(text.length, pos + 200);
-    return text.slice(start, end).trim();
+    return text.slice(Math.max(0, pos - 90), Math.min(text.length, pos + 170)).trim();
   }
 
   function buildShortAnswer(results, qTokens) {
     if (!results.length) return 'По текущему индексу не найдено достаточно данных для ответа. Уточните вопрос.';
-<<<<<<< codex/check-repository-access-i175wd
-    const askDuration = qTokens.some((t) => ['долго', 'сколько', 'время', 'минут', 'час'].includes(t));
-    if (askDuration) {
-      for (const r of results.slice(0, 5)) {
-        const m = (r.text || '').match(/(\d+)\s*(минут|минута|мин|час|часа|часов|секунд|секунда|сек)/i);
-        if (m) return `Короткий ответ: примерно ${m[1]} ${m[2]}.`;
+    const askNumber = qTokens.some((t) => ['сколько', 'лет', 'возраст'].includes(t));
+    if (askNumber) {
+      for (const r of results.slice(0, 6)) {
+        const m = (r.text || '').match(/\b(\d{1,3})\b/);
+        if (m) return `Короткий ответ: ${m[1]}.`;
       }
     }
-    const best = snippet(results[0].text, qTokens, 260);
-    const cleaned = best.replace(/\s+/g, ' ').trim();
-    const sentence = cleaned.split(/[.!?]/)[0] || cleaned;
-    return `Короткий ответ: ${sentence}.`;
-=======
-    const parts = [];
-    for (const r of results.slice(0, 5)) {
-      const sn = snippet(r.text, qTokens, 220);
-      if (sn) parts.push(sn);
-      if (parts.length >= 3) break;
-    }
-    return `По найденным фрагментам: ${parts.join(' ')}.`;
->>>>>>> main
+    return `Короткий ответ: ${snippet(results[0].text, qTokens, 220).split(/[.!?]/)[0]}.`;
   }
 
   function renderResults(results, qTokens) {
     el.sources.innerHTML = '';
     el.answer.textContent = buildShortAnswer(results, qTokens);
+    if (!results.length) return void (el.fragments.textContent = 'Совпадений не найдено.');
 
-    if (!results.length) {
-      el.fragments.textContent = 'Совпадений не найдено.';
-      return;
-    }
+    el.fragments.textContent = results.slice(0, 6).map((r, i) => `${i + 1}) ${Number.isFinite(r.start) ? `[${r.start}s] ` : ''}${snippet(r.text, qTokens)}`).join('\n\n');
 
-    el.fragments.textContent = results.slice(0, 6).map((r, i) => {
-      const ts = Number.isFinite(r.start) ? `[${r.start}s] ` : '';
-      return `${i + 1}) ${ts}${snippet(r.text, qTokens, 260)}`;
-    }).join('\n\n');
-
-    const seenVideos = new Set();
-    for (const r of results.slice(0, 12)) {
-      if (seenVideos.has(r.videoId)) continue;
-      seenVideos.add(r.videoId);
+    const seen = new Set();
+    for (const r of results) {
+      if (seen.has(r.videoId)) continue;
+      seen.add(r.videoId);
       const li = document.createElement('li');
       const a = document.createElement('a');
       a.href = withTime(r.url, r.start);
@@ -88,33 +77,25 @@
       a.textContent = `${r.title}${Number.isFinite(r.start) ? ` (${r.start}s)` : ''}`;
       li.appendChild(a);
       el.sources.appendChild(li);
-      if (seenVideos.size >= 8) break;
+      if (seen.size >= 8) break;
     }
   }
 
   function askQuestion() {
     const query = el.query.value.trim();
-    if (!query) { el.answer.textContent = 'Введите вопрос.'; return; }
+    if (!query) return void (el.answer.textContent = 'Введите вопрос.');
     const qTokens = tokens(query);
-    const ranked = idx.chunks
-      .map((c) => ({ ...c, _score: scoreChunk(c, qTokens) }))
-      .filter((x) => x._score > 0)
-      .sort((a, b) => b._score - a._score)
-      .slice(0, 12);
-    renderResults(ranked, qTokens);
+    const ranked = idx.chunks.map((c) => ({ ...c, _score: scoreChunk(c, qTokens) })).filter((x) => x._score > 0).sort((a, b) => b._score - a._score);
+    renderResults(rerankDiverse(ranked), qTokens);
   }
 
   el.ask.addEventListener('click', askQuestion);
   el.query.addEventListener('keydown', (ev) => { if (ev.key === 'Enter' && !ev.shiftKey) { ev.preventDefault(); askQuestion(); } });
 
-  fetch('./playlist-transcripts.json')
-    .then((r) => { if (!r.ok) throw new Error(`HTTP ${r.status}`); return r.json(); })
-    .then((payload) => {
-      if (!payload || !Array.isArray(payload.videos) || !Array.isArray(payload.chunks)) throw new Error('Некорректная структура playlist-transcripts.json');
-      idx = payload;
-      if (payload.error) setStatus('error', 'Индекс временно недоступен. Попробуйте позже.');
-      else setStatus('ok', `Индекс готов: видео ${payload.videos.length}, чанков ${payload.chunks.length}, обновлён ${payload.updatedAt ?? 'неизвестно'}.`);
-      el.ask.disabled = false;
-    })
-    .catch((err) => { setStatus('error', `Ошибка загрузки индекса: ${err.message}`); el.answer.textContent = 'Невозможно ответить без индекса.'; });
+  fetch('./playlist-transcripts.json').then((r) => { if (!r.ok) throw new Error(`HTTP ${r.status}`); return r.json(); }).then((payload) => {
+    if (!payload || !Array.isArray(payload.videos) || !Array.isArray(payload.chunks)) throw new Error('Некорректная структура playlist-transcripts.json');
+    idx = payload;
+    setStatus(payload.error ? 'error' : 'ok', payload.error ? 'Индекс временно недоступен. Попробуйте позже.' : `Индекс готов: видео ${payload.videos.length}, чанков ${payload.chunks.length}, обновлён ${payload.updatedAt ?? 'неизвестно'}.`);
+    el.ask.disabled = false;
+  }).catch((err) => { setStatus('error', `Ошибка загрузки индекса: ${err.message}`); el.answer.textContent = 'Невозможно ответить без индекса.'; });
 })();
