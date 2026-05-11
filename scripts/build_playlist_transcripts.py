@@ -25,6 +25,7 @@ OUT_PATH = Path("playlist-transcripts.json")
 MAX_WORDS = 120
 SCRIPT_REV = "2026-05-11-stable-incremental-v1"
 NOISE_RE = re.compile(r"^\s*(\[[^\]]+\]|\([^\)]+\)|\{[^\}]+\})\s*$", re.I)
+TIMECODE_RE = re.compile(r"(?:^|\s)(?:\d{1,2}:)?\d{1,2}:\d{2}(?:[.,]\d{1,3})?(?:\s*-->\s*(?:\d{1,2}:)?\d{1,2}:\d{2}(?:[.,]\d{1,3})?)?(?:$|\s)")
 
 
 def now_iso() -> str:
@@ -63,10 +64,14 @@ def list_playlist_videos() -> list[dict]:
 
 def clean_caption_line(s: str) -> str:
     s = re.sub(r"<[^>]+>", "", s)
-    s = re.sub(r"\s+", " ", s).strip()
+    s = TIMECODE_RE.sub(" ", s)
+    s = re.sub(r"\b(captions?|subtitles?|transcript|автосубтитры|субтитры)\b", " ", s, flags=re.I)
+    s = re.sub(r"\s+", " ", s).strip(" -–—\t")
     if not s or NOISE_RE.match(s):
         return ""
-    if re.fullmatch(r"(смех|музыка|аплодисменты|laugh(ing)?|music|applause)", s, re.I):
+    if re.fullmatch(r"(смех|музыка|аплодисменты|laugh(ing)?|music|applause|foreign)", s, re.I):
+        return ""
+    if re.fullmatch(r"[\W_]+", s):
         return ""
     return s
 
@@ -196,16 +201,15 @@ def main() -> int:
             chunks_by_video.setdefault(vid, []).append(ch)
 
     videos = list_playlist_videos()
-    out_videos, out_chunks = [], []
     new_count = 0
+
+    # Start from existing index and update incrementally. This avoids losing old data on partial failures.
+    out_videos_map = dict(existing_by_video)
+    out_chunks_map = {vid: list(chunks) for vid, chunks in chunks_by_video.items()}
+
     for video in videos:
         vid = video["videoId"]
         old_v = existing_by_video.get(vid)
-        old_chunks = chunks_by_video.get(vid, [])
-        if old_v and old_chunks:
-            out_videos.append(old_v)
-            out_chunks.extend(old_chunks)
-            continue
 
         lang, rows = fetch_rows_from_metadata(video)
         source = "metadata"
@@ -215,19 +219,26 @@ def main() -> int:
         if not rows:
             lang, rows = fetch_rows_from_openai(video)
             source = "openai"
+
         if rows:
             video["language"] = lang
             video["transcriptSource"] = source
             ch = chunk_rows(video, rows)
             if ch:
-                out_videos.append(video)
-                out_chunks.extend(ch)
-                new_count += 1
+                out_videos_map[vid] = video
+                out_chunks_map[vid] = ch
+                if not old_v:
+                    new_count += 1
                 continue
 
-        if old_v and old_chunks:
-            out_videos.append(old_v)
-            out_chunks.extend(old_chunks)
+        # If refresh failed, keep previous data untouched.
+        if old_v:
+            out_videos_map.setdefault(vid, old_v)
+
+    # Keep output bounded to current playlist order while preserving old data for failed refreshes.
+    ordered_ids = [v["videoId"] for v in videos]
+    out_videos = [out_videos_map[vid] for vid in ordered_ids if vid in out_videos_map]
+    out_chunks = [ch for vid in ordered_ids for ch in out_chunks_map.get(vid, [])]
 
     payload = {
         "updatedAt": now_iso(),
