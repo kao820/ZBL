@@ -21,7 +21,8 @@ jobs:
         run: |
           echo "GITHUB_SHA=$GITHUB_SHA"
           git rev-parse HEAD
-          sed -n "1,40p" scripts/build_playlist_transcripts.py
+          sed -n "1,60p" scripts/build_playlist_transcripts.py
+          grep -n "SCRIPT_REV" scripts/build_playlist_transcripts.py
       - name: Validate script syntax
         run: python -m py_compile scripts/build_playlist_transcripts.py
       - name: Build transcript index

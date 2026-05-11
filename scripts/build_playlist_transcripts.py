@@ -14,6 +14,7 @@ from typing import Iterable
 PLAYLIST_URL = "https://www.youtube.com/playlist?list=PLQ0wmPbdvhzJl6lFMAVzbneqAPtBvCrsg"
 OUT_PATH = Path("playlist-transcripts.json")
 MAX_WORDS = 160
+SCRIPT_REV = "2026-05-11-fix-nonlocal-v2"
 
 
 def now_iso() -> str:
@@ -150,6 +151,7 @@ def build() -> dict:
             stats["failed"] += 1
 
     return {
+        "scriptRev": SCRIPT_REV,
         "playlistUrl": PLAYLIST_URL,
         "updatedAt": now_iso(),
         "error": None if chunks else "index_unavailable",
