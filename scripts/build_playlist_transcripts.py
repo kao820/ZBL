@@ -3,11 +3,13 @@ from __future__ import annotations
 
 import json
 import re
+import shutil
 import subprocess
 import sys
 import tempfile
 from datetime import datetime, timezone
 from pathlib import Path
+from typing import Iterable
 
 PLAYLIST_URL = "https://www.youtube.com/playlist?list=PLQ0wmPbdvhzJl6lFMAVzbneqAPtBvCrsg"
 OUT_PATH = Path("playlist-transcripts.json")
@@ -168,6 +170,16 @@ def main() -> int:
         OUT_PATH.write_text(json.dumps({"playlistUrl": PLAYLIST_URL, "updatedAt": now_iso(), "error": "index_unavailable", "videos": [], "chunks": [], "stats": {"total": 0, "withCaptions": 0, "withoutCaptions": 0, "failed": 0, "reused": 0, "downloaded": 0}}, ensure_ascii=False, indent=2), encoding="utf-8")
         return 1
 
+    def flush():
+        nonlocal buf, start, idx
+        if not buf:
+            return
+        txt = re.sub(r"\s+", " ", " ".join(buf)).strip()
+        if txt and txt not in seen:
+            seen.add(txt)
+            out.append({"id": f"{video['videoId']}-chunk-{idx:03d}", "videoId": video["videoId"], "title": video["title"], "url": video["url"], "start": start, "text": txt})
+            idx += 1
+        buf, start = [], None
 
 if __name__ == "__main__":
     sys.exit(main())
