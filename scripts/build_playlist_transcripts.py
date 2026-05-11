@@ -5,6 +5,7 @@ import json
 import re
 import subprocess
 import sys
+import os
 import tempfile
 import urllib.request
 from datetime import datetime, timezone
@@ -12,7 +13,7 @@ from pathlib import Path
 
 PLAYLIST_URL = "https://www.youtube.com/playlist?list=PLQ0wmPbdvhzJl6lFMAVzbneqAPtBvCrsg"
 OUT_PATH = Path("playlist-transcripts.json")
-MAX_WORDS = 160
+MAX_WORDS = 120
 SCRIPT_REV = "2026-05-11-fix-nonlocal-v2"
 
 
@@ -22,6 +23,14 @@ def now_iso() -> str:
 
 def run(cmd: list[str]) -> subprocess.CompletedProcess[str]:
     return subprocess.run(cmd, text=True, capture_output=True)
+
+
+def ytdlp_base_args() -> list[str]:
+    args = ["yt-dlp"]
+    cookies_file = os.getenv("YTDLP_COOKIES_FILE", "").strip()
+    if cookies_file:
+        args += ["--cookies", cookies_file]
+    return args
 
 
 def load_existing() -> dict:
@@ -35,7 +44,7 @@ def load_existing() -> dict:
 
 
 def list_playlist_videos() -> list[dict]:
-    p = run(["yt-dlp", "--flat-playlist", "--dump-single-json", PLAYLIST_URL])
+    p = run(ytdlp_base_args() + ["--flat-playlist", "--dump-single-json", PLAYLIST_URL])
     if p.returncode != 0:
         raise RuntimeError(p.stderr.strip() or "yt-dlp playlist fetch failed")
     data = json.loads(p.stdout)
@@ -126,7 +135,7 @@ def rows_from_json3(payload: str) -> list[tuple[int | None, str]]:
 
 
 def fallback_rows_from_metadata(video: dict) -> tuple[str | None, list[tuple[int | None, str]]]:
-    p = run(["yt-dlp", "-J", video["url"]])
+    p = run(ytdlp_base_args() + ["-J", video["url"]])
     if p.returncode != 0:
         return None, []
     try:
@@ -162,8 +171,8 @@ def extract_video_chunks(video: dict) -> list[dict]:
     vid = video["videoId"]
     with tempfile.TemporaryDirectory() as td:
         out_tpl = str(Path(td) / "%(id)s.%(ext)s")
-        cmd = [
-            "yt-dlp", "--skip-download", "--write-auto-subs", "--write-subs",
+        cmd = ytdlp_base_args() + [
+            "--skip-download", "--write-auto-subs", "--write-subs",
             "--sub-langs", "ru,en,ru.*,en.*,.*", "--sub-format", "vtt", "-o", out_tpl, video["url"],
         ]
         p = run(cmd)
@@ -183,6 +192,25 @@ def extract_video_chunks(video: dict) -> list[dict]:
             video["language"] = chosen.suffixes[-2].lstrip(".")
         return chunk_rows(video, parse_vtt_rows(chosen.read_text(encoding="utf-8", errors="ignore")))
 
+
+
+
+def dedupe_chunks(chunks: list[dict]) -> list[dict]:
+    by_id = {}
+    seen_text = set()
+    for c in chunks:
+        cid = c.get("id")
+        key = (c.get("videoId"), re.sub(r"\s+", " ", (c.get("text") or "").strip()))
+        if not c.get("text"):
+            continue
+        if key in seen_text:
+            continue
+        seen_text.add(key)
+        if cid not in by_id:
+            by_id[cid] = c
+    out = list(by_id.values())
+    out.sort(key=lambda x: (x.get("videoId") or "", x.get("start") or 0, x.get("id") or ""))
+    return out
 
 def build() -> dict:
     existing = load_existing()
@@ -213,6 +241,8 @@ def build() -> dict:
                 stats["withoutCaptions"] += 1
         except Exception:
             stats["failed"] += 1
+
+    chunks = dedupe_chunks(chunks)
 
     return {
         "scriptRev": SCRIPT_REV,
