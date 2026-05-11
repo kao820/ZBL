@@ -1,0 +1,15 @@
+{
+  "playlistUrl": "https://www.youtube.com/playlist?list=PLQ0wmPbdvhzJl6lFMAVzbneqAPtBvCrsg",
+  "updatedAt": "2026-05-11T12:21:05.467235+00:00",
+  "error": "index_unavailable",
+  "videos": [],
+  "chunks": [],
+  "stats": {
+    "total": 0,
+    "withCaptions": 0,
+    "withoutCaptions": 0,
+    "failed": 0,
+    "reused": 0,
+    "downloaded": 0
+  }
+}
