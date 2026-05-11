@@ -27,14 +27,24 @@ OUT_PATH = Path("playlist-transcripts.json")
 MAX_WORDS = 120
 SCRIPT_REV = "2026-05-11-fix-nonlocal-v2"
 
+def now_iso() -> str:
+    return datetime.now(timezone.utc).isoformat()
 
 def now_iso() -> str:
     return datetime.now(timezone.utc).isoformat()
 
+def run(cmd: list[str]) -> subprocess.CompletedProcess[str]:
+    return subprocess.run(cmd, text=True, capture_output=True)
 
 def run(cmd: list[str]) -> subprocess.CompletedProcess[str]:
     return subprocess.run(cmd, text=True, capture_output=True)
 
+def ytdlp_base_args() -> list[str]:
+    args = ["yt-dlp"]
+    cookies_file = os.getenv("YTDLP_COOKIES_FILE", "").strip()
+    if cookies_file:
+        args += ["--cookies", cookies_file]
+    return args
 
 def ytdlp_base_args() -> list[str]:
     args = ["yt-dlp"]
@@ -53,6 +63,14 @@ def load_existing() -> dict:
     except Exception:
         return {}
 
+def load_existing() -> dict:
+    if not OUT_PATH.exists():
+        return {}
+    try:
+        data = json.loads(OUT_PATH.read_text(encoding="utf-8"))
+        return data if isinstance(data, dict) else {}
+    except Exception:
+        return {}
 
 def list_playlist_videos() -> list[dict]:
     p = run(ytdlp_base_args() + ["--flat-playlist", "--dump-single-json", PLAYLIST_URL])
