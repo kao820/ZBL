@@ -20,19 +20,18 @@ def now_iso() -> str:
     return datetime.now(timezone.utc).isoformat()
 
 
-def base_payload() -> dict:
-    return {
-        "playlistUrl": PLAYLIST_URL,
-        "updatedAt": now_iso(),
-        "error": None,
-        "videos": [],
-        "chunks": [],
-        "stats": {"total": 0, "withCaptions": 0, "withoutCaptions": 0, "failed": 0},
-    }
-
-
 def run(cmd: list[str]) -> subprocess.CompletedProcess[str]:
     return subprocess.run(cmd, text=True, capture_output=True)
+
+
+def load_existing() -> dict:
+    if not OUT_PATH.exists():
+        return {}
+    try:
+        data = json.loads(OUT_PATH.read_text(encoding="utf-8"))
+        return data if isinstance(data, dict) else {}
+    except Exception:
+        return {}
 
 
 def list_playlist_videos() -> list[dict]:
@@ -41,25 +40,22 @@ def list_playlist_videos() -> list[dict]:
         raise RuntimeError(p.stderr.strip() or "yt-dlp playlist fetch failed")
     data = json.loads(p.stdout)
     entries = data.get("entries") or []
-    vids = []
-    for e in entries:
-        vid = e.get("id")
-        if not vid:
-            continue
-        vids.append({
-            "videoId": vid,
-            "title": e.get("title") or vid,
-            "url": f"https://www.youtube.com/watch?v={vid}",
+    return [
+        {
+            "videoId": e.get("id"),
+            "title": e.get("title") or e.get("id"),
+            "url": f"https://www.youtube.com/watch?v={e.get('id')}",
             "duration": e.get("duration"),
             "language": None,
-        })
-    return vids
+        }
+        for e in entries
+        if e.get("id")
+    ]
 
 
 def parse_vtt_rows(vtt: str) -> list[tuple[int | None, str]]:
-    rows = []
+    rows, seen = [], set()
     cur = None
-    seen_line = set()
     for line in vtt.splitlines():
         s = line.strip()
         if "-->" in s:
@@ -70,8 +66,8 @@ def parse_vtt_rows(vtt: str) -> list[tuple[int | None, str]]:
             continue
         clean = re.sub(r"<[^>]+>", "", s)
         clean = re.sub(r"\s+", " ", clean).strip()
-        if clean and clean not in seen_line:
-            seen_line.add(clean)
+        if clean and clean not in seen:
+            seen.add(clean)
             rows.append((cur, clean))
     return rows
 
@@ -101,22 +97,13 @@ def chunk_rows(video: dict, rows: list[tuple[int | None, str]]) -> list[dict]:
     return out
 
 
-def extract_video_captions(video: dict) -> list[dict]:
+def extract_video_chunks(video: dict) -> list[dict]:
     vid = video["videoId"]
     with tempfile.TemporaryDirectory() as td:
         out_tpl = str(Path(td) / "%(id)s.%(ext)s")
         cmd = [
-            "yt-dlp",
-            "--skip-download",
-            "--write-auto-subs",
-            "--write-subs",
-            "--sub-langs",
-            "ru,en,ru.*,en.*,.*",
-            "--sub-format",
-            "vtt",
-            "-o",
-            out_tpl,
-            video["url"],
+            "yt-dlp", "--skip-download", "--write-auto-subs", "--write-subs",
+            "--sub-langs", "ru,en,ru.*,en.*,.*", "--sub-format", "vtt", "-o", out_tpl, video["url"],
         ]
         p = run(cmd)
         if p.returncode != 0:
@@ -127,31 +114,47 @@ def extract_video_captions(video: dict) -> list[dict]:
         chosen = files[0]
         if len(chosen.suffixes) >= 2:
             video["language"] = chosen.suffixes[-2].lstrip(".")
-        vtt = chosen.read_text(encoding="utf-8", errors="ignore")
-        rows = parse_vtt_rows(vtt)
-        return chunk_rows(video, rows)
+        return chunk_rows(video, parse_vtt_rows(chosen.read_text(encoding="utf-8", errors="ignore")))
 
 
 def build() -> dict:
-    data = base_payload()
+    existing = load_existing()
+    existing_chunks = existing.get("chunks") if isinstance(existing.get("chunks"), list) else []
+    by_video = {}
+    for c in existing_chunks:
+        by_video.setdefault(c.get("videoId"), []).append(c)
+
     videos = list_playlist_videos()
-    data["stats"]["total"] = len(videos)
+    chunks = []
+    stats = {"total": len(videos), "withCaptions": 0, "withoutCaptions": 0, "failed": 0, "reused": 0, "downloaded": 0}
 
     for video in videos:
-        data["videos"].append(video)
+        vid = video["videoId"]
+        reused = by_video.get(vid)
+        if reused:
+            chunks.extend(reused)
+            stats["withCaptions"] += 1
+            stats["reused"] += 1
+            continue
         try:
-            chunks = extract_video_captions(video)
-            if chunks:
-                data["chunks"].extend(chunks)
-                data["stats"]["withCaptions"] += 1
+            new_chunks = extract_video_chunks(video)
+            if new_chunks:
+                chunks.extend(new_chunks)
+                stats["withCaptions"] += 1
+                stats["downloaded"] += 1
             else:
-                data["stats"]["withoutCaptions"] += 1
+                stats["withoutCaptions"] += 1
         except Exception:
-            data["stats"]["failed"] += 1
+            stats["failed"] += 1
 
-    if not data["chunks"]:
-        data["error"] = "index_unavailable"
-    return data
+    return {
+        "playlistUrl": PLAYLIST_URL,
+        "updatedAt": now_iso(),
+        "error": None if chunks else "index_unavailable",
+        "videos": videos,
+        "chunks": chunks,
+        "stats": stats,
+    }
 
 
 def main() -> int:
@@ -160,11 +163,19 @@ def main() -> int:
         OUT_PATH.write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8")
         return 0
     except Exception:
-        fail = base_payload()
-        fail["error"] = "index_unavailable"
-        OUT_PATH.write_text(json.dumps(fail, ensure_ascii=False, indent=2), encoding="utf-8")
+        OUT_PATH.write_text(json.dumps({"playlistUrl": PLAYLIST_URL, "updatedAt": now_iso(), "error": "index_unavailable", "videos": [], "chunks": [], "stats": {"total": 0, "withCaptions": 0, "withoutCaptions": 0, "failed": 0, "reused": 0, "downloaded": 0}}, ensure_ascii=False, indent=2), encoding="utf-8")
         return 1
 
+    def flush():
+        nonlocal buf, start, idx
+        if not buf:
+            return
+        txt = re.sub(r"\s+", " ", " ".join(buf)).strip()
+        if txt and txt not in seen:
+            seen.add(txt)
+            out.append({"id": f"{video['videoId']}-chunk-{idx:03d}", "videoId": video["videoId"], "title": video["title"], "url": video["url"], "start": start, "text": txt})
+            idx += 1
+        buf, start = [], None
 
 if __name__ == "__main__":
     sys.exit(main())
