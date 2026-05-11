@@ -73,28 +73,30 @@ def parse_vtt_rows(vtt: str) -> list[tuple[int | None, str]]:
 
 
 def chunk_rows(video: dict, rows: list[tuple[int | None, str]]) -> list[dict]:
-    out, buf, seen = [], [], set()
-    start, idx = None, 1
-
-    def flush():
-        nonlocal buf, start, idx
-        if not buf:
-            return
-        txt = re.sub(r"\s+", " ", " ".join(buf)).strip()
-        if txt and txt not in seen:
-            seen.add(txt)
-            out.append({"id": f"{video['videoId']}-chunk-{idx:03d}", "videoId": video["videoId"], "title": video["title"], "url": video["url"], "start": start, "text": txt})
-            idx += 1
-        buf, start = [], None
+    out, seen = [], set()
+    buf = []
+    start = None
+    idx = 1
 
     for s, line in rows:
         if start is None:
             start = s
         buf.extend(line.split())
         if len(buf) >= MAX_WORDS:
-            flush()
-    flush()
+            txt = re.sub(r"\s+", " ", " ".join(buf)).strip()
+            if txt and txt not in seen:
+                seen.add(txt)
+                out.append({"id": f"{video['videoId']}-chunk-{idx:03d}", "videoId": video["videoId"], "title": video["title"], "url": video["url"], "start": start, "text": txt})
+                idx += 1
+            buf = []
+            start = None
+
+    if buf:
+        txt = re.sub(r"\s+", " ", " ".join(buf)).strip()
+        if txt and txt not in seen:
+            out.append({"id": f"{video['videoId']}-chunk-{idx:03d}", "videoId": video["videoId"], "title": video["title"], "url": video["url"], "start": start, "text": txt})
     return out
+
 
 
 def extract_video_chunks(video: dict) -> list[dict]:
