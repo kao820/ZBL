@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ZBL Playlist QA</title>
+  <link rel="stylesheet" href="./playlist-qa.css" />
+  <script src="./playlist-qa.js" defer></script>
+</head>
+<body>
+  <main class="app">
+    <h1>ZBL Playlist QA</h1>
+    <p>Мини-NotebookLM для вопросов по YouTube-плейлисту.</p>
+    <p><a href="https://www.youtube.com/playlist?list=PLQ0wmPbdvhzJl6lFMAVzbneqAPtBvCrsg" target="_blank" rel="noopener noreferrer">Открыть исходный плейлист</a></p>
+    <section id="index-status" class="card status status-loading">Загрузка индекса...</section>
+    <section class="card">
+      <label for="qa-query">Ваш вопрос по содержанию плейлиста</label>
+      <textarea id="qa-query" placeholder="Например: Кто такой Карнелл?"></textarea>
+      <button id="qa-ask" type="button" disabled>Спросить</button>
+    </section>
+    <section class="card"><h2>Короткий ответ</h2><div id="qa-answer">Задайте вопрос после загрузки индекса.</div></section>
+    <section class="card"><h2>Найденные фрагменты</h2><div id="qa-fragments">Пока нет данных.</div></section>
+    <section class="card"><h2>Источники</h2><ul id="qa-sources"></ul></section>
+  </main>
+</body>
+</html>
