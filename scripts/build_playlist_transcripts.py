@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+import os
 import re
 import subprocess
 import sys
@@ -178,6 +179,7 @@ def fallback_rows_from_metadata(video: dict) -> tuple[str | None, list[tuple[int
                 return lang, rows
     return None, []
 
+        return "auto-openai", rows
 
 
 def fallback_rows_from_yta(video: dict) -> tuple[str | None, list[tuple[int | None, str]]]:
