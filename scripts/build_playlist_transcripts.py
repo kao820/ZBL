@@ -27,14 +27,17 @@ OUT_PATH = Path("playlist-transcripts.json")
 MAX_WORDS = 120
 SCRIPT_REV = "2026-05-11-fix-nonlocal-v2"
 
+def now_iso() -> str:
+    return datetime.now(timezone.utc).isoformat()
 
 def now_iso() -> str:
     return datetime.now(timezone.utc).isoformat()
 
-
 def run(cmd: list[str]) -> subprocess.CompletedProcess[str]:
     return subprocess.run(cmd, text=True, capture_output=True)
 
+def run(cmd: list[str]) -> subprocess.CompletedProcess[str]:
+    return subprocess.run(cmd, text=True, capture_output=True)
 
 def ytdlp_base_args() -> list[str]:
     args = ["yt-dlp"]
@@ -43,6 +46,30 @@ def ytdlp_base_args() -> list[str]:
         args += ["--cookies", cookies_file]
     return args
 
+def ytdlp_base_args() -> list[str]:
+    args = ["yt-dlp"]
+    cookies_file = os.getenv("YTDLP_COOKIES_FILE", "").strip()
+    if cookies_file:
+        args += ["--cookies", cookies_file]
+    return args
+
+def load_existing() -> dict:
+    if not OUT_PATH.exists():
+        return {}
+    try:
+        data = json.loads(OUT_PATH.read_text(encoding="utf-8"))
+        return data if isinstance(data, dict) else {}
+    except Exception:
+        return {}
+
+def load_existing() -> dict:
+    if not OUT_PATH.exists():
+        return {}
+    try:
+        data = json.loads(OUT_PATH.read_text(encoding="utf-8"))
+        return data if isinstance(data, dict) else {}
+    except Exception:
+        return {}
 
 def load_existing() -> dict:
     if not OUT_PATH.exists():
@@ -178,6 +205,30 @@ def fallback_rows_from_metadata(video: dict) -> tuple[str | None, list[tuple[int
                 return lang, rows
     return None, []
 
+def extract_video_chunks(video: dict) -> list[dict]:
+    vid = video["videoId"]
+    with tempfile.TemporaryDirectory() as td:
+        out_tpl = str(Path(td) / "%(id)s.%(ext)s")
+        cmd = ytdlp_base_args() + [
+            "--skip-download", "--write-auto-subs", "--write-subs",
+            "--sub-langs", "ru,en,ru.*,en.*,.*", "--sub-format", "vtt", "-o", out_tpl, video["url"],
+        ]
+        p = run(cmd)
+        if p.returncode != 0:
+            lang, rows = fallback_rows_from_metadata(video)
+            if lang:
+                video["language"] = lang
+            return chunk_rows(video, rows) if rows else []
+        files = sorted(Path(td).glob(f"{vid}*.vtt"))
+        if not files:
+            lang, rows = fallback_rows_from_metadata(video)
+            if lang:
+                video["language"] = lang
+            return chunk_rows(video, rows) if rows else []
+        chosen = files[0]
+        if len(chosen.suffixes) >= 2:
+            video["language"] = chosen.suffixes[-2].lstrip(".")
+        return chunk_rows(video, parse_vtt_rows(chosen.read_text(encoding="utf-8", errors="ignore")))
 
 
 def fallback_rows_from_yta(video: dict) -> tuple[str | None, list[tuple[int | None, str]]]:
