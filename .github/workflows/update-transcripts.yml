@@ -46,10 +46,7 @@ jobs:
       - name: Build transcript index
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-<<<<<<< codex/check-repository-access-i175wd
           REQUIRE_FULL_COVERAGE: "1"
-=======
->>>>>>> main
         run: python scripts/build_playlist_transcripts.py
       - name: Validate index growth
         run: |
@@ -65,22 +62,14 @@ jobs:
           print(f"OK: withCaptions {old['with']} -> {nw}, chunks {old['chunks']} -> {nc}")
           PY
       - name: Sync docs index
-<<<<<<< codex/check-repository-access-i175wd
         run: |
           cp -f playlist-transcripts.json docs/playlist-transcripts.json
           cp -f missing-videos.json docs/missing-videos.json
-=======
-        run: cp -f playlist-transcripts.json docs/playlist-transcripts.json
->>>>>>> main
       - name: Commit updated index
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-<<<<<<< codex/check-repository-access-i175wd
           git add playlist-transcripts.json missing-videos.json docs/playlist-transcripts.json docs/missing-videos.json
-=======
-          git add playlist-transcripts.json docs/playlist-transcripts.json
->>>>>>> main
           if git diff --cached --quiet; then
             echo "No changes"
             exit 0
