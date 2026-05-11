@@ -53,14 +53,6 @@ def ytdlp_base_args() -> list[str]:
         args += ["--cookies", cookies_file]
     return args
 
-def load_existing() -> dict:
-    if not OUT_PATH.exists():
-        return {}
-    try:
-        data = json.loads(OUT_PATH.read_text(encoding="utf-8"))
-        return data if isinstance(data, dict) else {}
-    except Exception:
-        return {}
 
 def load_existing() -> dict:
     if not OUT_PATH.exists():
@@ -79,7 +71,6 @@ def load_existing() -> dict:
         return data if isinstance(data, dict) else {}
     except Exception:
         return {}
-
 
 def list_playlist_videos() -> list[dict]:
     p = run(ytdlp_base_args() + ["--flat-playlist", "--dump-single-json", PLAYLIST_URL])
@@ -205,30 +196,6 @@ def fallback_rows_from_metadata(video: dict) -> tuple[str | None, list[tuple[int
                 return lang, rows
     return None, []
 
-def extract_video_chunks(video: dict) -> list[dict]:
-    vid = video["videoId"]
-    with tempfile.TemporaryDirectory() as td:
-        out_tpl = str(Path(td) / "%(id)s.%(ext)s")
-        cmd = ytdlp_base_args() + [
-            "--skip-download", "--write-auto-subs", "--write-subs",
-            "--sub-langs", "ru,en,ru.*,en.*,.*", "--sub-format", "vtt", "-o", out_tpl, video["url"],
-        ]
-        p = run(cmd)
-        if p.returncode != 0:
-            lang, rows = fallback_rows_from_metadata(video)
-            if lang:
-                video["language"] = lang
-            return chunk_rows(video, rows) if rows else []
-        files = sorted(Path(td).glob(f"{vid}*.vtt"))
-        if not files:
-            lang, rows = fallback_rows_from_metadata(video)
-            if lang:
-                video["language"] = lang
-            return chunk_rows(video, rows) if rows else []
-        chosen = files[0]
-        if len(chosen.suffixes) >= 2:
-            video["language"] = chosen.suffixes[-2].lstrip(".")
-        return chunk_rows(video, parse_vtt_rows(chosen.read_text(encoding="utf-8", errors="ignore")))
 
 
 def fallback_rows_from_yta(video: dict) -> tuple[str | None, list[tuple[int | None, str]]]:
@@ -374,7 +341,7 @@ def build() -> dict:
         by_video.setdefault(c.get("videoId"), []).append(c)
 
     videos = list_playlist_videos()
-    chunks = []
+    chunks = list(existing_chunks)
     stats = {"total": len(videos), "withCaptions": 0, "withoutCaptions": 0, "failed": 0, "reused": 0, "downloaded": 0}
 
     missing_videos = []
@@ -383,7 +350,6 @@ def build() -> dict:
         vid = video["videoId"]
         reused = by_video.get(vid)
         if reused:
-            chunks.extend(reused)
             stats["withCaptions"] += 1
             stats["reused"] += 1
             continue
