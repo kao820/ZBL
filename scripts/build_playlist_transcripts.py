@@ -7,6 +7,7 @@ import re
 import subprocess
 import tempfile
 import urllib.request
+import time
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -23,8 +24,14 @@ except Exception:
 PLAYLIST_URL = "https://www.youtube.com/playlist?list=PLQ0wmPbdvhzJl6lFMAVzbneqAPtBvCrsg"
 OUT_PATH = Path("playlist-transcripts.json")
 MAX_WORDS = 120
-SCRIPT_REV = "2026-05-11-stable-incremental-v1"
+SCRIPT_REV = "2026-05-12-full-coverage-retry-v2"
+MAX_RETRIES = int(os.getenv("TRANSCRIPT_FETCH_RETRIES", "4"))
+REQUIRE_FULL_COVERAGE = os.getenv("REQUIRE_FULL_COVERAGE", "0") == "1"
+MAX_PASSES = int(os.getenv("TRANSCRIPT_MAX_PASSES", "70"))
+RETRY_SLEEP_SEC = float(os.getenv("TRANSCRIPT_RETRY_SLEEP_SEC", "15"))
+MAX_RUNTIME_SEC = int(float(os.getenv("TRANSCRIPT_MAX_HOURS", "23")) * 3600)
 NOISE_RE = re.compile(r"^\s*(\[[^\]]+\]|\([^\)]+\)|\{[^\}]+\})\s*$", re.I)
+TIMECODE_RE = re.compile(r"(?:^|\s)(?:\d{1,2}:)?\d{1,2}:\d{2}(?:[.,]\d{1,3})?(?:\s*-->\s*(?:\d{1,2}:)?\d{1,2}:\d{2}(?:[.,]\d{1,3})?)?(?:$|\s)")
 
 
 def now_iso() -> str:
@@ -63,10 +70,14 @@ def list_playlist_videos() -> list[dict]:
 
 def clean_caption_line(s: str) -> str:
     s = re.sub(r"<[^>]+>", "", s)
-    s = re.sub(r"\s+", " ", s).strip()
+    s = TIMECODE_RE.sub(" ", s)
+    s = re.sub(r"\b(captions?|subtitles?|transcript|автосубтитры|субтитры)\b", " ", s, flags=re.I)
+    s = re.sub(r"\s+", " ", s).strip(" -–—\t")
     if not s or NOISE_RE.match(s):
         return ""
-    if re.fullmatch(r"(смех|музыка|аплодисменты|laugh(ing)?|music|applause)", s, re.I):
+    if re.fullmatch(r"(смех|музыка|аплодисменты|laugh(ing)?|music|applause|foreign)", s, re.I):
+        return ""
+    if re.fullmatch(r"[\W_]+", s):
         return ""
     return s
 
@@ -147,6 +158,33 @@ def fetch_rows_from_yta(video: dict) -> tuple[str | None, list[tuple[int | None,
     return (transcript[0].get("language_code") if transcript else None), rows
 
 
+
+def fetch_rows_from_ytdlp_subs(video: dict) -> tuple[str | None, list[tuple[int | None, str]]]:
+    with tempfile.TemporaryDirectory() as td:
+        base = Path(td) / "%(id)s"
+        p = run(ytdlp_base_args() + [
+            "--skip-download", "--no-playlist", "--write-subs", "--write-auto-subs",
+            "--sub-langs", "ru,en,ru.*,en.*", "--sub-format", "vtt/json3",
+            "-o", str(base), video["url"],
+        ])
+        if p.returncode != 0:
+            return None, []
+
+        candidates = sorted(Path(td).glob(f"{video['videoId']}*"))
+        for fp in candidates:
+            ext = fp.suffix.lower().lstrip('.')
+            try:
+                body = fp.read_text(encoding="utf-8", errors="ignore")
+            except Exception:
+                continue
+            rows = rows_from_json3(body) if ext == "json3" or body.lstrip().startswith("{") else parse_vtt_rows(body)
+            if rows:
+                # filename example: <id>.ru.vtt
+                parts = fp.name.split('.')
+                lang = parts[-2] if len(parts) >= 3 else None
+                return lang, rows
+    return None, []
+
 def fetch_rows_from_openai(video: dict) -> tuple[str | None, list[tuple[int | None, str]]]:
     if OpenAI is None or not os.getenv("OPENAI_API_KEY"):
         return None, []
@@ -186,6 +224,48 @@ def chunk_rows(video: dict, rows: list[tuple[int | None, str]]) -> list[dict]:
     return out
 
 
+
+def fetch_video_rows(video: dict) -> tuple[str | None, list[tuple[int | None, str]], str | None]:
+    attempts = max(1, MAX_RETRIES)
+    last_source = None
+    for _ in range(attempts):
+        lang, rows = fetch_rows_from_metadata(video)
+        last_source = "metadata"
+        if rows:
+            return lang, rows, last_source
+        lang, rows = fetch_rows_from_ytdlp_subs(video)
+        last_source = "ytdlp_subs"
+        if rows:
+            return lang, rows, last_source
+        lang, rows = fetch_rows_from_yta(video)
+        last_source = "yta"
+        if rows:
+            return lang, rows, last_source
+        lang, rows = fetch_rows_from_openai(video)
+        last_source = "openai"
+        if rows:
+            return lang, rows, last_source
+    return None, [], last_source
+
+
+def try_index_video(video: dict, existing_by_video: dict, out_videos_map: dict, out_chunks_map: dict) -> bool:
+    vid = video["videoId"]
+    old_v = existing_by_video.get(vid)
+    lang, rows, source = fetch_video_rows(video)
+    if rows:
+        video = dict(video)
+        video["language"] = lang
+        video["transcriptSource"] = source
+        ch = chunk_rows(video, rows)
+        if ch:
+            out_videos_map[vid] = video
+            out_chunks_map[vid] = ch
+            return True
+    if old_v:
+        out_videos_map.setdefault(vid, old_v)
+        return True
+    return False
+
 def main() -> int:
     existing = load_existing()
     existing_by_video = {v.get("videoId"): v for v in (existing.get("videos") or []) if v.get("videoId")}
@@ -196,38 +276,64 @@ def main() -> int:
             chunks_by_video.setdefault(vid, []).append(ch)
 
     videos = list_playlist_videos()
-    out_videos, out_chunks = [], []
+    if not videos:
+        raise RuntimeError("Playlist returned zero videos; refusing to overwrite index with empty payload")
     new_count = 0
-    for video in videos:
-        vid = video["videoId"]
-        old_v = existing_by_video.get(vid)
-        old_chunks = chunks_by_video.get(vid, [])
-        if old_v and old_chunks:
-            out_videos.append(old_v)
-            out_chunks.extend(old_chunks)
-            continue
 
-        lang, rows = fetch_rows_from_metadata(video)
-        source = "metadata"
-        if not rows:
-            lang, rows = fetch_rows_from_yta(video)
-            source = "yta"
-        if not rows:
-            lang, rows = fetch_rows_from_openai(video)
-            source = "openai"
-        if rows:
-            video["language"] = lang
-            video["transcriptSource"] = source
-            ch = chunk_rows(video, rows)
-            if ch:
-                out_videos.append(video)
-                out_chunks.extend(ch)
-                new_count += 1
-                continue
+    # Start from existing index and update incrementally. This avoids losing old data on partial failures.
+    out_videos_map = dict(existing_by_video)
+    out_chunks_map = {vid: list(chunks) for vid, chunks in chunks_by_video.items()}
 
-        if old_v and old_chunks:
-            out_videos.append(old_v)
-            out_chunks.extend(old_chunks)
+    start_ts = time.time()
+    missing_map = {v["videoId"]: dict(v) for v in videos}
+
+    for pass_idx in range(max(1, MAX_PASSES)):
+        if not missing_map:
+            break
+        if time.time() - start_ts > MAX_RUNTIME_SEC:
+            break
+
+        unresolved = {}
+        for vid, video in list(missing_map.items()):
+            ok = try_index_video(video, existing_by_video, out_videos_map, out_chunks_map)
+            if ok:
+                if vid not in existing_by_video:
+                    new_count += 1
+            else:
+                unresolved[vid] = video
+
+        missing_map = unresolved
+        if not missing_map:
+            break
+        if pass_idx + 1 < max(1, MAX_PASSES):
+            time.sleep(max(0.0, RETRY_SLEEP_SEC))
+
+    missing_videos = [
+        {"videoId": v["videoId"], "title": v.get("title"), "url": v.get("url"), "reason": "transcript_unavailable"}
+        for v in missing_map.values()
+    ]
+
+    # Keep playlist order first, but never drop already indexed videos/chunks that may be absent temporarily.
+    ordered_ids = [v["videoId"] for v in videos]
+    extra_ids = [vid for vid in out_videos_map.keys() if vid not in ordered_ids]
+    final_ids = ordered_ids + sorted(extra_ids)
+    out_videos = [out_videos_map[vid] for vid in final_ids if vid in out_videos_map]
+    out_chunks = [ch for vid in final_ids for ch in out_chunks_map.get(vid, [])]
+
+    Path("missing-videos.json").write_text(json.dumps({
+        "updatedAt": now_iso(),
+        "playlistVideos": len(videos),
+        "missingCount": len(missing_videos),
+        "videos": missing_videos,
+    }, ensure_ascii=False, indent=2), encoding="utf-8")
+
+    if REQUIRE_FULL_COVERAGE and missing_videos:
+        raise RuntimeError(f"Missing transcripts for {len(missing_videos)} playlist videos; see missing-videos.json")
+
+    if not out_videos:
+        if existing:
+            raise RuntimeError("Indexing produced zero videos; preserving previously saved index")
+        raise RuntimeError("Indexing produced zero videos on initial build")
 
     payload = {
         "updatedAt": now_iso(),
