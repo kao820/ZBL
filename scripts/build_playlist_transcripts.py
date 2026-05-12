@@ -23,7 +23,9 @@ except Exception:
 PLAYLIST_URL = "https://www.youtube.com/playlist?list=PLQ0wmPbdvhzJl6lFMAVzbneqAPtBvCrsg"
 OUT_PATH = Path("playlist-transcripts.json")
 MAX_WORDS = 120
-SCRIPT_REV = "2026-05-11-stable-incremental-v1"
+SCRIPT_REV = "2026-05-12-full-coverage-retry-v2"
+MAX_RETRIES = int(os.getenv("TRANSCRIPT_FETCH_RETRIES", "4"))
+REQUIRE_FULL_COVERAGE = os.getenv("REQUIRE_FULL_COVERAGE", "0") == "1"
 NOISE_RE = re.compile(r"^\s*(\[[^\]]+\]|\([^\)]+\)|\{[^\}]+\})\s*$", re.I)
 TIMECODE_RE = re.compile(r"(?:^|\s)(?:\d{1,2}:)?\d{1,2}:\d{2}(?:[.,]\d{1,3})?(?:\s*-->\s*(?:\d{1,2}:)?\d{1,2}:\d{2}(?:[.,]\d{1,3})?)?(?:$|\s)")
 
@@ -191,6 +193,25 @@ def chunk_rows(video: dict, rows: list[tuple[int | None, str]]) -> list[dict]:
     return out
 
 
+
+def fetch_video_rows(video: dict) -> tuple[str | None, list[tuple[int | None, str]], str | None]:
+    attempts = max(1, MAX_RETRIES)
+    last_source = None
+    for _ in range(attempts):
+        lang, rows = fetch_rows_from_metadata(video)
+        last_source = "metadata"
+        if rows:
+            return lang, rows, last_source
+        lang, rows = fetch_rows_from_yta(video)
+        last_source = "yta"
+        if rows:
+            return lang, rows, last_source
+        lang, rows = fetch_rows_from_openai(video)
+        last_source = "openai"
+        if rows:
+            return lang, rows, last_source
+    return None, [], last_source
+
 def main() -> int:
     existing = load_existing()
     existing_by_video = {v.get("videoId"): v for v in (existing.get("videos") or []) if v.get("videoId")}
@@ -201,24 +222,21 @@ def main() -> int:
             chunks_by_video.setdefault(vid, []).append(ch)
 
     videos = list_playlist_videos()
+    if not videos:
+        raise RuntimeError("Playlist returned zero videos; refusing to overwrite index with empty payload")
     new_count = 0
 
     # Start from existing index and update incrementally. This avoids losing old data on partial failures.
     out_videos_map = dict(existing_by_video)
     out_chunks_map = {vid: list(chunks) for vid, chunks in chunks_by_video.items()}
 
+    missing_videos: list[dict] = []
+
     for video in videos:
         vid = video["videoId"]
         old_v = existing_by_video.get(vid)
 
-        lang, rows = fetch_rows_from_metadata(video)
-        source = "metadata"
-        if not rows:
-            lang, rows = fetch_rows_from_yta(video)
-            source = "yta"
-        if not rows:
-            lang, rows = fetch_rows_from_openai(video)
-            source = "openai"
+        lang, rows, source = fetch_video_rows(video)
 
         if rows:
             video["language"] = lang
@@ -234,11 +252,30 @@ def main() -> int:
         # If refresh failed, keep previous data untouched.
         if old_v:
             out_videos_map.setdefault(vid, old_v)
+        else:
+            missing_videos.append({"videoId": vid, "title": video.get("title"), "url": video.get("url"), "reason": "transcript_unavailable"})
 
-    # Keep output bounded to current playlist order while preserving old data for failed refreshes.
+    # Keep playlist order first, but never drop already indexed videos/chunks that may be absent temporarily.
     ordered_ids = [v["videoId"] for v in videos]
-    out_videos = [out_videos_map[vid] for vid in ordered_ids if vid in out_videos_map]
-    out_chunks = [ch for vid in ordered_ids for ch in out_chunks_map.get(vid, [])]
+    extra_ids = [vid for vid in out_videos_map.keys() if vid not in ordered_ids]
+    final_ids = ordered_ids + sorted(extra_ids)
+    out_videos = [out_videos_map[vid] for vid in final_ids if vid in out_videos_map]
+    out_chunks = [ch for vid in final_ids for ch in out_chunks_map.get(vid, [])]
+
+    Path("missing-videos.json").write_text(json.dumps({
+        "updatedAt": now_iso(),
+        "playlistVideos": len(videos),
+        "missingCount": len(missing_videos),
+        "videos": missing_videos,
+    }, ensure_ascii=False, indent=2), encoding="utf-8")
+
+    if REQUIRE_FULL_COVERAGE and missing_videos:
+        raise RuntimeError(f"Missing transcripts for {len(missing_videos)} playlist videos; see missing-videos.json")
+
+    if not out_videos:
+        if existing:
+            raise RuntimeError("Indexing produced zero videos; preserving previously saved index")
+        raise RuntimeError("Indexing produced zero videos on initial build")
 
     payload = {
         "updatedAt": now_iso(),
