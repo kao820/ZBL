@@ -7,6 +7,7 @@ import re
 import subprocess
 import tempfile
 import urllib.request
+import time
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -26,6 +27,9 @@ MAX_WORDS = 120
 SCRIPT_REV = "2026-05-12-full-coverage-retry-v2"
 MAX_RETRIES = int(os.getenv("TRANSCRIPT_FETCH_RETRIES", "4"))
 REQUIRE_FULL_COVERAGE = os.getenv("REQUIRE_FULL_COVERAGE", "0") == "1"
+MAX_PASSES = int(os.getenv("TRANSCRIPT_MAX_PASSES", "70"))
+RETRY_SLEEP_SEC = float(os.getenv("TRANSCRIPT_RETRY_SLEEP_SEC", "15"))
+MAX_RUNTIME_SEC = int(float(os.getenv("TRANSCRIPT_MAX_HOURS", "23")) * 3600)
 NOISE_RE = re.compile(r"^\s*(\[[^\]]+\]|\([^\)]+\)|\{[^\}]+\})\s*$", re.I)
 TIMECODE_RE = re.compile(r"(?:^|\s)(?:\d{1,2}:)?\d{1,2}:\d{2}(?:[.,]\d{1,3})?(?:\s*-->\s*(?:\d{1,2}:)?\d{1,2}:\d{2}(?:[.,]\d{1,3})?)?(?:$|\s)")
 
@@ -154,6 +158,33 @@ def fetch_rows_from_yta(video: dict) -> tuple[str | None, list[tuple[int | None,
     return (transcript[0].get("language_code") if transcript else None), rows
 
 
+
+def fetch_rows_from_ytdlp_subs(video: dict) -> tuple[str | None, list[tuple[int | None, str]]]:
+    with tempfile.TemporaryDirectory() as td:
+        base = Path(td) / "%(id)s"
+        p = run(ytdlp_base_args() + [
+            "--skip-download", "--no-playlist", "--write-subs", "--write-auto-subs",
+            "--sub-langs", "ru,en,ru.*,en.*", "--sub-format", "vtt/json3",
+            "-o", str(base), video["url"],
+        ])
+        if p.returncode != 0:
+            return None, []
+
+        candidates = sorted(Path(td).glob(f"{video['videoId']}*"))
+        for fp in candidates:
+            ext = fp.suffix.lower().lstrip('.')
+            try:
+                body = fp.read_text(encoding="utf-8", errors="ignore")
+            except Exception:
+                continue
+            rows = rows_from_json3(body) if ext == "json3" or body.lstrip().startswith("{") else parse_vtt_rows(body)
+            if rows:
+                # filename example: <id>.ru.vtt
+                parts = fp.name.split('.')
+                lang = parts[-2] if len(parts) >= 3 else None
+                return lang, rows
+    return None, []
+
 def fetch_rows_from_openai(video: dict) -> tuple[str | None, list[tuple[int | None, str]]]:
     if OpenAI is None or not os.getenv("OPENAI_API_KEY"):
         return None, []
@@ -202,6 +233,10 @@ def fetch_video_rows(video: dict) -> tuple[str | None, list[tuple[int | None, st
         last_source = "metadata"
         if rows:
             return lang, rows, last_source
+        lang, rows = fetch_rows_from_ytdlp_subs(video)
+        last_source = "ytdlp_subs"
+        if rows:
+            return lang, rows, last_source
         lang, rows = fetch_rows_from_yta(video)
         last_source = "yta"
         if rows:
@@ -211,6 +246,25 @@ def fetch_video_rows(video: dict) -> tuple[str | None, list[tuple[int | None, st
         if rows:
             return lang, rows, last_source
     return None, [], last_source
+
+
+def try_index_video(video: dict, existing_by_video: dict, out_videos_map: dict, out_chunks_map: dict) -> bool:
+    vid = video["videoId"]
+    old_v = existing_by_video.get(vid)
+    lang, rows, source = fetch_video_rows(video)
+    if rows:
+        video = dict(video)
+        video["language"] = lang
+        video["transcriptSource"] = source
+        ch = chunk_rows(video, rows)
+        if ch:
+            out_videos_map[vid] = video
+            out_chunks_map[vid] = ch
+            return True
+    if old_v:
+        out_videos_map.setdefault(vid, old_v)
+        return True
+    return False
 
 def main() -> int:
     existing = load_existing()
@@ -230,30 +284,34 @@ def main() -> int:
     out_videos_map = dict(existing_by_video)
     out_chunks_map = {vid: list(chunks) for vid, chunks in chunks_by_video.items()}
 
-    missing_videos: list[dict] = []
+    start_ts = time.time()
+    missing_map = {v["videoId"]: dict(v) for v in videos}
 
-    for video in videos:
-        vid = video["videoId"]
-        old_v = existing_by_video.get(vid)
+    for pass_idx in range(max(1, MAX_PASSES)):
+        if not missing_map:
+            break
+        if time.time() - start_ts > MAX_RUNTIME_SEC:
+            break
 
-        lang, rows, source = fetch_video_rows(video)
-
-        if rows:
-            video["language"] = lang
-            video["transcriptSource"] = source
-            ch = chunk_rows(video, rows)
-            if ch:
-                out_videos_map[vid] = video
-                out_chunks_map[vid] = ch
-                if not old_v:
+        unresolved = {}
+        for vid, video in list(missing_map.items()):
+            ok = try_index_video(video, existing_by_video, out_videos_map, out_chunks_map)
+            if ok:
+                if vid not in existing_by_video:
                     new_count += 1
-                continue
+            else:
+                unresolved[vid] = video
 
-        # If refresh failed, keep previous data untouched.
-        if old_v:
-            out_videos_map.setdefault(vid, old_v)
-        else:
-            missing_videos.append({"videoId": vid, "title": video.get("title"), "url": video.get("url"), "reason": "transcript_unavailable"})
+        missing_map = unresolved
+        if not missing_map:
+            break
+        if pass_idx + 1 < max(1, MAX_PASSES):
+            time.sleep(max(0.0, RETRY_SLEEP_SEC))
+
+    missing_videos = [
+        {"videoId": v["videoId"], "title": v.get("title"), "url": v.get("url"), "reason": "transcript_unavailable"}
+        for v in missing_map.values()
+    ]
 
     # Keep playlist order first, but never drop already indexed videos/chunks that may be absent temporarily.
     ordered_ids = [v["videoId"] for v in videos]
