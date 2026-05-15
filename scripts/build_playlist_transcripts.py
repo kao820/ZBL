@@ -220,6 +220,33 @@ def fetch_rows_from_ytdlp_subs(video: dict) -> tuple[str | None, list[tuple[int 
                 return lang, rows
     return None, []
 
+
+def fetch_rows_from_ytdlp_subs(video: dict) -> tuple[str | None, list[tuple[int | None, str]]]:
+    with tempfile.TemporaryDirectory() as td:
+        base = Path(td) / "%(id)s"
+        p = run(ytdlp_base_args() + [
+            "--skip-download", "--no-playlist", "--write-subs", "--write-auto-subs",
+            "--sub-langs", "ru,en,ru.*,en.*", "--sub-format", "vtt/json3",
+            "-o", str(base), video["url"],
+        ])
+        if p.returncode != 0:
+            return None, []
+
+        candidates = sorted(Path(td).glob(f"{video['videoId']}*"))
+        for fp in candidates:
+            ext = fp.suffix.lower().lstrip('.')
+            try:
+                body = fp.read_text(encoding="utf-8", errors="ignore")
+            except Exception:
+                continue
+            rows = rows_from_json3(body) if ext == "json3" or body.lstrip().startswith("{") else parse_vtt_rows(body)
+            if rows:
+                # filename example: <id>.ru.vtt
+                parts = fp.name.split('.')
+                lang = parts[-2] if len(parts) >= 3 else None
+                return lang, rows
+    return None, []
+
 def fetch_rows_from_openai(video: dict) -> tuple[str | None, list[tuple[int | None, str]]]:
     if OpenAI is None or not os.getenv("OPENAI_API_KEY"):
         return None, []
