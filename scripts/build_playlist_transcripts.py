@@ -127,7 +127,7 @@ def fetch_rows_from_metadata(video: dict) -> tuple[str | None, list[tuple[int | 
     except Exception:
         return None, []
     caps = meta.get("subtitles") or meta.get("automatic_captions") or {}
-    langs = ["ru", "en"] + [x for x in sorted(caps.keys()) if x not in {"ru", "en"}]
+    langs = ["ru"] + [x for x in sorted(caps.keys()) if x != "ru"]
     for lang in langs:
         for t in (caps.get(lang) or []):
             u = t.get("url")
@@ -146,17 +146,79 @@ def fetch_rows_from_metadata(video: dict) -> tuple[str | None, list[tuple[int | 
 def fetch_rows_from_yta(video: dict) -> tuple[str | None, list[tuple[int | None, str]]]:
     if YouTubeTranscriptApi is None:
         return None, []
+
+    def _rows(items: list[dict]) -> list[tuple[int | None, str]]:
+        out = []
+        for item in items:
+            clean = clean_caption_line((item.get("text") or "").strip())
+            if clean:
+                out.append((int(item.get("start", 0)), clean))
+        return out
+
     try:
-        transcript = YouTubeTranscriptApi.get_transcript(video["videoId"], languages=["ru", "en"])
+        transcript = YouTubeTranscriptApi.get_transcript(video["videoId"], languages=["ru"])
+        rows = _rows(transcript)
+        if rows:
+            return (transcript[0].get("language_code") if transcript else None), rows
+    except Exception:
+        pass
+
+    try:
+        listing = YouTubeTranscriptApi.list_transcripts(video["videoId"])
     except Exception:
         return None, []
-    rows = []
-    for item in transcript:
-        clean = clean_caption_line((item.get("text") or "").strip())
-        if clean:
-            rows.append((int(item.get("start", 0)), clean))
-    return (transcript[0].get("language_code") if transcript else None), rows
 
+    candidates = []
+    for tr in listing:
+        candidates.append(tr)
+        try:
+            candidates.append(tr.translate("en"))
+        except Exception:
+            pass
+
+    seen = set()
+    for tr in candidates:
+        key = (getattr(tr, "language_code", None), getattr(tr, "is_generated", None))
+        if key in seen:
+            continue
+        seen.add(key)
+        try:
+            fetched = tr.fetch()
+        except Exception:
+            continue
+        rows = _rows(fetched)
+        if rows:
+            return getattr(tr, "language_code", None), rows
+
+    return None, []
+
+
+
+def fetch_rows_from_ytdlp_subs(video: dict) -> tuple[str | None, list[tuple[int | None, str]]]:
+    with tempfile.TemporaryDirectory() as td:
+        base = Path(td) / "%(id)s"
+        p = run(ytdlp_base_args() + [
+            "--skip-download", "--no-playlist", "--write-subs", "--write-auto-subs",
+            "--sub-langs", "ru,ru.*,all,-live_chat", "--sub-format", "vtt/json3/srv3",
+            "-o", str(base), video["url"],
+        ])
+        if p.returncode != 0:
+            return None, []
+
+        candidates = sorted(Path(td).glob(f"{video['videoId']}*"))
+        for fp in candidates:
+            ext = fp.suffix.lower().lstrip('.')
+            try:
+                body = fp.read_text(encoding="utf-8", errors="ignore")
+            except Exception:
+                continue
+            rows = rows_from_json3(body) if ext == "json3" or body.lstrip().startswith("{") else parse_vtt_rows(body)
+            if rows:
+                # filename example: <id>.ru.vtt
+                parts = fp.name.split('.')
+                lang = parts[-2] if len(parts) >= 3 else None
+                return lang, rows
+    return None, []
 
 
 def fetch_rows_from_ytdlp_subs(video: dict) -> tuple[str | None, list[tuple[int | None, str]]]:
@@ -303,6 +365,7 @@ def main() -> int:
                 unresolved[vid] = video
 
         missing_map = unresolved
+        print(f"Pass {pass_idx+1}: indexed={len(out_videos_map)}, unresolved={len(missing_map)}")
         if not missing_map:
             break
         if pass_idx + 1 < max(1, MAX_PASSES):
