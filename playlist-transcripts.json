@@ -1,15 +1,14 @@
 {
+  "updatedAt": "2026-05-12T00:12:07.974069+00:00",
+  "scriptRevision": "2026-05-11-stable-incremental-v1",
   "playlistUrl": "https://www.youtube.com/playlist?list=PLQ0wmPbdvhzJl6lFMAVzbneqAPtBvCrsg",
-  "updatedAt": "2026-05-11T12:21:05.467235+00:00",
-  "error": "index_unavailable",
   "videos": [],
   "chunks": [],
+  "error": null,
   "stats": {
-    "total": 0,
-    "withCaptions": 0,
-    "withoutCaptions": 0,
-    "failed": 0,
-    "reused": 0,
-    "downloaded": 0
+    "playlistVideos": 416,
+    "indexedVideos": 0,
+    "chunks": 0,
+    "newOrRefreshedVideos": 0
   }
 }
