@@ -27,9 +27,10 @@ MAX_WORDS = 120
 SCRIPT_REV = "2026-05-12-full-coverage-retry-v2"
 MAX_RETRIES = int(os.getenv("TRANSCRIPT_FETCH_RETRIES", "4"))
 REQUIRE_FULL_COVERAGE = os.getenv("REQUIRE_FULL_COVERAGE", "0") == "1"
-MAX_PASSES = int(os.getenv("TRANSCRIPT_MAX_PASSES", "70"))
+MAX_PASSES = int(os.getenv("TRANSCRIPT_MAX_PASSES", "24"))
 RETRY_SLEEP_SEC = float(os.getenv("TRANSCRIPT_RETRY_SLEEP_SEC", "15"))
-MAX_RUNTIME_SEC = int(float(os.getenv("TRANSCRIPT_MAX_HOURS", "23")) * 3600)
+MAX_RUNTIME_SEC = int(float(os.getenv("TRANSCRIPT_MAX_HOURS", "5.5")) * 3600)
+NO_PROGRESS_PASSES = int(os.getenv("TRANSCRIPT_NO_PROGRESS_PASSES", "3"))
 NOISE_RE = re.compile(r"^\s*(\[[^\]]+\]|\([^\)]+\)|\{[^\}]+\})\s*$", re.I)
 TIMECODE_RE = re.compile(r"(?:^|\s)(?:\d{1,2}:)?\d{1,2}:\d{2}(?:[.,]\d{1,3})?(?:\s*-->\s*(?:\d{1,2}:)?\d{1,2}:\d{2}(?:[.,]\d{1,3})?)?(?:$|\s)")
 
@@ -339,6 +340,9 @@ def main() -> int:
     missing_map = {v["videoId"]: dict(v) for v in videos}
     source_stats: dict[str, int] = {}
 
+    stagnant_passes = 0
+    prev_missing = len(missing_map)
+
     for pass_idx in range(max(1, MAX_PASSES)):
         if not missing_map:
             break
@@ -356,8 +360,19 @@ def main() -> int:
 
         missing_map = unresolved
         print(f"Pass {pass_idx+1}: indexed={len(out_videos_map)}, unresolved={len(missing_map)}, sourceStats={source_stats}")
+
+        if len(missing_map) < prev_missing:
+            stagnant_passes = 0
+        else:
+            stagnant_passes += 1
+        prev_missing = len(missing_map)
+
         if not missing_map:
             break
+        if stagnant_passes >= max(1, NO_PROGRESS_PASSES):
+            print(f"Stopping early after {stagnant_passes} stagnant passes (no reduction in unresolved videos).")
+            break
+
         if pass_idx + 1 < max(1, MAX_PASSES):
             time.sleep(max(0.0, RETRY_SLEEP_SEC))
 
@@ -377,6 +392,7 @@ def main() -> int:
         "updatedAt": now_iso(),
         "playlistVideos": len(videos),
         "missingCount": len(missing_videos),
+        "sourceStats": source_stats,
         "videos": missing_videos,
     }, ensure_ascii=False, indent=2), encoding="utf-8")
 
