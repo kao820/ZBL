@@ -147,12 +147,18 @@ def fetch_rows_from_yta(video: dict) -> tuple[str | None, list[tuple[int | None,
     if YouTubeTranscriptApi is None:
         return None, []
 
-    def _rows(items: list[dict]) -> list[tuple[int | None, str]]:
+    def _rows(items) -> list[tuple[int | None, str]]:
         out = []
-        for item in items:
-            clean = clean_caption_line((item.get("text") or "").strip())
+        for item in (items or []):
+            if isinstance(item, dict):
+                text = (item.get("text") or "").strip()
+                start = item.get("start", 0)
+            else:
+                text = (getattr(item, "text", "") or "").strip()
+                start = getattr(item, "start", 0)
+            clean = clean_caption_line(text)
             if clean:
-                out.append((int(item.get("start", 0)), clean))
+                out.append((int(start or 0), clean))
         return out
 
     try:
@@ -172,7 +178,7 @@ def fetch_rows_from_yta(video: dict) -> tuple[str | None, list[tuple[int | None,
     for tr in listing:
         candidates.append(tr)
         try:
-            candidates.append(tr.translate("en"))
+            candidates.append(tr.translate("ru"))
         except Exception:
             pass
 
@@ -200,33 +206,6 @@ def fetch_rows_from_ytdlp_subs(video: dict) -> tuple[str | None, list[tuple[int 
         p = run(ytdlp_base_args() + [
             "--skip-download", "--no-playlist", "--write-subs", "--write-auto-subs",
             "--sub-langs", "ru,ru.*,all,-live_chat", "--sub-format", "vtt/json3/srv3",
-            "-o", str(base), video["url"],
-        ])
-        if p.returncode != 0:
-            return None, []
-
-        candidates = sorted(Path(td).glob(f"{video['videoId']}*"))
-        for fp in candidates:
-            ext = fp.suffix.lower().lstrip('.')
-            try:
-                body = fp.read_text(encoding="utf-8", errors="ignore")
-            except Exception:
-                continue
-            rows = rows_from_json3(body) if ext == "json3" or body.lstrip().startswith("{") else parse_vtt_rows(body)
-            if rows:
-                # filename example: <id>.ru.vtt
-                parts = fp.name.split('.')
-                lang = parts[-2] if len(parts) >= 3 else None
-                return lang, rows
-    return None, []
-
-
-def fetch_rows_from_ytdlp_subs(video: dict) -> tuple[str | None, list[tuple[int | None, str]]]:
-    with tempfile.TemporaryDirectory() as td:
-        base = Path(td) / "%(id)s"
-        p = run(ytdlp_base_args() + [
-            "--skip-download", "--no-playlist", "--write-subs", "--write-auto-subs",
-            "--sub-langs", "ru,en,ru.*,en.*", "--sub-format", "vtt/json3",
             "-o", str(base), video["url"],
         ])
         if p.returncode != 0:
@@ -287,33 +266,43 @@ def chunk_rows(video: dict, rows: list[tuple[int | None, str]]) -> list[dict]:
 
 
 
-def fetch_video_rows(video: dict) -> tuple[str | None, list[tuple[int | None, str]], str | None]:
+def fetch_video_rows(video: dict, source_stats: dict[str, int] | None = None) -> tuple[str | None, list[tuple[int | None, str]], str | None]:
     attempts = max(1, MAX_RETRIES)
     last_source = None
     for _ in range(attempts):
         lang, rows = fetch_rows_from_metadata(video)
         last_source = "metadata"
         if rows:
+            if source_stats is not None:
+                source_stats[last_source] = source_stats.get(last_source, 0) + 1
             return lang, rows, last_source
         lang, rows = fetch_rows_from_ytdlp_subs(video)
         last_source = "ytdlp_subs"
         if rows:
+            if source_stats is not None:
+                source_stats[last_source] = source_stats.get(last_source, 0) + 1
             return lang, rows, last_source
         lang, rows = fetch_rows_from_yta(video)
         last_source = "yta"
         if rows:
+            if source_stats is not None:
+                source_stats[last_source] = source_stats.get(last_source, 0) + 1
             return lang, rows, last_source
         lang, rows = fetch_rows_from_openai(video)
         last_source = "openai"
         if rows:
+            if source_stats is not None:
+                source_stats[last_source] = source_stats.get(last_source, 0) + 1
             return lang, rows, last_source
+    if source_stats is not None:
+        source_stats["none"] = source_stats.get("none", 0) + 1
     return None, [], last_source
 
 
-def try_index_video(video: dict, existing_by_video: dict, out_videos_map: dict, out_chunks_map: dict) -> bool:
+def try_index_video(video: dict, existing_by_video: dict, out_videos_map: dict, out_chunks_map: dict, source_stats: dict[str, int] | None = None) -> bool:
     vid = video["videoId"]
     old_v = existing_by_video.get(vid)
-    lang, rows, source = fetch_video_rows(video)
+    lang, rows, source = fetch_video_rows(video, source_stats=source_stats)
     if rows:
         video = dict(video)
         video["language"] = lang
@@ -348,6 +337,7 @@ def main() -> int:
 
     start_ts = time.time()
     missing_map = {v["videoId"]: dict(v) for v in videos}
+    source_stats: dict[str, int] = {}
 
     for pass_idx in range(max(1, MAX_PASSES)):
         if not missing_map:
@@ -357,7 +347,7 @@ def main() -> int:
 
         unresolved = {}
         for vid, video in list(missing_map.items()):
-            ok = try_index_video(video, existing_by_video, out_videos_map, out_chunks_map)
+            ok = try_index_video(video, existing_by_video, out_videos_map, out_chunks_map, source_stats=source_stats)
             if ok:
                 if vid not in existing_by_video:
                     new_count += 1
@@ -365,7 +355,7 @@ def main() -> int:
                 unresolved[vid] = video
 
         missing_map = unresolved
-        print(f"Pass {pass_idx+1}: indexed={len(out_videos_map)}, unresolved={len(missing_map)}")
+        print(f"Pass {pass_idx+1}: indexed={len(out_videos_map)}, unresolved={len(missing_map)}, sourceStats={source_stats}")
         if not missing_map:
             break
         if pass_idx + 1 < max(1, MAX_PASSES):
