@@ -26,7 +26,7 @@
     const perVideo = new Map();
     for (const r of ranked) {
       const n = perVideo.get(r.videoId) || 0;
-      if (n >= 2) continue;
+      if (n >= 1) continue;
       perVideo.set(r.videoId, n + 1);
       out.push(r);
       if (out.length >= 12) break;
@@ -52,10 +52,17 @@
     if (askNumber) {
       for (const r of results.slice(0, 6)) {
         const m = (r.text || '').match(/\b(\d{1,3})\b/);
-        if (m) return `Короткий ответ: ${m[1]}.`;
+        if (m) return `Короткий ответ: вероятное значение — ${m[1]}.`;
       }
     }
-    return `Короткий ответ: ${snippet(results[0].text, qTokens, 220).split(/[.!?]/)[0]}.`;
+
+    const first = snippet(results[0].text, qTokens, 220).split(/[.!?]/)[0].trim();
+    const second = (results[1] ? snippet(results[1].text, qTokens, 180).split(/[.!?]/)[0].trim() : '');
+    const primary = first.length >= 40 ? first : (results[0].text || '').split(/[.!?]/)[0].trim();
+    if (second && second !== primary) {
+      return `Короткий ответ: ${primary}. Дополнительно: ${second}.`;
+    }
+    return `Короткий ответ: ${primary}.`;
   }
 
   function renderResults(results, qTokens) {
