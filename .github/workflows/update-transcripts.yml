@@ -14,24 +14,21 @@ jobs:
         with:
           python-version: '3.11'
       - name: Install deps
-        run: python -m pip install --upgrade pip yt-dlp youtube-transcript-api
-      - name: Build one video incrementally
+        run: python -m pip install --upgrade pip yt-dlp youtube-transcript-api openai
+      - name: Refresh playlist queue
         env:
           YTDLP_TIMEOUT_SEC: '90'
+          PROCESS_MODE: queue_only
         run: python scripts/build_playlist_transcripts.py
-      - name: Validate progress signal (non-blocking bootstrap)
-        run: |
-          python - <<'PY'
-          import json, pathlib
-          st = json.loads(pathlib.Path('playlist-video-status.json').read_text(encoding='utf-8')) if pathlib.Path('playlist-video-status.json').exists() else {'videos': []}
-          videos = st.get('videos', [])
-          indexed = sum(1 for v in videos if v.get('status') == 'indexed')
-          active = sum(1 for v in videos if v.get('status') in {'pending','retry'})
-          missing = sum(1 for v in videos if v.get('status') == 'missing')
-          print(f'Progress signal: indexed={indexed}, active={active}, missing={missing}, total={len(videos)}')
-          if indexed == 0 and active > 0:
-            print('Warning: bootstrap phase (no indexed yet). Keeping workflow green to allow daily one-by-one accumulation.')
-          PY
+      - name: Process one pending video (WhisperX-first)
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: python scripts/run_one_pending_whisperx.py
+      - name: Rebuild aggregate index
+        env:
+          PROCESS_MODE: rebuild_only
+        run: python scripts/build_playlist_transcripts.py
       - name: Sync docs/static indexes
         run: |
           cp -f playlist-transcripts.json docs/playlist-transcripts.json

@@ -7,7 +7,6 @@ import re
 import subprocess
 import tempfile
 import urllib.request
-import time
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -15,6 +14,11 @@ try:
     from youtube_transcript_api import YouTubeTranscriptApi
 except Exception:
     YouTubeTranscriptApi = None
+
+try:
+    from openai import OpenAI
+except Exception:
+    OpenAI = None
 
 PLAYLIST_URL = "https://www.youtube.com/playlist?list=PLQ0wmPbdvhzJl6lFMAVzbneqAPtBvCrsg"
 OUT_PATH = Path("playlist-transcripts.json")
@@ -24,6 +28,7 @@ MAX_WORDS = 120
 SCRIPT_REV = "2026-05-26-per-video-v1"
 YTDLP_TIMEOUT_SEC = int(os.getenv("YTDLP_TIMEOUT_SEC", "90"))
 MAX_VIDEO_ATTEMPTS = int(os.getenv("MAX_VIDEO_ATTEMPTS", "5"))
+PROCESS_MODE = os.getenv("PROCESS_MODE", "normal").strip().lower()
 
 NOISE_RE = re.compile(r"^\s*(\[[^\]]+\]|\([^\)]+\)|\{[^\}]+\})\s*$", re.I)
 TIMECODE_RE = re.compile(r"(?:^|\s)(?:\d{1,2}:)?\d{1,2}:\d{2}(?:[.,]\d{1,3})?(?:\s*-->\s*(?:\d{1,2}:)?\d{1,2}:\d{2}(?:[.,]\d{1,3})?)?(?:$|\s)")
@@ -153,7 +158,11 @@ def fetch_rows(video: dict) -> tuple[str | None, list[tuple[int | None, str]], s
         except Exception:
             pass
 
-    return None, [], "none", "no_captions_or_api_access"
+    lang, rows, src, err = fetch_rows_openai(video)
+    if rows:
+        return lang, rows, src, None
+
+    return None, [], "none", err or "no_captions_or_api_access"
 
 
 def chunk_rows(video: dict, rows: list[tuple[int | None, str]]) -> list[dict]:
@@ -182,6 +191,27 @@ def cleanup_legacy_files() -> None:
     for fp in (Path("missing-videos.json"), Path("quartz/static/playlist-transcripts.json")):
         if fp.exists():
             fp.unlink()
+
+
+def fetch_rows_openai(video: dict) -> tuple[str | None, list[tuple[int | None, str]], str, str | None]:
+    if OpenAI is None or not os.getenv("OPENAI_API_KEY"):
+        return None, [], "openai", "openai_not_configured"
+    with tempfile.TemporaryDirectory() as td:
+        audio = Path(td) / f"{video['videoId']}.m4a"
+        p = run(ytdlp_base_args() + ["-f", "bestaudio[ext=m4a]/bestaudio", "--no-playlist", "-o", str(audio), video["url"]])
+        if p.returncode != 0 or not audio.exists():
+            return None, [], "openai", "audio_download_failed"
+        client = OpenAI()
+        with audio.open("rb") as fh:
+            tr = client.audio.transcriptions.create(model="gpt-4o-mini-transcribe", file=fh, response_format="verbose_json")
+        rows = []
+        for seg in (getattr(tr, "segments", None) or []):
+            t = clean_caption_line((getattr(seg, "text", "") or "").strip())
+            if t:
+                rows.append((int(getattr(seg, "start", 0) or 0), t))
+        if rows:
+            return (getattr(tr, "language", None) or "ru"), rows, "openai", None
+    return None, [], "openai", "openai_empty"
 
 def load_status() -> dict:
     if not STATUS_PATH.exists():
@@ -232,6 +262,20 @@ def main() -> int:
             changed = True
 
     pending = [v for v in status.get("videos", []) if v.get("status") in {"pending", "retry"}]
+
+    if PROCESS_MODE == "queue_only":
+        rebuild_aggregate(status)
+        save_status(status)
+        print("Queue refreshed: total={}, active={}".format(len(status.get("videos", [])), len(pending)))
+        return 0
+
+    if PROCESS_MODE == "rebuild_only":
+        rebuild_aggregate(status)
+        save_status(status)
+        indexed_n = len([v for v in status.get("videos", []) if v.get("status") == "indexed"])
+        print(f"Aggregate rebuilt: indexed={indexed_n}")
+        return 0
+
     if not pending and not changed:
         print("No playlist updates and no pending videos. Nothing to do.")
         rebuild_aggregate(status)
