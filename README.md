@@ -31,3 +31,17 @@ Workflow: `.github/workflows/update-transcripts.yml`
 - ручной запуск: Actions → **Update playlist transcripts** → Run workflow
 - запуск по расписанию: каждый понедельник
 - авто-коммит нового `playlist-transcripts.json`, если есть изменения
+
+
+## Новый инкрементальный процесс (1 ролик за запуск)
+
+- Реестр статусов: `playlist-video-status.json`.
+- Отдельные immutable-файлы: `playlist-video-transcripts/<videoId>.json`.
+- Один запуск `scripts/build_playlist_transcripts.py` обрабатывает максимум один `pending` ролик.
+- Ежедневная автоматизация: `.github/workflows/update-transcripts.yml`.
+
+Опциональный тяжёлый fallback (WhisperX + diarization) для конкретного видео:
+
+```bash
+python3 scripts/transcribe_youtube_whisperx.py "https://www.youtube.com/watch?v=<ID>" --video-id <ID> --hf-token "$HF_TOKEN"
+```

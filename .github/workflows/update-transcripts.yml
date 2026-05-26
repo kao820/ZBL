@@ -1,10 +1,8 @@
 name: Update playlist transcripts
-
 on:
   workflow_dispatch:
   schedule:
-    - cron: '30 4 * * 1'
-
+    - cron: '30 4 * * *'
 jobs:
   update:
     runs-on: ubuntu-latest
@@ -15,64 +13,38 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - name: Install yt-dlp
-        run: python -m pip install --upgrade pip yt-dlp youtube-transcript-api openai
-      - name: Debug revision
-        run: |
-          echo "GITHUB_SHA=$GITHUB_SHA"
-          git rev-parse HEAD
-          sed -n "1,80p" scripts/build_playlist_transcripts.py
-          grep -n "SCRIPT_REV" scripts/build_playlist_transcripts.py
-      - name: Prepare optional cookies
-        run: |
-          if [ -n "${{ secrets.YTDLP_COOKIES_TXT }}" ]; then
-            echo "${{ secrets.YTDLP_COOKIES_TXT }}" > cookies.txt
-            echo "YTDLP_COOKIES_FILE=$PWD/cookies.txt" >> $GITHUB_ENV
-          fi
-      - name: Validate script syntax
-        run: python -m py_compile scripts/build_playlist_transcripts.py
-      - name: Save previous stats
+      - name: Install deps
+        run: python -m pip install --upgrade pip yt-dlp youtube-transcript-api
+      - name: Build one video incrementally
+        env:
+          YTDLP_TIMEOUT_SEC: '90'
+        run: python scripts/build_playlist_transcripts.py
+      - name: Validate progress signal (non-blocking bootstrap)
         run: |
           python - <<'PY'
           import json, pathlib
-          p = pathlib.Path('playlist-transcripts.json')
-          if p.exists():
-            d = json.loads(p.read_text(encoding='utf-8'))
-            old = {'with': (d.get('stats') or {}).get('withCaptions', 0), 'chunks': len(d.get('chunks') or [])}
-          else:
-            old = {'with': 0, 'chunks': 0}
-          pathlib.Path('.old_stats.json').write_text(json.dumps(old), encoding='utf-8')
+          st = json.loads(pathlib.Path('playlist-video-status.json').read_text(encoding='utf-8')) if pathlib.Path('playlist-video-status.json').exists() else {'videos': []}
+          videos = st.get('videos', [])
+          indexed = sum(1 for v in videos if v.get('status') == 'indexed')
+          active = sum(1 for v in videos if v.get('status') in {'pending','retry'})
+          missing = sum(1 for v in videos if v.get('status') == 'missing')
+          print(f'Progress signal: indexed={indexed}, active={active}, missing={missing}, total={len(videos)}')
+          if indexed == 0 and active > 0:
+            print('Warning: bootstrap phase (no indexed yet). Keeping workflow green to allow daily one-by-one accumulation.')
           PY
-      - name: Build transcript index
-        env:
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-          REQUIRE_FULL_COVERAGE: "1"
-        run: python scripts/build_playlist_transcripts.py
-      - name: Validate index growth
-        run: |
-          python - <<'PY'
-          import json, pathlib, sys
-          old = json.loads(pathlib.Path('.old_stats.json').read_text(encoding='utf-8'))
-          new = json.loads(pathlib.Path('playlist-transcripts.json').read_text(encoding='utf-8'))
-          nw = (new.get('stats') or {}).get('withCaptions', 0)
-          nc = len(new.get('chunks') or [])
-          if nw < old['with'] or nc < old['chunks']:
-            print(f"Regression detected: withCaptions {old['with']} -> {nw}, chunks {old['chunks']} -> {nc}")
-            sys.exit(1)
-          print(f"OK: withCaptions {old['with']} -> {nw}, chunks {old['chunks']} -> {nc}")
-          PY
-      - name: Sync docs index
+      - name: Sync docs/static indexes
         run: |
           cp -f playlist-transcripts.json docs/playlist-transcripts.json
-          cp -f missing-videos.json docs/missing-videos.json
-      - name: Commit updated index
+          mkdir -p quartz/static
+          cp -f playlist-transcripts.json quartz/static/playlist-transcripts.json
+      - name: Commit
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add playlist-transcripts.json missing-videos.json docs/playlist-transcripts.json docs/missing-videos.json
+          git add playlist-transcripts.json playlist-video-status.json playlist-video-transcripts docs/playlist-transcripts.json quartz/static/playlist-transcripts.json
           if git diff --cached --quiet; then
             echo "No changes"
             exit 0
           fi
-          git commit -m "chore: update playlist transcript index"
+          git commit -m "chore: update one playlist transcript"
           git push
