@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-05-26T19:42:32.548611+00:00",
+  "updatedAt": "2026-05-26T19:46:11.981855+00:00",
   "playlistUrl": "https://www.youtube.com/playlist?list=PLQ0wmPbdvhzJl6lFMAVzbneqAPtBvCrsg",
   "videos": [
     {
@@ -14,8 +14,8 @@
       "title": "S1E2 | ХАОС В ЛАГЕРЕ КОНДАМНИТАЛЬ | Dungeons and Dragons",
       "url": "https://www.youtube.com/watch?v=rsTRHsQkmts",
       "status": "retry",
-      "updatedAt": "2026-05-26T19:42:32.548313+00:00",
-      "attempts": 1,
+      "updatedAt": "2026-05-26T19:46:11.981625+00:00",
+      "attempts": 2,
       "lastError": "no_captions_or_api_access"
     },
     {
