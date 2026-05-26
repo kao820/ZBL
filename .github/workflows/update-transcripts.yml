@@ -47,9 +47,11 @@ jobs:
       - name: Build transcript index
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-          TRANSCRIPT_MAX_HOURS: "5.5"
-          TRANSCRIPT_MAX_PASSES: "24"
-          TRANSCRIPT_NO_PROGRESS_PASSES: "3"
+          TRANSCRIPT_MAX_HOURS: "2.5"
+          TRANSCRIPT_MAX_PASSES: "12"
+          TRANSCRIPT_NO_PROGRESS_PASSES: "2"
+          TRANSCRIPT_FETCH_RETRIES: "2"
+          YTDLP_TIMEOUT_SEC: "75"
         run: python scripts/build_playlist_transcripts.py
       - name: Validate index growth
         run: |

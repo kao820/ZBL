@@ -24,13 +24,14 @@ except Exception:
 PLAYLIST_URL = "https://www.youtube.com/playlist?list=PLQ0wmPbdvhzJl6lFMAVzbneqAPtBvCrsg"
 OUT_PATH = Path("playlist-transcripts.json")
 MAX_WORDS = 120
-SCRIPT_REV = "2026-05-12-full-coverage-retry-v2"
+SCRIPT_REV = "2026-05-26-timeout-guard-v3"
 MAX_RETRIES = int(os.getenv("TRANSCRIPT_FETCH_RETRIES", "4"))
 REQUIRE_FULL_COVERAGE = os.getenv("REQUIRE_FULL_COVERAGE", "0") == "1"
 MAX_PASSES = int(os.getenv("TRANSCRIPT_MAX_PASSES", "24"))
 RETRY_SLEEP_SEC = float(os.getenv("TRANSCRIPT_RETRY_SLEEP_SEC", "15"))
 MAX_RUNTIME_SEC = int(float(os.getenv("TRANSCRIPT_MAX_HOURS", "5.5")) * 3600)
-NO_PROGRESS_PASSES = int(os.getenv("TRANSCRIPT_NO_PROGRESS_PASSES", "3"))
+NO_PROGRESS_PASSES = int(os.getenv("TRANSCRIPT_NO_PROGRESS_PASSES", "2"))
+YTDLP_TIMEOUT_SEC = int(os.getenv("YTDLP_TIMEOUT_SEC", "75"))
 NOISE_RE = re.compile(r"^\s*(\[[^\]]+\]|\([^\)]+\)|\{[^\}]+\})\s*$", re.I)
 TIMECODE_RE = re.compile(r"(?:^|\s)(?:\d{1,2}:)?\d{1,2}:\d{2}(?:[.,]\d{1,3})?(?:\s*-->\s*(?:\d{1,2}:)?\d{1,2}:\d{2}(?:[.,]\d{1,3})?)?(?:$|\s)")
 
@@ -40,7 +41,10 @@ def now_iso() -> str:
 
 
 def run(cmd: list[str]) -> subprocess.CompletedProcess[str]:
-    return subprocess.run(cmd, text=True, capture_output=True)
+    try:
+        return subprocess.run(cmd, text=True, capture_output=True, timeout=YTDLP_TIMEOUT_SEC)
+    except subprocess.TimeoutExpired as e:
+        return subprocess.CompletedProcess(cmd, 124, stdout=e.stdout or "", stderr=(e.stderr or "") + f"\nTIMEOUT after {YTDLP_TIMEOUT_SEC}s")
 
 
 def ytdlp_base_args() -> list[str]:
