@@ -23,6 +23,7 @@ VIDEO_DIR = Path("playlist-video-transcripts")
 MAX_WORDS = 120
 SCRIPT_REV = "2026-05-26-per-video-v1"
 YTDLP_TIMEOUT_SEC = int(os.getenv("YTDLP_TIMEOUT_SEC", "90"))
+MAX_VIDEO_ATTEMPTS = int(os.getenv("MAX_VIDEO_ATTEMPTS", "5"))
 
 NOISE_RE = re.compile(r"^\s*(\[[^\]]+\]|\([^\)]+\)|\{[^\}]+\})\s*$", re.I)
 TIMECODE_RE = re.compile(r"(?:^|\s)(?:\d{1,2}:)?\d{1,2}:\d{2}(?:[.,]\d{1,3})?(?:\s*-->\s*(?:\d{1,2}:)?\d{1,2}:\d{2}(?:[.,]\d{1,3})?)?(?:$|\s)")
@@ -105,7 +106,7 @@ def fetch_text(url: str) -> str:
         return r.read().decode("utf-8", errors="ignore")
 
 
-def fetch_rows(video: dict) -> tuple[str | None, list[tuple[int | None, str]], str]:
+def fetch_rows(video: dict) -> tuple[str | None, list[tuple[int | None, str]], str, str | None]:
     p = run(ytdlp_base_args() + ["-J", video["url"]])
     if p.returncode == 0:
         try:
@@ -123,7 +124,7 @@ def fetch_rows(video: dict) -> tuple[str | None, list[tuple[int | None, str]], s
                         continue
                     rows = rows_from_json3(body) if ((t.get("ext") or "").lower() == "json3" or body.lstrip().startswith("{")) else parse_vtt_rows(body)
                     if rows:
-                        return lang, rows, "metadata"
+                        return lang, rows, "metadata", None
         except Exception:
             pass
 
@@ -137,7 +138,7 @@ def fetch_rows(video: dict) -> tuple[str | None, list[tuple[int | None, str]], s
                 body = fp.read_text(encoding="utf-8", errors="ignore")
                 rows = rows_from_json3(body) if ext == "json3" or body.lstrip().startswith("{") else parse_vtt_rows(body)
                 if rows:
-                    return "ru", rows, "ytdlp_subs"
+                    return "ru", rows, "ytdlp_subs", None
 
     if YouTubeTranscriptApi is not None:
         try:
@@ -148,11 +149,11 @@ def fetch_rows(video: dict) -> tuple[str | None, list[tuple[int | None, str]], s
                 if t:
                     rows.append((int(item.get("start", 0)), t))
             if rows:
-                return "ru", rows, "yta"
+                return "ru", rows, "yta", None
         except Exception:
             pass
 
-    return None, [], "none"
+    return None, [], "none", "no_captions_or_api_access"
 
 
 def chunk_rows(video: dict, rows: list[tuple[int | None, str]]) -> list[dict]:
@@ -174,6 +175,13 @@ def chunk_rows(video: dict, rows: list[tuple[int | None, str]]) -> list[dict]:
             out.append({"id": f"{video['videoId']}-chunk-{idx:03d}", "videoId": video["videoId"], "title": video["title"], "url": video["url"], "start": start, "text": txt})
     return out
 
+
+
+def cleanup_legacy_files() -> None:
+    # Legacy artifacts from old monolithic flow can create false signals in CI/debugging.
+    for fp in (Path("missing-videos.json"), Path("quartz/static/playlist-transcripts.json")):
+        if fp.exists():
+            fp.unlink()
 
 def load_status() -> dict:
     if not STATUS_PATH.exists():
@@ -211,6 +219,7 @@ def rebuild_aggregate(status: dict) -> None:
 
 def main() -> int:
     VIDEO_DIR.mkdir(parents=True, exist_ok=True)
+    cleanup_legacy_files()
     playlist = list_playlist_videos()
     status = load_status()
     existing = {v["videoId"]: v for v in status.get("videos", []) if v.get("videoId")}
@@ -222,7 +231,7 @@ def main() -> int:
             status.setdefault("videos", []).append({"videoId": vid, "title": item["title"], "url": item["url"], "status": "pending", "updatedAt": now_iso()})
             changed = True
 
-    pending = [v for v in status.get("videos", []) if v.get("status") != "indexed"]
+    pending = [v for v in status.get("videos", []) if v.get("status") in {"pending", "retry"}]
     if not pending and not changed:
         print("No playlist updates and no pending videos. Nothing to do.")
         rebuild_aggregate(status)
@@ -232,24 +241,29 @@ def main() -> int:
     target = pending[0] if pending else None
     if target:
         video = {"videoId": target["videoId"], "title": target["title"], "url": target["url"]}
-        lang, rows, source = fetch_rows(video)
+        target["attempts"] = int(target.get("attempts", 0)) + 1
+        lang, rows, source, err = fetch_rows(video)
         if rows:
             ch = chunk_rows(video, rows)
             if ch:
                 per_video = {"updatedAt": now_iso(), "video": {**video, "language": lang, "transcriptSource": source}, "chunks": ch}
                 (VIDEO_DIR / f"{video['videoId']}.json").write_text(json.dumps(per_video, ensure_ascii=False, indent=2), encoding="utf-8")
                 target["status"] = "indexed"
+                target["lastError"] = None
                 target["updatedAt"] = now_iso()
             else:
-                target["status"] = "missing"
+                target["status"] = "retry" if target["attempts"] < MAX_VIDEO_ATTEMPTS else "missing"
+                target["lastError"] = "empty_chunks"
                 target["updatedAt"] = now_iso()
         else:
-            target["status"] = "missing"
+            target["status"] = "retry" if target["attempts"] < MAX_VIDEO_ATTEMPTS else "missing"
+            target["lastError"] = err or source
             target["updatedAt"] = now_iso()
 
     rebuild_aggregate(status)
     save_status(status)
-    print(f"Status: total={len(status.get('videos', []))}, indexed={len([v for v in status.get('videos', []) if v.get('status')=='indexed'])}")
+    indexed = len([v for v in status.get("videos", []) if v.get("status")=="indexed"]); retry = len([v for v in status.get("videos", []) if v.get("status")=="retry"]); missing = len([v for v in status.get("videos", []) if v.get("status")=="missing"]); pending_n = len([v for v in status.get("videos", []) if v.get("status")=="pending"]);
+    print(f"Status: total={len(status.get('videos', []))}, indexed={indexed}, pending={pending_n}, retry={retry}, missing={missing}")
     return 0
 
 

@@ -19,13 +19,29 @@ jobs:
         env:
           YTDLP_TIMEOUT_SEC: '90'
         run: python scripts/build_playlist_transcripts.py
-      - name: Sync docs
-        run: cp -f playlist-transcripts.json docs/playlist-transcripts.json
+      - name: Validate progress signal
+        run: |
+          python - <<'PY'
+          import json, pathlib, sys
+          st = json.loads(pathlib.Path('playlist-video-status.json').read_text(encoding='utf-8')) if pathlib.Path('playlist-video-status.json').exists() else {'videos': []}
+          videos = st.get('videos', [])
+          indexed = sum(1 for v in videos if v.get('status') == 'indexed')
+          active = sum(1 for v in videos if v.get('status') in {'pending','retry'})
+          if indexed == 0 and active > 0:
+            print(f'No transcripts indexed yet while {active} videos still pending/retry. Failing to avoid false-green run.')
+            sys.exit(1)
+          print(f'Progress signal OK: indexed={indexed}, active={active}')
+          PY
+      - name: Sync docs/static indexes
+        run: |
+          cp -f playlist-transcripts.json docs/playlist-transcripts.json
+          mkdir -p quartz/static
+          cp -f playlist-transcripts.json quartz/static/playlist-transcripts.json
       - name: Commit
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add playlist-transcripts.json playlist-video-status.json playlist-video-transcripts docs/playlist-transcripts.json
+          git add playlist-transcripts.json playlist-video-status.json playlist-video-transcripts docs/playlist-transcripts.json quartz/static/playlist-transcripts.json
           if git diff --cached --quiet; then
             echo "No changes"
             exit 0
