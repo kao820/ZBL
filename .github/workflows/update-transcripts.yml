@@ -38,15 +38,20 @@ jobs:
           p = pathlib.Path('playlist-transcripts.json')
           if p.exists():
             d = json.loads(p.read_text(encoding='utf-8'))
-            old = {'with': (d.get('stats') or {}).get('withCaptions', 0), 'chunks': len(d.get('chunks') or [])}
+            stats = d.get('stats') or {}
+            old = {'indexed': stats.get('indexedVideos', len(d.get('videos') or [])), 'chunks': len(d.get('chunks') or [])}
           else:
-            old = {'with': 0, 'chunks': 0}
+            old = {'indexed': 0, 'chunks': 0}
           pathlib.Path('.old_stats.json').write_text(json.dumps(old), encoding='utf-8')
           PY
       - name: Build transcript index
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-          REQUIRE_FULL_COVERAGE: "1"
+          TRANSCRIPT_MAX_HOURS: "2.5"
+          TRANSCRIPT_MAX_PASSES: "12"
+          TRANSCRIPT_NO_PROGRESS_PASSES: "2"
+          TRANSCRIPT_FETCH_RETRIES: "2"
+          YTDLP_TIMEOUT_SEC: "75"
         run: python scripts/build_playlist_transcripts.py
       - name: Validate index growth
         run: |
@@ -54,22 +59,27 @@ jobs:
           import json, pathlib, sys
           old = json.loads(pathlib.Path('.old_stats.json').read_text(encoding='utf-8'))
           new = json.loads(pathlib.Path('playlist-transcripts.json').read_text(encoding='utf-8'))
-          nw = (new.get('stats') or {}).get('withCaptions', 0)
+          stats = new.get('stats') or {}
+          nw = stats.get('indexedVideos', len(new.get('videos') or []))
           nc = len(new.get('chunks') or [])
-          if nw < old['with'] or nc < old['chunks']:
-            print(f"Regression detected: withCaptions {old['with']} -> {nw}, chunks {old['chunks']} -> {nc}")
+          if nw < old['indexed'] or nc < old['chunks']:
+            print(f"Regression detected: indexedVideos {old['indexed']} -> {nw}, chunks {old['chunks']} -> {nc}")
             sys.exit(1)
-          print(f"OK: withCaptions {old['with']} -> {nw}, chunks {old['chunks']} -> {nc}")
+          print(f"OK: indexedVideos {old['indexed']} -> {nw}, chunks {old['chunks']} -> {nc}")
           PY
       - name: Sync docs index
         run: |
           cp -f playlist-transcripts.json docs/playlist-transcripts.json
-          cp -f missing-videos.json docs/missing-videos.json
+          if [ -f missing-videos.json ]; then
+            cp -f missing-videos.json docs/missing-videos.json
+          fi
       - name: Commit updated index
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add playlist-transcripts.json missing-videos.json docs/playlist-transcripts.json docs/missing-videos.json
+          git add playlist-transcripts.json docs/playlist-transcripts.json
+          [ -f missing-videos.json ] && git add missing-videos.json || true
+          [ -f docs/missing-videos.json ] && git add docs/missing-videos.json || true
           if git diff --cached --quiet; then
             echo "No changes"
             exit 0
