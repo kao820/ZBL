@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-05-27T08:25:36.685498+00:00",
+  "updatedAt": "2026-05-28T08:27:10.125587+00:00",
   "playlistUrl": "https://www.youtube.com/playlist?list=PLQ0wmPbdvhzJl6lFMAVzbneqAPtBvCrsg",
   "videos": [
     {
@@ -13,9 +13,9 @@
       "videoId": "rsTRHsQkmts",
       "title": "S1E2 | ХАОС В ЛАГЕРЕ КОНДАМНИТАЛЬ | Dungeons and Dragons",
       "url": "https://www.youtube.com/watch?v=rsTRHsQkmts",
-      "status": "retry",
-      "updatedAt": "2026-05-27T08:25:33.540104+00:00",
-      "attempts": 4,
+      "status": "missing",
+      "updatedAt": "2026-05-28T08:27:07.253737+00:00",
+      "attempts": 5,
       "lastError": "whisperx_rc_1"
     },
     {
