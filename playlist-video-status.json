@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-05-29T08:14:35.401946+00:00",
+  "updatedAt": "2026-05-30T07:25:52.145573+00:00",
   "playlistUrl": "https://www.youtube.com/playlist?list=PLQ0wmPbdvhzJl6lFMAVzbneqAPtBvCrsg",
   "videos": [
     {
@@ -23,8 +23,8 @@
       "title": "S1E3 | НАКАНУНЕ СВАДЬБЫ УРОДА | Dungeons and Dragons",
       "url": "https://www.youtube.com/watch?v=bkUd4QvygmA",
       "status": "retry",
-      "updatedAt": "2026-05-29T08:14:32.328214+00:00",
-      "attempts": 1,
+      "updatedAt": "2026-05-30T07:25:49.434064+00:00",
+      "attempts": 2,
       "lastError": "whisperx_rc_1"
     },
     {
@@ -2931,6 +2931,13 @@
       "url": "https://www.youtube.com/watch?v=ZBGHxgWFWgM",
       "status": "pending",
       "updatedAt": "2026-05-26T19:19:15.866599+00:00"
+    },
+    {
+      "videoId": "9QJSLwkHPlQ",
+      "title": "Земли Былых Легенд: Собиратель душ | Эпизод 4: Бессмертие",
+      "url": "https://www.youtube.com/watch?v=9QJSLwkHPlQ",
+      "status": "pending",
+      "updatedAt": "2026-05-30T07:25:49.296083+00:00"
     }
   ]
 }

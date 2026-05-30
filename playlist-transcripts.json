@@ -1,12 +1,12 @@
 {
-  "updatedAt": "2026-05-29T08:14:35.401704+00:00",
+  "updatedAt": "2026-05-30T07:25:52.145367+00:00",
   "scriptRevision": "2026-05-26-per-video-v1",
   "playlistUrl": "https://www.youtube.com/playlist?list=PLQ0wmPbdvhzJl6lFMAVzbneqAPtBvCrsg",
   "videos": [],
   "chunks": [],
   "error": null,
   "stats": {
-    "playlistVideos": 418,
+    "playlistVideos": 419,
     "indexedVideos": 0,
     "chunks": 0
   }
