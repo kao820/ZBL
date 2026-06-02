@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-01T09:40:43.433765+00:00",
+  "updatedAt": "2026-06-02T08:51:59.547511+00:00",
   "playlistUrl": "https://www.youtube.com/playlist?list=PLQ0wmPbdvhzJl6lFMAVzbneqAPtBvCrsg",
   "videos": [
     {
@@ -22,9 +22,9 @@
       "videoId": "bkUd4QvygmA",
       "title": "S1E3 | НАКАНУНЕ СВАДЬБЫ УРОДА | Dungeons and Dragons",
       "url": "https://www.youtube.com/watch?v=bkUd4QvygmA",
-      "status": "retry",
-      "updatedAt": "2026-06-01T09:40:41.000884+00:00",
-      "attempts": 4,
+      "status": "missing",
+      "updatedAt": "2026-06-02T08:51:56.747310+00:00",
+      "attempts": 5,
       "lastError": "whisperx_rc_1"
     },
     {
