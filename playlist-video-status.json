@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-04T08:38:35.501618+00:00",
+  "updatedAt": "2026-06-05T08:30:05.017470+00:00",
   "playlistUrl": "https://www.youtube.com/playlist?list=PLQ0wmPbdvhzJl6lFMAVzbneqAPtBvCrsg",
   "videos": [
     {
@@ -32,8 +32,8 @@
       "title": "S1E4 | СВАНДЭЙЛ. БЫЛАЯ МУДРОСТЬ | Dungeons and Dragons",
       "url": "https://www.youtube.com/watch?v=25E6a5kDYDM",
       "status": "retry",
-      "updatedAt": "2026-06-04T08:38:33.071319+00:00",
-      "attempts": 2,
+      "updatedAt": "2026-06-05T08:30:02.462875+00:00",
+      "attempts": 3,
       "lastError": "whisperx_rc_1"
     },
     {
