@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-11T08:59:03.885525+00:00",
+  "updatedAt": "2026-06-12T08:46:22.859655+00:00",
   "playlistUrl": "https://www.youtube.com/playlist?list=PLQ0wmPbdvhzJl6lFMAVzbneqAPtBvCrsg",
   "videos": [
     {
@@ -40,9 +40,9 @@
       "videoId": "oaW7m-XAMB4",
       "title": "S2E1 | ПО ЛЕЗВИЮ КИНЖАЛА | Dungeons and Dragons",
       "url": "https://www.youtube.com/watch?v=oaW7m-XAMB4",
-      "status": "retry",
-      "updatedAt": "2026-06-11T08:59:02.197717+00:00",
-      "attempts": 4,
+      "status": "missing",
+      "updatedAt": "2026-06-12T08:46:21.226984+00:00",
+      "attempts": 5,
       "lastError": "whisperx_rc_1"
     },
     {
