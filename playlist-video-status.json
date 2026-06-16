@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-15T10:43:17.419123+00:00",
+  "updatedAt": "2026-06-16T09:39:46.668620+00:00",
   "playlistUrl": "https://www.youtube.com/playlist?list=PLQ0wmPbdvhzJl6lFMAVzbneqAPtBvCrsg",
   "videos": [
     {
@@ -50,8 +50,8 @@
       "title": "S2E2 | ИГРА ТЕНЕЙ | Dungeons and Dragons",
       "url": "https://www.youtube.com/watch?v=OnvP3zpCcgg",
       "status": "retry",
-      "updatedAt": "2026-06-15T10:43:15.704170+00:00",
-      "attempts": 3,
+      "updatedAt": "2026-06-16T09:39:45.074399+00:00",
+      "attempts": 4,
       "lastError": "whisperx_rc_1"
     },
     {
