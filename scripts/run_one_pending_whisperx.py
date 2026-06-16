@@ -28,7 +28,10 @@ def main() -> int:
 
     p = subprocess.run(cmd)
     target['attempts'] = int(target.get('attempts',0)) + 1
-    if p.returncode == 0 and Path(f'playlist-video-transcripts/{vid}.json').exists():
+    transcript_path = Path(f'playlist-video-transcripts/{vid}.json')
+    success = p.returncode == 0 and transcript_path.exists()
+
+    if success:
         target['status'] = 'indexed'
         target['lastError'] = None
     else:
@@ -37,6 +40,11 @@ def main() -> int:
         target['lastError'] = f'whisperx_rc_{p.returncode}'
     target['updatedAt'] = now_iso()
     STATUS.write_text(json.dumps(st, ensure_ascii=False, indent=2), encoding='utf-8')
+
+    if not success:
+        print(f"transcription failed for {vid}: rc={p.returncode}, file_exists={transcript_path.exists()}")
+        return p.returncode if p.returncode != 0 else 2
+
     return 0
 
 if __name__ == '__main__':
